@@ -1,7 +1,5 @@
 #include "Location.h"
 
-using namespace std;
-
 Location::Location() {};
 
 Location::Location(int id, double longitude, double latitude) {
