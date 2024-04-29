@@ -11,4 +11,5 @@ add_executable(feup_da_02
         include/MutablePriorityQueue.h
         include/Utilities.h             src/Utilities.cpp
         include/Location.h              src/Location.cpp
+        include/DataParser.h            src/DataParser.cpp
 )

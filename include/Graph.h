@@ -42,6 +42,7 @@ public:
     double getDist() const;
     Edge<T> *getPath() const;
     std::vector<Edge<T> *> getIncoming() const;
+    std::string getLabel() const;
 
     void setInfo(T info);
     void setVisited(bool visited);
@@ -52,11 +53,13 @@ public:
     Edge<T> * addEdge(Vertex<T> *dest, double w);
     bool removeEdge(T in);
     void removeOutgoingEdges();
+    void setLabel(std::string);
 
     friend class MutablePriorityQueue<Vertex>;
 protected:
     T info;                // info node
     std::vector<Edge<T> *> adj;  // outgoing edges
+    std::string label;  //label for toy graphs, null otherwise
 
     // auxiliary fields
     bool visited = false; // used by DFS, BFS, Prim ...
@@ -267,6 +270,11 @@ std::vector<Edge<T> *> Vertex<T>::getIncoming() const {
 }
 
 template <class T>
+std::string Vertex<T>::getLabel() const {
+    return this->label;
+}
+
+template <class T>
 void Vertex<T>::setInfo(T in) {
     this->info = in;
 }
@@ -294,6 +302,11 @@ void Vertex<T>::setDist(double dist) {
 template <class T>
 void Vertex<T>::setPath(Edge<T> *path) {
     this->path = path;
+}
+
+template <class T>
+void Vertex<T>::setLabel(std::string label) {
+    this->label = label;
 }
 
 template <class T>
