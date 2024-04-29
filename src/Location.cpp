@@ -4,14 +4,18 @@ Location::Location() {};
 
 Location::Location(int id, double longitude, double latitude) {
     this->id = id;
-    this->coordinates.longitude = longitude;
-    this->coordinates.latitude = latitude;
+    this->longitude = longitude;
+    this->latitude = latitude;
 }
 
 int Location::getId() {
     return this->id;
 }
 
-Coordinates Location::getCoordinates() {
-    return this->coordinates;
+double Location::getLongitude() {
+    return this->longitude;
+}
+
+double Location::getLatitude() {
+    return this->latitude;
 }
