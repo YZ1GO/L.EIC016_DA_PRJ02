@@ -46,7 +46,7 @@ double ToRadians(double degrees);
  * @param lon1 Longitude of the first coordinate.
  * @param lat2 Latitude of the second coordinate.
  * @param lon2 Longitude of the second coordinate.
- * @return The distance between the coordinates in kilometers.
+ * @return The distance between the coordinates in meters.
  */
 double HarversineDistance(double lat1, double lon1, double lat2, double lon2);
 

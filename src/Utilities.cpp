@@ -15,7 +15,7 @@ double ToRadians(double degrees) {
 }
 
 double HarversineDistance(double lat1, double lon1, double lat2, double lon2) {
-    constexpr double kEarthRadiusKm = 6371.0;
+    constexpr double kEarthRadiusM = 6371000.0;
 
     lat1 = ToRadians(lat1);
     lon1 = ToRadians(lon1);
@@ -29,5 +29,5 @@ double HarversineDistance(double lat1, double lon1, double lat2, double lon2) {
                cos(lat1) * cos(lat2) * sin(dLon / 2.0) * sin(dLon / 2.0);
     double c = 2.0 * atan2(sqrt(a), sqrt(1.0 - a));
 
-    return kEarthRadiusKm * c;
+    return kEarthRadiusM * c;
 }
