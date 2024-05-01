@@ -30,10 +30,10 @@ int main() {
     string toyGraphShipping = "data/Toy_Graphs/shipping.csv";
     string toyGraphStadiums = "data/Toy_Graphs/stadiums.csv";
     string toyGraphTourism = "data/Toy_Graphs/tourism.csv";
-
+/*
     Graph<int> RealGraph1;
-    /*Graph<int> RealGraph2;
-    Graph<int> RealGraph3;
+    Graph<int> RealGraph2;
+
     Graph<int> ExtraFullyConnectedGraph25;
     Graph<int> ExtraFullyConnectedGraph50;
     Graph<int> ExtraFullyConnectedGraph75;
@@ -49,11 +49,12 @@ int main() {
     Graph<int> ToyGraphShipping;
     Graph<int> ToyGraphStadiums;
     Graph<int> ToyGraphTourism;*/
-    Graph<int> ToyGraphTourism;
+    Graph<int> RealGraph3;
+    //Graph<int> ToyGraphTourism;
 
     DataParser dataParser;
-    //dataParser.ParseBigGraph("data/Real_world_Graphs/graph1/nodes.csv", "data/Real_world_Graphs/graph1/edges.csv", RealGraph1, true);
-    dataParser.ParseToyGraphTourism("data/Toy_Graphs/tourism.csv", ToyGraphTourism);
+    dataParser.ParseBigGraph("data/Real_world_Graphs/graph3/nodes.csv", "data/Real_world_Graphs/graph3/edges.csv", RealGraph3, true);
+    //dataParser.ParseToyGraphTourism("data/Toy_Graphs/tourism.csv", ToyGraphTourism);
 
     return 0;
 }

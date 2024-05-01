@@ -64,7 +64,7 @@ public:
 protected:
     T info;                // info node
     std::vector<Edge<T> *> adj;  // outgoing edges
-    std::string label = nullptr;  //label for toy graphs, null otherwise
+    std::string label;  //label for toy graphs, null otherwise
 
     double longitude = 0;
     double latitude = 0;
@@ -141,8 +141,8 @@ public:
      *  Returns true if successful, and false if a vertex with that content already exists.
      */
     bool addVertex(const T &in);
-    bool addVertex(const T &in, const std::string label);
-    bool addVertex(const T &in, const double& longitude, const double& latitude);
+    bool addVertexLabel(const T &in, const std::string& label);
+    bool addVertexCoordinates(const T &in, const double& longitude, const double& latitude);
     bool removeVertex(const T &in);
 
     /*
@@ -458,14 +458,15 @@ bool Graph<T>::addVertex(const T &in) {
 }
 
 template <class T>
-bool Graph<T>::addVertex(const T &in, const std::string label) {
+bool Graph<T>::addVertexLabel(const T &in, const std::string& label) {
     if (findVertex(in) != nullptr)
         return false;
     vertexSet.push_back(new Vertex<T>(in, label));
     return true;
 }
+
 template <class T>
-bool Graph<T>::addVertex(const T &in, const double& longitude, const double& latitude) {
+bool Graph<T>::addVertexCoordinates(const T &in, const double& longitude, const double& latitude) {
     if (findVertex(in) != nullptr)
         return false;
     vertexSet.push_back(new Vertex<T>(in, longitude, latitude));
