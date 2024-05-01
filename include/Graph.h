@@ -32,6 +32,7 @@ template <class T>
 class Vertex {
 public:
     Vertex(T in);
+    Vertex(T in, std::string label);
     bool operator<(Vertex<T> & vertex) const; // // required by MutablePriorityQueue
 
     T getInfo() const;
@@ -133,6 +134,7 @@ public:
      *  Returns true if successful, and false if a vertex with that content already exists.
      */
     bool addVertex(const T &in);
+    bool addVertex(const T &in, const std::string label);
     bool removeVertex(const T &in);
 
     /*
@@ -175,6 +177,13 @@ void deleteMatrix(double **m, int n);
 
 template <class T>
 Vertex<T>::Vertex(T in): info(in) {}
+
+template <class T>
+Vertex<T>::Vertex(T in, std::string label) {
+    this->info = in;
+    this->label = label;
+}
+
 /*
  * Auxiliary function to add an outgoing edge to a vertex (this),
  * with a given destination vertex (d) and edge weight (w).
@@ -417,6 +426,14 @@ bool Graph<T>::addVertex(const T &in) {
     if (findVertex(in) != nullptr)
         return false;
     vertexSet.push_back(new Vertex<T>(in));
+    return true;
+}
+
+template <class T>
+bool Graph<T>::addVertex(const T &in, const std::string label) {
+    if (findVertex(in) != nullptr)
+        return false;
+    vertexSet.push_back(new Vertex<T>(in, label));
     return true;
 }
 
