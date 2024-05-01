@@ -4,7 +4,7 @@ using namespace std;
 
 DataParser::DataParser() {}
 
-DataParser::DataParser(string shippingPath, string stadiumsPath, string tourismPath,
+/*DataParser::DataParser(string shippingPath, string stadiumsPath, string tourismPath,
                         vector<string> extraFullyConnectedEdges, string extraFullyConnectedNodes,
                         vector<string> realWorldPaths) {
     ParseToyGraphs(shippingPath, this->ToyGraphShipping);
@@ -14,7 +14,7 @@ DataParser::DataParser(string shippingPath, string stadiumsPath, string tourismP
     for (int i = 0; i < extraFullyConnectedEdges.size(); i++) {
         string edgeFilename = extraFullyConnectedEdges[i];
 
-        switch(i) {
+        switch(i+1) {
             case 1:
                 ParseBigGraph(extraFullyConnectedNodes, edgeFilename, this->ExtraFullyConnectedGraph25, false);
                 break;
@@ -60,7 +60,7 @@ DataParser::DataParser(string shippingPath, string stadiumsPath, string tourismP
         string edgeFilename = realWorldPaths[i] + "edges.csv";
         string nodesFilename = realWorldPaths[i] + "nodes.csv";
 
-        switch (i) {
+        switch (i+1) {
             case 1:
                 ParseBigGraph(nodesFilename, edgeFilename, this->RealGraph1, true);
                 break;
@@ -74,7 +74,7 @@ DataParser::DataParser(string shippingPath, string stadiumsPath, string tourismP
                 break;
         }
     }
-}
+}*/
 
 void DataParser::ParseToyGraphs(std::string filePath, Graph<int>& graph) {
     ifstream file(filePath);
@@ -210,22 +210,3 @@ void DataParser::ParseBigGraph(std::string vertexPath, std::string edgePath, Gra
     nodeFile.close();
     cout << "Success: " << edgePath << " parsed!" << endl;
 }
-
-Graph<int> DataParser::getRealGraph1() { return this->RealGraph1; }
-Graph<int> DataParser::getRealGraph2() { return this->RealGraph2; }
-Graph<int> DataParser::getRealGraph3() { return this->RealGraph3; }
-Graph<int> DataParser::getExtraFullyConnectedGraph25() { return this->ExtraFullyConnectedGraph25; }
-Graph<int> DataParser::getExtraFullyConnectedGraph50() { return this->ExtraFullyConnectedGraph50; }
-Graph<int> DataParser::getExtraFullyConnectedGraph75() { return this->ExtraFullyConnectedGraph75; }
-Graph<int> DataParser::getExtraFullyConnectedGraph100() { return this->ExtraFullyConnectedGraph100; }
-Graph<int> DataParser::getExtraFullyConnectedGraph200() { return this->ExtraFullyConnectedGraph200; }
-Graph<int> DataParser::getExtraFullyConnectedGraph300() { return this->ExtraFullyConnectedGraph300; }
-Graph<int> DataParser::getExtraFullyConnectedGraph400() { return this->ExtraFullyConnectedGraph400; }
-Graph<int> DataParser::getExtraFullyConnectedGraph500() { return this->ExtraFullyConnectedGraph500; }
-Graph<int> DataParser::getExtraFullyConnectedGraph600() { return this->ExtraFullyConnectedGraph600; }
-Graph<int> DataParser::getExtraFullyConnectedGraph700() { return this->ExtraFullyConnectedGraph700; }
-Graph<int> DataParser::getExtraFullyConnectedGraph800() { return this->ExtraFullyConnectedGraph800; }
-Graph<int> DataParser::getExtraFullyConnectedGraph900() { return this->ExtraFullyConnectedGraph900; }
-Graph<int> DataParser::getToyGraphShipping() { return this->ToyGraphShipping; }
-Graph<int> DataParser::getToyGraphStadiums() { return this->ToyGraphStadiums; }
-Graph<int> DataParser::getToyGraphTourism() { return this->ToyGraphTourism; }
