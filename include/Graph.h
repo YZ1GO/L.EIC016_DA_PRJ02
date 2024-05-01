@@ -32,6 +32,8 @@ template <class T>
 class Vertex {
 public:
     Vertex(T in);
+    Vertex(T in, std::string label);
+    Vertex(T in, double longitude, double latitude);
     bool operator<(Vertex<T> & vertex) const; // // required by MutablePriorityQueue
 
     T getInfo() const;
@@ -43,6 +45,8 @@ public:
     Edge<T> *getPath() const;
     std::vector<Edge<T> *> getIncoming() const;
     std::string getLabel() const;
+    double getLongitude();
+    double getLatitude();
 
     void setInfo(T info);
     void setVisited(bool visited);
@@ -50,6 +54,7 @@ public:
     void setIndegree(unsigned int indegree);
     void setDist(double dist);
     void setPath(Edge<T> *path);
+    void setCoordinates(double longitude, double latitude);
     Edge<T> * addEdge(Vertex<T> *dest, double w);
     bool removeEdge(T in);
     void removeOutgoingEdges();
@@ -60,6 +65,9 @@ protected:
     T info;                // info node
     std::vector<Edge<T> *> adj;  // outgoing edges
     std::string label;  //label for toy graphs, null otherwise
+
+    double longitude = 0;
+    double latitude = 0;
 
     // auxiliary fields
     bool visited = false; // used by DFS, BFS, Prim ...
@@ -133,6 +141,8 @@ public:
      *  Returns true if successful, and false if a vertex with that content already exists.
      */
     bool addVertex(const T &in);
+    bool addVertexLabel(const T &in, const std::string& label);
+    bool addVertexCoordinates(const T &in, const double& longitude, const double& latitude);
     bool removeVertex(const T &in);
 
     /*
@@ -175,6 +185,19 @@ void deleteMatrix(double **m, int n);
 
 template <class T>
 Vertex<T>::Vertex(T in): info(in) {}
+
+template <class T>
+Vertex<T>::Vertex(T in, std::string label) {
+    this->info = in;
+    this->label = label;
+}
+template <class T>
+Vertex<T>::Vertex(T in, double longitude, double latitude) {
+    this->info = in;
+    this->longitude = longitude;
+    this->latitude = latitude;
+}
+
 /*
  * Auxiliary function to add an outgoing edge to a vertex (this),
  * with a given destination vertex (d) and edge weight (w).
@@ -273,6 +296,15 @@ template <class T>
 std::string Vertex<T>::getLabel() const {
     return this->label;
 }
+template <class T>
+double Vertex<T>::getLongitude() {
+    return this->longitude;
+}
+
+template <class T>
+double Vertex<T>::getLatitude() {
+    return this->latitude;
+}
 
 template <class T>
 void Vertex<T>::setInfo(T in) {
@@ -307,6 +339,11 @@ void Vertex<T>::setPath(Edge<T> *path) {
 template <class T>
 void Vertex<T>::setLabel(std::string label) {
     this->label = label;
+}
+template <class T>
+void Vertex<T>::setCoordinates(double longitude, double latitude) {
+    this->longitude = longitude;
+    this->latitude = latitude;
 }
 
 template <class T>
@@ -417,6 +454,22 @@ bool Graph<T>::addVertex(const T &in) {
     if (findVertex(in) != nullptr)
         return false;
     vertexSet.push_back(new Vertex<T>(in));
+    return true;
+}
+
+template <class T>
+bool Graph<T>::addVertexLabel(const T &in, const std::string& label) {
+    if (findVertex(in) != nullptr)
+        return false;
+    vertexSet.push_back(new Vertex<T>(in, label));
+    return true;
+}
+
+template <class T>
+bool Graph<T>::addVertexCoordinates(const T &in, const double& longitude, const double& latitude) {
+    if (findVertex(in) != nullptr)
+        return false;
+    vertexSet.push_back(new Vertex<T>(in, longitude, latitude));
     return true;
 }
 
