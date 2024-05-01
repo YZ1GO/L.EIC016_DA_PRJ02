@@ -12,6 +12,9 @@ public:
     int getId();
     double getLongitude();
     double getLatitude();
+    bool operator==(const Location& other) const {
+        return id == other.id;
+    }
 };
 
 #endif //FEUP_DA_02_LOCATION_H
