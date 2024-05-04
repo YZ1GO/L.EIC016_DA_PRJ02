@@ -49,12 +49,12 @@ int main() {
     Graph<int> ToyGraphShipping;
     Graph<int> ToyGraphStadiums;
     Graph<int> ToyGraphTourism;*/
-    Graph<int> RealGraph3;
-    //Graph<int> ToyGraphTourism;
+    //Graph<int> RealGraph3;
+    Graph<int> ToyGraphTourism;
 
     DataParser dataParser;
-    dataParser.ParseBigGraph("data/Real_world_Graphs/graph3/nodes.csv", "data/Real_world_Graphs/graph3/edges.csv", RealGraph3, true);
-    //dataParser.ParseToyGraphTourism("data/Toy_Graphs/tourism.csv", ToyGraphTourism);
+    //dataParser.ParseBigGraph("data/Real_world_Graphs/graph3/nodes.csv", "data/Real_world_Graphs/graph3/edges.csv", RealGraph3, true);
+    dataParser.ParseToyGraphTourism("data/Toy_Graphs/tourism.csv", ToyGraphTourism);
 
     return 0;
 }
