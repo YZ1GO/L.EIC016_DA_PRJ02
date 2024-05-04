@@ -1,8 +1,17 @@
 #include <iostream>
 #include <vector>
+#include <chrono>
 #include "DataParser.h"
 
 using namespace std;
+using namespace chrono;
+
+void countOneMillion() {
+    for (long long i = 0; i < 1000000; i++) {
+        cout << i << endl;
+    }
+    cout << "DONE" << endl;
+}
 
 int main() {
     vector<string> extraFullyConnectedGraphsEdges = {
@@ -49,12 +58,29 @@ int main() {
     Graph<int> ToyGraphShipping;
     Graph<int> ToyGraphStadiums;
     Graph<int> ToyGraphTourism;*/
-    //Graph<int> RealGraph3;
-    Graph<int> ToyGraphTourism;
 
-    DataParser dataParser;
+    //DataParser dataParser;
+
+    //Graph<int> RealGraph3;
     //dataParser.ParseBigGraph("data/Real_world_Graphs/graph3/nodes.csv", "data/Real_world_Graphs/graph3/edges.csv", RealGraph3, true);
-    dataParser.ParseToyGraphTourism("data/Toy_Graphs/tourism.csv", ToyGraphTourism);
+
+    //Graph<int> ToyGraphTourism;
+    //dataParser.ParseToyGraphTourism("data/Toy_Graphs/tourism.csv", ToyGraphTourism);
+
+    /***** EXECUTION ****/
+    // 1. BEFORE CALL THE FUNCTION
+    auto start = high_resolution_clock::now();
+
+    // 1. FUNCTION CALL
+    countOneMillion();
+
+    // 3. AFTER FUNCTION CALL
+    auto stop = high_resolution_clock::now();
+
+    // 4. CALCULATE EXECUTION TIME
+    // available units: nano, micro, milliseconds, seconds, minutes, hours
+    auto duration = duration_cast<milliseconds>(stop - start);
+    cout << "Time taken by function: " << duration.count() << " ms" << endl;
 
     return 0;
 }
