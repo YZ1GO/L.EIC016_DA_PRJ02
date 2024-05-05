@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.27)
 project(feup_da_02)
 set(CMAKE_CXX_STANDARD 14)
-#file(COPY data/ DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/data/)
+file(COPY data/ DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/data/)
 include_directories(${PROJECT_SOURCE_DIR}/include)
 
 add_executable(feup_da_02
@@ -10,4 +10,5 @@ add_executable(feup_da_02
         include/MutablePriorityQueue.h
         include/Utilities.h             src/Utilities.cpp
         include/DataParser.h            src/DataParser.cpp
+        include/TSP.h                   src/TSP.cpp
 )

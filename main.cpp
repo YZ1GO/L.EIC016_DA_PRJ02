@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <chrono>
-#include "DataParser.h"
+#include "TSP.h"
 
 using namespace std;
 using namespace chrono;
@@ -59,16 +59,32 @@ int main() {
     Graph<int> ToyGraphStadiums;
     Graph<int> ToyGraphTourism;*/
 
-    //DataParser dataParser;
+    DataParser dataParser;
 
     //Graph<int> RealGraph3;
     //dataParser.ParseBigGraph("data/Real_world_Graphs/graph3/nodes.csv", "data/Real_world_Graphs/graph3/edges.csv", RealGraph3, true);
 
-    //Graph<int> ToyGraphTourism;
-    //dataParser.ParseToyGraphTourism("data/Toy_Graphs/tourism.csv", ToyGraphTourism);
+    Graph<int> ToyGraphTourism;
+    Graph<int> ToyGraphStadiums;
+    Graph<int> ToyGraphShipping;
+    dataParser.ParseToyGraphTourism(toyGraphTourism, ToyGraphTourism);
+    dataParser.ParseToyGraphs(toyGraphStadiums, ToyGraphStadiums);
+    dataParser.ParseToyGraphs(toyGraphShipping, ToyGraphShipping);
+    TSP tourismGraph(ToyGraphTourism);
+    TSP stadiumGraph(ToyGraphStadiums);
+    TSP shippingGraph(ToyGraphShipping);
+    tourismGraph.backtrackingAlgorithm();
+    //stadiumGraph.backtrackingAlgorithm();
+    //shippingGraph.backtrackingAlgorithm();
+
+    /*Graph<int> ExtraFullyConnectedGraph25;
+    dataParser.ParseBigGraph(extraFullyConnectedGraphsNodes, extraFullyConnectedGraphsEdges[0], ExtraFullyConnectedGraph25, false);
+    TSP twoFiveGraph(ExtraFullyConnectedGraph25);
+
+    twoFiveGraph.backtrackingAlgorithm();*/
 
     /***** EXECUTION ****/
-    // 1. BEFORE CALL THE FUNCTION
+    /*// 1. BEFORE CALL THE FUNCTION
     auto start = high_resolution_clock::now();
 
     // 1. FUNCTION CALL
@@ -81,6 +97,6 @@ int main() {
     // available units: nano, micro, milliseconds, seconds, minutes, hours
     auto duration = duration_cast<milliseconds>(stop - start);
     cout << "Time taken by function: " << duration.count() << " ms" << endl;
-
+    */
     return 0;
 }
