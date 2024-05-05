@@ -103,7 +103,7 @@ void DataParser::ParseToyGraphs(std::string filePath, Graph<int>& graph) {
 
         graph.addVertex(source);
         graph.addVertex(target);
-        graph.addEdge(source, target, distance);
+        graph.addBidirectionalEdge(source, target, distance);
     }
     file.close();
     cout << "Success: " << filePath << " parsed!" << endl;
@@ -142,7 +142,7 @@ void DataParser::ParseToyGraphTourism(std::string tourismPath, Graph<int>& graph
 
         graph.addVertexLabel(source, sourceLabel);
         graph.addVertexLabel(target, targetLabel);
-        graph.addEdge(source, target, distance);
+        graph.addBidirectionalEdge(source, target, distance);
     }
     file.close();
     cout << "Success: " << tourismPath << " parsed!" << endl;
@@ -205,7 +205,7 @@ void DataParser::ParseBigGraph(std::string vertexPath, std::string edgePath, Gra
         getline(ss, nonTrimmed, ',');
         distance = stod(TrimString(nonTrimmed));
 
-        graph.addEdge(source, target, distance);
+        graph.addBidirectionalEdge(source, target, distance);
     }
     nodeFile.close();
     cout << "Success: " << edgePath << " parsed!" << endl;

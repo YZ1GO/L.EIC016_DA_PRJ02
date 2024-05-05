@@ -73,9 +73,9 @@ int main() {
     TSP tourismGraph(ToyGraphTourism);
     TSP stadiumGraph(ToyGraphStadiums);
     TSP shippingGraph(ToyGraphShipping);
-    tourismGraph.backtrackingAlgorithm();
+    //tourismGraph.backtrackingAlgorithm();
     //stadiumGraph.backtrackingAlgorithm();
-    //shippingGraph.backtrackingAlgorithm();
+    shippingGraph.backtrackingAlgorithm();
 
     /*Graph<int> ExtraFullyConnectedGraph25;
     dataParser.ParseBigGraph(extraFullyConnectedGraphsNodes, extraFullyConnectedGraphsEdges[0], ExtraFullyConnectedGraph25, false);

@@ -6,20 +6,25 @@ TSP::TSP(const Graph<int> &graph) {
 }
 
 void TSP::backtrackingAlgorithmAux(Vertex<int>* currVertex, double currDistance, vector<Vertex<int>*> &currPath, vector<bool> &visited, double &minDistance, vector<Vertex<int>*> &bestPath) {
-    /*cout << "Current vertex: " << currVertex->getInfo() << endl;
+    cout << "Current vertex: " << currVertex->getInfo() << endl;
     cout << "Current path: ";
     for (auto vertex : currPath) {
         cout << vertex->getInfo() << " ";
     }
     cout << "Current distance: " << currDistance << endl;
-    cout << endl;*/
+    cout << endl;
 
     if (currPath.size() == tspGraph.getVertexSet().size()) {
-        if (currDistance < minDistance) {
-            minDistance = currDistance;
-            bestPath = currPath;
+        for (auto edge: currVertex->getAdj()) {
+            if (edge->getDest() == currPath.front()) {
+                double totalDistance = currDistance + edge->getWeight();
+                if (totalDistance < minDistance) {
+                    minDistance = totalDistance;
+                    bestPath = currPath;
+                }
+                return;
+            }
         }
-        return;
     }
 
     for (auto edge : currVertex->getAdj()) {
