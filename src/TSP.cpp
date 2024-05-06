@@ -175,7 +175,7 @@ void TSP::heldKarp() {
 /*** TRIANGULAR APPROXIMATION RELATED FUNCTIONS [T2.2] ***/
 Graph<int> TSP::getMST(const Graph<int>& graph) {
     Graph<int> copyGraph = deepGraphCopy(graph);
-    copyGraph.convertToMST();
+
 
     return copyGraph;
 }
@@ -183,27 +183,36 @@ Graph<int> TSP::getMST(const Graph<int>& graph) {
 double TSP::pathDistance(const vector<Vertex<int>*>& path) {
     double totalDistance = 0.0;
 
-    for (int i = 0; i < path.size()-1; i++) {
-        auto s = path[i];
-        auto t = path[i+1];
+    for (int i = 0; i < path.size() - 1; i++) {
+        auto s = tspGraph.findVertex(path[i]->getInfo());
+        auto t = tspGraph.findVertex(path[i + 1]->getInfo());
+
+        double distance = 0.0;
+        bool directEdgeFound = false;
         for (auto e : s->getAdj()) {
             if (e->getDest()->getInfo() == t->getInfo()) {
-                double distance = e->getWeight();
-                if (distance == 0.0) {
-                    double lat1 = s->getLatitude();
-                    double lon1 = s->getLongitude();
-                    double lat2 = t->getLatitude();
-                    double lon2 = t->getLongitude();
-                    distance = HarversineDistance(lat1, lon1, lat2, lon2);
-                }
-                totalDistance += distance;
+                distance = e->getWeight();
+                directEdgeFound = true;
                 break;
             }
         }
+
+        if (!directEdgeFound) {
+            double lat1 = s->getLatitude();
+            double lon1 = s->getLongitude();
+            double lat2 = t->getLatitude();
+            double lon2 = t->getLongitude();
+            distance = HarversineDistance(lat1, lon1, lat2, lon2);
+            //cout << lat1 << ", " << lon1 << ", " << lat2 << ", " << lon2 << endl;
+        }
+
+        totalDistance += distance;
+        //cout << s->getInfo() << "," << t->getInfo() << ": " << distance << endl;
     }
 
     return totalDistance;
 }
+
 
 void TSP::dfsTraversal(Vertex<int>* current, vector<Vertex<int>*>& path) {
     current->setVisited(true);
@@ -229,7 +238,7 @@ void TSP::traverseMST(const Graph<int>& graph, Vertex<int>* start, vector<Vertex
 }
 
 void TSP::triangularApproximationAlgorithm() {
-    Graph<int> graph = getMST(this->tspGraph);
+    Graph<int> graph = tspGraph.convertToMST();
 
     graph.printGraph("../output/MST.txt");
     tspGraph.printGraph("../output/original.txt");
