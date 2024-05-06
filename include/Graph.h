@@ -61,6 +61,7 @@ public:
     bool removeEdge(T in);
     void removeOutgoingEdges();
     void setLabel(std::string);
+    int getQueueIndex() const;
 
     friend class MutablePriorityQueue<Vertex>;
 protected:
@@ -167,7 +168,7 @@ public:
     bool isDAG() const;
     bool dfsIsDAG(Vertex<T> *v) const;
     std::vector<T> topsort() const;
-    void convertToMST() const;
+    Graph<T> convertToMST() const;
     void setAllNotVisited() const;
     void printGraph(std::string filename) const;
 protected:
@@ -349,6 +350,11 @@ template <class T>
 void Vertex<T>::setCoordinates(double longitude, double latitude) {
     this->longitude = longitude;
     this->latitude = latitude;
+}
+
+template <class T>
+int Vertex<T>::getQueueIndex() const {
+    return queueIndex;
 }
 
 template <class T>
@@ -738,37 +744,54 @@ std::vector<T> Graph<T>::topsort() const {
  * Each vertex is inserted into and extracted from the priority queue once, and each edge is examined once.
  *
  * @tparam T Class type of the Graph.
+ * @return MST graph
  *
  * Time Complexity: O((V+E)logV)
  */
 template <class T>
-void Graph<T>::convertToMST() const {
-    std::unordered_set<Vertex<T>*> mstSet;
-
-    // Priority queue to store vertices not yet included in MST
+Graph<T> Graph<T>::convertToMST() const {
+    Graph<T> mst;
     MutablePriorityQueue<Vertex<T>> pq;
 
-    Vertex<T>* startVertex = vertexSet[0];
+    for (auto v : vertexSet) {
+        v->setVisited(false);
+        v->setDist(std::numeric_limits<double>::max());
+    }
+
+    for (auto v : vertexSet) {
+        mst.addVertex(v->getInfo());
+    }
+
+    Vertex<T> *startVertex = vertexSet[0];
     startVertex->setDist(0);
     pq.insert(startVertex);
 
     while (!pq.empty()) {
-        Vertex<T>* u = pq.extractMin();
+        Vertex<T> *currentVertex = pq.extractMin();
+        if (currentVertex->isVisited()) {
+            continue;
+        }
+        currentVertex->setVisited(true);
 
-        mstSet.insert(u);
+        if (currentVertex->getPath() != nullptr) {
+            mst.addBidirectionalEdge(currentVertex->getPath()->getOrig()->getInfo(), currentVertex->getInfo(), currentVertex->getPath()->getWeight());
+        }
 
-        for (Edge<T>* edge : u->getAdj()) {
-            Vertex<T>* v = edge->getDest();
-            double weight = edge->getWeight();
-
-            // If v is not in MST and weight of edge (u,v) is smaller than current key of v
-            if (mstSet.find(v) == mstSet.end() && weight < v->getDist()) {
-                v->setPath(edge); // Update path
-                v->setDist(weight); // Update distance
-                pq.decreaseKey(v); // Update key in priority queue
+        for (auto edge : currentVertex->getAdj()) {
+            Vertex<T> *adjVertex = edge->getDest();
+            if (!adjVertex->isVisited() && edge->getWeight() < adjVertex->getDist()) {
+                adjVertex->setDist(edge->getWeight());
+                adjVertex->setPath(edge);
+                if (adjVertex->getQueueIndex() == 0) {
+                    pq.insert(adjVertex);
+                } else {
+                    pq.decreaseKey(adjVertex);
+                }
             }
         }
     }
+
+    return mst;
 }
 
 /***

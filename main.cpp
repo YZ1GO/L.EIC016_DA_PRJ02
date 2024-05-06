@@ -84,8 +84,8 @@ int main() {
 
     // 1. FUNCTION CALL
 
-    tourismGraph.backtrackingAlgorithm(); // 0ms
-    tourismGraph.triangularApproximationAlgorithm();
+    //tourismGraph.backtrackingAlgorithm(); // 0ms
+    //tourismGraph.triangularApproximationAlgorithm();
     //tourismGraph.heldKarp(); // 0ms
 
     //shippingGraph.backtrackingAlgorithm(); // ~ 30ms
@@ -97,6 +97,7 @@ int main() {
     //stadiumGraph.heldKarp(); // ~ 15ms
 
     //twoFiveGraph.backtrackingAlgorithm(); // 1.5 hours still didn't end
+    //twoFiveGraph.triangularApproximationAlgorithm();
     //twoFiveGraph.heldKarp(); // ~ 37min
 
     //stadiumGraph.heldKarp(); // ~ 15ms
