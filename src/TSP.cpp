@@ -99,11 +99,15 @@ void TSP::backtrackingAlgorithm() {
 
 // O(V^2 * 2^V)
 void TSP::heldKarp() {
-    int n = tspGraph.getVertexSet().size();
+    auto vertexSet = tspGraph.getVertexSet();
+    if (vertexSet.size() > 25) {
+        vertexSet.resize(25);
+    }
+    int n = vertexSet.size();
     vector<vector<double>> dp(n, vector<double>(1 << n, INF));
     vector<vector<Vertex<int>*>> parentVertex(n, vector<Vertex<int>*>(1 << n, nullptr));
 
-    for (auto v : tspGraph.getVertexSet()) {
+    for (auto v : vertexSet) {
         dp[v->getInfo()][1 << v->getInfo()] = 0;
     }
 
