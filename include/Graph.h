@@ -731,27 +731,30 @@ std::vector<T> Graph<T>::topsort() const {
     return res;
 }
 
+/***
+ * This function uses Prim's algorithm with a priority queue (implemented as a MutablePriorityQueue) to construct the MST.
+ * Each vertex is inserted into and extracted from the priority queue once, and each edge is examined once.
+ *
+ * @tparam T Class type of the Graph.
+ *
+ * Time Complexity: O((V+E)logV)
+ */
 template <class T>
 void Graph<T>::convertToMST() const {
-    // Create a set to store vertices included in MST
     std::unordered_set<Vertex<T>*> mstSet;
 
     // Priority queue to store vertices not yet included in MST
     MutablePriorityQueue<Vertex<T>> pq;
 
-    // Pick the first vertex as the starting point
     Vertex<T>* startVertex = vertexSet[0];
-    startVertex->setDist(0); // Set distance to 0 to ensure it's picked first
+    startVertex->setDist(0);
     pq.insert(startVertex);
 
     while (!pq.empty()) {
-        // Extract the vertex with minimum distance from the priority queue
         Vertex<T>* u = pq.extractMin();
 
-        // Mark the extracted vertex as visited
         mstSet.insert(u);
 
-        // Update adjacent vertices' distances and enqueue them
         for (Edge<T>* edge : u->getAdj()) {
             Vertex<T>* v = edge->getDest();
             double weight = edge->getWeight();
@@ -764,9 +767,6 @@ void Graph<T>::convertToMST() const {
             }
         }
     }
-
-    // At this point, the MST edges are stored in the 'path' field of each vertex.
-    // You can then iterate over the vertices to retrieve the MST edges and process them as needed.
 }
 
 
