@@ -99,6 +99,8 @@ int main() {
     //twoFiveGraph.backtrackingAlgorithm(); // 1.5 hours still didn't end
     //twoFiveGraph.heldKarp(); // ~ 37min
 
+    //stadiumGraph.heldKarp(); // ~ 15ms
+
     // 3. AFTER FUNCTION CALL
     auto stop = high_resolution_clock::now();
 
