@@ -90,8 +90,11 @@ int main() {
     // 1. FUNCTION CALL
     //countOneMillion();
     //stadiumGraph.backtrackingAlgorithm();
+    //stadiumGraph.triangularApproximationAlgorithm();
     //shippingGraph.backtrackingAlgorithm();
-    tourismGraph.backtrackingAlgorithm();
+    //shippingGraph.triangularApproximationAlgorithm();
+    //tourismGraph.backtrackingAlgorithm();
+    //tourismGraph.triangularApproximationAlgorithm();
 
     // 3. AFTER FUNCTION CALL
     auto stop = high_resolution_clock::now();
