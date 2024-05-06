@@ -13,6 +13,7 @@
 #include <queue>
 #include <limits>
 #include <algorithm>
+#include <unordered_set>
 #include "MutablePriorityQueue.h"
 
 template <class T>
@@ -165,6 +166,8 @@ public:
     bool isDAG() const;
     bool dfsIsDAG(Vertex<T> *v) const;
     std::vector<T> topsort() const;
+    void convertToMST() const;
+    void setAllNotVisited() const;
 protected:
     std::vector<Vertex<T> *> vertexSet;    // vertex set
 
@@ -726,6 +729,52 @@ std::vector<T> Graph<T>::topsort() const {
     }
 
     return res;
+}
+
+template <class T>
+void Graph<T>::convertToMST() const {
+    // Create a set to store vertices included in MST
+    std::unordered_set<Vertex<T>*> mstSet;
+
+    // Priority queue to store vertices not yet included in MST
+    MutablePriorityQueue<Vertex<T>> pq;
+
+    // Pick the first vertex as the starting point
+    Vertex<T>* startVertex = vertexSet[0];
+    startVertex->setDist(0); // Set distance to 0 to ensure it's picked first
+    pq.insert(startVertex);
+
+    while (!pq.empty()) {
+        // Extract the vertex with minimum distance from the priority queue
+        Vertex<T>* u = pq.extractMin();
+
+        // Mark the extracted vertex as visited
+        mstSet.insert(u);
+
+        // Update adjacent vertices' distances and enqueue them
+        for (Edge<T>* edge : u->getAdj()) {
+            Vertex<T>* v = edge->getDest();
+            double weight = edge->getWeight();
+
+            // If v is not in MST and weight of edge (u,v) is smaller than current key of v
+            if (mstSet.find(v) == mstSet.end() && weight < v->getDist()) {
+                v->setPath(edge); // Update path
+                v->setDist(weight); // Update distance
+                pq.decreaseKey(v); // Update key in priority queue
+            }
+        }
+    }
+
+    // At this point, the MST edges are stored in the 'path' field of each vertex.
+    // You can then iterate over the vertices to retrieve the MST edges and process them as needed.
+}
+
+
+template <class T>
+void Graph<T>::setAllNotVisited() const {
+    for (auto v : vertexSet) {
+        v->setVisited(false);
+    }
 }
 
 inline void deleteMatrix(int **m, int n) {
