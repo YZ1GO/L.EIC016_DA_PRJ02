@@ -73,28 +73,33 @@ int main() {
     TSP tourismGraph(ToyGraphTourism);
     TSP stadiumGraph(ToyGraphStadiums);
     TSP shippingGraph(ToyGraphShipping);
-    //tourismGraph.backtrackingAlgorithm();
-    //stadiumGraph.backtrackingAlgorithm();
-    //shippingGraph.backtrackingAlgorithm();
 
-    /*Graph<int> ExtraFullyConnectedGraph25;
+    Graph<int> ExtraFullyConnectedGraph25;
     dataParser.ParseBigGraph(extraFullyConnectedGraphsNodes, extraFullyConnectedGraphsEdges[0], ExtraFullyConnectedGraph25, false);
     TSP twoFiveGraph(ExtraFullyConnectedGraph25);
-
-    twoFiveGraph.backtrackingAlgorithm();*/
 
     /***** EXECUTION ****/
     // 1. BEFORE CALL THE FUNCTION
     auto start = high_resolution_clock::now();
 
     // 1. FUNCTION CALL
-    //countOneMillion();
-    //stadiumGraph.backtrackingAlgorithm();
-    //stadiumGraph.triangularApproximationAlgorithm();
-    //shippingGraph.backtrackingAlgorithm();
-    //shippingGraph.triangularApproximationAlgorithm();
-    //tourismGraph.backtrackingAlgorithm();
-    //tourismGraph.triangularApproximationAlgorithm();
+
+    //tourismGraph.backtrackingAlgorithm(); // 0ms
+      //stadiumGraph.triangularApproximationAlgorithm();
+    //tourismGraph.heldKarp(); // 0ms
+
+    //shippingGraph.backtrackingAlgorithm(); // ~ 30ms
+      //shippingGraph.triangularApproximationAlgorithm();
+    //shippingGraph.heldKarp(); // ~ 220ms
+
+    //stadiumGraph.backtrackingAlgorithm(); // ~ 550ms
+      //tourismGraph.triangularApproximationAlgorithm();
+    //stadiumGraph.heldKarp(); // ~ 15ms
+
+    //twoFiveGraph.backtrackingAlgorithm(); // 1.5 hours still didn't end
+    //twoFiveGraph.heldKarp(); // ???
+
+    cout << "ADD TO THE EXCEL SHEET, LINK ON README"
 
     // 3. AFTER FUNCTION CALL
     auto stop = high_resolution_clock::now();
@@ -103,6 +108,5 @@ int main() {
     // available units: nano, micro, milliseconds, seconds, minutes, hours
     auto duration = duration_cast<milliseconds>(stop - start);
     cout << "Time taken by function: " << duration.count() << " ms" << endl;
-
     return 0;
 }
