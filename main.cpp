@@ -84,8 +84,8 @@ int main() {
 
     // 1. FUNCTION CALL
 
-    //tourismGraph.backtrackingAlgorithm(); // 0ms
-    //tourismGraph.triangularApproximationAlgorithm();
+    tourismGraph.backtrackingAlgorithm(); // 0ms
+    tourismGraph.triangularApproximationAlgorithm();
     //tourismGraph.heldKarp(); // 0ms
 
     //shippingGraph.backtrackingAlgorithm(); // ~ 30ms

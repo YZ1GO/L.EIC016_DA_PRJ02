@@ -12,6 +12,7 @@
 #include <vector>
 #include <queue>
 #include <limits>
+#include <fstream>
 #include <algorithm>
 #include <unordered_set>
 #include "MutablePriorityQueue.h"
@@ -168,6 +169,7 @@ public:
     std::vector<T> topsort() const;
     void convertToMST() const;
     void setAllNotVisited() const;
+    void printGraph(std::string filename) const;
 protected:
     std::vector<Vertex<T> *> vertexSet;    // vertex set
 
@@ -774,6 +776,24 @@ template <class T>
 void Graph<T>::setAllNotVisited() const {
     for (auto v : vertexSet) {
         v->setVisited(false);
+    }
+}
+
+template<class T>
+void Graph<T>::printGraph(std::string filename) const {
+    std::ofstream outputFile(filename);
+    if (outputFile.is_open()) {
+        outputFile << "Vertices: " << vertexSet.size() << std::endl;
+        outputFile << "(target vertex, edge weight)\n" << std::endl;
+        for (auto v: vertexSet) {
+            outputFile << "Vertex [" << v->getInfo() << "] :" << std::endl;
+            outputFile << "     Adjacent edges: ";
+            for (auto edge : v->getAdj()) {
+                outputFile << "(" << edge->getDest()->getInfo() << "," << edge->getWeight() << ") ";
+            }
+            outputFile << std::endl;
+        }
+        outputFile.close();
     }
 }
 

@@ -230,6 +230,10 @@ void TSP::traverseMST(const Graph<int>& graph, Vertex<int>* start, vector<Vertex
 
 void TSP::triangularApproximationAlgorithm() {
     Graph<int> graph = getMST(this->tspGraph);
+
+    graph.printGraph("../output/MST.txt");
+    tspGraph.printGraph("../output/original.txt");
+
     graph.setAllNotVisited();
 
     Vertex<int>* start = graph.findVertex(0);
