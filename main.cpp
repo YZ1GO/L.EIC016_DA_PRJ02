@@ -75,7 +75,7 @@ int main() {
     TSP shippingGraph(ToyGraphShipping);
     //tourismGraph.backtrackingAlgorithm();
     //stadiumGraph.backtrackingAlgorithm();
-    shippingGraph.backtrackingAlgorithm();
+    //shippingGraph.backtrackingAlgorithm();
 
     /*Graph<int> ExtraFullyConnectedGraph25;
     dataParser.ParseBigGraph(extraFullyConnectedGraphsNodes, extraFullyConnectedGraphsEdges[0], ExtraFullyConnectedGraph25, false);
@@ -84,11 +84,12 @@ int main() {
     twoFiveGraph.backtrackingAlgorithm();*/
 
     /***** EXECUTION ****/
-    /*// 1. BEFORE CALL THE FUNCTION
+    // 1. BEFORE CALL THE FUNCTION
     auto start = high_resolution_clock::now();
 
     // 1. FUNCTION CALL
-    countOneMillion();
+    //countOneMillion();
+    stadiumGraph.backtrackingAlgorithm();
 
     // 3. AFTER FUNCTION CALL
     auto stop = high_resolution_clock::now();
@@ -97,6 +98,6 @@ int main() {
     // available units: nano, micro, milliseconds, seconds, minutes, hours
     auto duration = duration_cast<milliseconds>(stop - start);
     cout << "Time taken by function: " << duration.count() << " ms" << endl;
-    */
+
     return 0;
 }

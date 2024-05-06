@@ -6,13 +6,13 @@ TSP::TSP(const Graph<int> &graph) {
 }
 
 void TSP::backtrackingAlgorithmAux(Vertex<int>* currVertex, double currDistance, vector<Vertex<int>*> &currPath, vector<bool> &visited, double &minDistance, vector<Vertex<int>*> &bestPath) {
-    cout << "Current vertex: " << currVertex->getInfo() << endl;
+    /*cout << "Current vertex: " << currVertex->getInfo() << endl;
     cout << "Current path: ";
     for (auto vertex : currPath) {
         cout << vertex->getInfo() << " ";
     }
     cout << "Current distance: " << currDistance << endl;
-    cout << endl;
+    cout << endl;*/
 
     if (currPath.size() == tspGraph.getVertexSet().size()) {
         for (auto edge: currVertex->getAdj()) {
@@ -61,8 +61,18 @@ void TSP::backtrackingAlgorithm() {
 
     backtrackingAlgorithmAux(root, 0, currPath, visited, minDistance, bestPath);
 
-    cout << "Minimum Distance: " << minDistance << endl;
+    cout << "Minimum Distance: ";
+    if (minDistance == numeric_limits<double>::max()) {
+        cout << "No path found" << endl;
+        return;
+    } else {
+        cout << minDistance << endl;
+    }
     cout << "Path: ";
+    if (bestPath.empty()) {
+        cout << "No path found" << endl;
+        return;
+    }
     for (auto vertex : bestPath) {
         cout << vertex->getInfo() << " ";
     }
