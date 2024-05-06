@@ -201,27 +201,26 @@ double TSP::pathDistance(const vector<Vertex<int>*>& path) {
     return totalDistance;
 }
 
-void TSP::traverseMST(Vertex<int>* start, vector<Vertex<int>*>& path) {
-    stack<Vertex<int>*> s;
+void TSP::dfsTraversal(Vertex<int>* current, vector<Vertex<int>*>& path) {
+    current->setVisited(true);
+    path.push_back(current);
 
-    start->setVisited(true);
-    path.push_back(start);
-    s.push(start);
+    auto adj = current->getAdj();
+    sort(adj.begin(), adj.end(), [](const Edge<int>* a, const Edge<int>* b) {
+        return a->getWeight() < b->getWeight();
+    });
 
-    while (!s.empty()) {
-        auto v = s.top();
-        s.pop();
-
-        for (auto e : v->getAdj()) {
-            auto w = e->getDest();
-            if (!w->isVisited()) {
-                w->setVisited(true);
-                path.push_back(w);
-                s.push(w);
-            }
+    for (auto edge : adj) {
+        Vertex<int>* nextVertex = edge->getDest();
+        if (!nextVertex->isVisited()) {
+            dfsTraversal(nextVertex, path);
         }
     }
+}
 
+void TSP::traverseMST(const Graph<int>& graph, Vertex<int>* start, vector<Vertex<int>*>& path) {
+    graph.setAllNotVisited();
+    dfsTraversal(start, path);
     path.push_back(start);
 }
 
@@ -235,7 +234,7 @@ void TSP::triangularApproximationAlgorithm() {
     }
 
     vector<Vertex<int>*> path;
-    traverseMST(start, path);
+    traverseMST(graph, start, path);
     double totalDistance = pathDistance(path);
 
     cout << "Travelled distance: " << totalDistance << endl;

@@ -84,7 +84,8 @@ int main() {
 
     // 1. FUNCTION CALL
 
-    //tourismGraph.backtrackingAlgorithm(); // 0ms
+    tourismGraph.backtrackingAlgorithm(); // 0ms
+    tourismGraph.triangularApproximationAlgorithm();
       //stadiumGraph.triangularApproximationAlgorithm();
     //tourismGraph.heldKarp(); // 0ms
 
@@ -93,13 +94,11 @@ int main() {
     //shippingGraph.heldKarp(); // ~ 220ms
 
     //stadiumGraph.backtrackingAlgorithm(); // ~ 550ms
-      //tourismGraph.triangularApproximationAlgorithm();
+
     //stadiumGraph.heldKarp(); // ~ 15ms
 
     //twoFiveGraph.backtrackingAlgorithm(); // 1.5 hours still didn't end
     //twoFiveGraph.heldKarp(); // ???
-
-    cout << "ADD TO THE EXCEL SHEET, LINK ON README"
 
     // 3. AFTER FUNCTION CALL
     auto stop = high_resolution_clock::now();
