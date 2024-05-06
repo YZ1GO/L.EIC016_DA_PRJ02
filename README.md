@@ -1,5 +1,7 @@
 ## DA - 2nd project
 
+[RESULTS SHEET](https://docs.google.com/spreadsheets/d/1I6d1NvNj34K96kJRol0O1ccQ8HP2-nnEXvQ0IW0alAs/edit?usp=sharing)
+
 ### Basic
 - [T1.1] - simple menu interface
 - [T1.2] - parse csv files
