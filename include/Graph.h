@@ -771,7 +771,12 @@ void Graph<T>::convertToMST() const {
     }
 }
 
-
+/***
+ * Iterates through the graph nodes and set them all to NOT-VISITED
+ * @tparam T Class type of the graph
+ *
+ * Time Complexity: O(V)
+ */
 template <class T>
 void Graph<T>::setAllNotVisited() const {
     for (auto v : vertexSet) {
@@ -779,6 +784,15 @@ void Graph<T>::setAllNotVisited() const {
     }
 }
 
+/***
+ * Writes the graph information to a text file.
+ * Mainly for debug purpose.
+ *
+ * @tparam T Class type of the Graph.
+ * @param filename Path to the text file.
+ *
+ * Time Complexity: O(VE)
+ */
 template<class T>
 void Graph<T>::printGraph(std::string filename) const {
     std::ofstream outputFile(filename);
