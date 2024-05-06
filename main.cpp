@@ -73,15 +73,10 @@ int main() {
     TSP tourismGraph(ToyGraphTourism);
     TSP stadiumGraph(ToyGraphStadiums);
     TSP shippingGraph(ToyGraphShipping);
-    //tourismGraph.backtrackingAlgorithm();
-    //stadiumGraph.backtrackingAlgorithm();
-    //shippingGraph.backtrackingAlgorithm();
 
     Graph<int> ExtraFullyConnectedGraph25;
     dataParser.ParseBigGraph(extraFullyConnectedGraphsNodes, extraFullyConnectedGraphsEdges[0], ExtraFullyConnectedGraph25, false);
     TSP twoFiveGraph(ExtraFullyConnectedGraph25);
-
-    //twoFiveGraph.backtrackingAlgorithm();*/
 
     /***** EXECUTION ****/
     // 1. BEFORE CALL THE FUNCTION
@@ -98,7 +93,7 @@ int main() {
     //stadiumGraph.heldKarp(); // ~ 15ms
 
     //twoFiveGraph.backtrackingAlgorithm(); // 1.5 hours still didn't end
-    twoFiveGraph.heldKarp(); // ~ 34s
+    //twoFiveGraph.heldKarp(); // ???
 
     // 3. AFTER FUNCTION CALL
     auto stop = high_resolution_clock::now();
