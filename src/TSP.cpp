@@ -173,15 +173,8 @@ void TSP::heldKarp() {
 }
 
 /*** TRIANGULAR APPROXIMATION RELATED FUNCTIONS [T2.2] ***/
-Graph<int> TSP::getMST(const Graph<int>& graph) {
-    Graph<int> copyGraph = deepGraphCopy(graph);
-
-
-    return copyGraph;
-}
-
-double TSP::pathDistance(const vector<Vertex<int>*>& path) {
-    double totalDistance = 0.0;
+long long TSP::pathDistance(const vector<Vertex<int>*>& path) {
+    long long totalDistance = 0.0;
 
     for (int i = 0; i < path.size() - 1; i++) {
         auto s = tspGraph.findVertex(path[i]->getInfo());
@@ -203,9 +196,12 @@ double TSP::pathDistance(const vector<Vertex<int>*>& path) {
             double lat2 = t->getLatitude();
             double lon2 = t->getLongitude();
             distance = HarversineDistance(lat1, lon1, lat2, lon2);
+            //if (distance <= 0) {
+            //    cerr << "Error: Can\'t calculate the Harversine distance" << endl;
+            //    cout << s->getInfo() << ", " << t->getInfo() << endl;
+            //}
             //cout << lat1 << ", " << lon1 << ", " << lat2 << ", " << lon2 << endl;
         }
-
         totalDistance += distance;
         //cout << s->getInfo() << "," << t->getInfo() << ": " << distance << endl;
     }
@@ -240,11 +236,9 @@ void TSP::traverseMST(const Graph<int>& graph, Vertex<int>* start, vector<Vertex
 void TSP::triangularApproximationAlgorithm() {
     Graph<int> graph = tspGraph.convertToMST();
 
-    graph.printGraph("../output/MST.txt");
-    tspGraph.printGraph("../output/original.txt");
-
+    //graph.printGraph("../output/MST.txt");
+    //tspGraph.printGraph("../output/original.txt");
     graph.setAllNotVisited();
-
     Vertex<int>* start = graph.findVertex(0);
     if (start == nullptr) {
         throw logic_error("Node zero not found in graph");
@@ -252,7 +246,7 @@ void TSP::triangularApproximationAlgorithm() {
 
     vector<Vertex<int>*> path;
     traverseMST(graph, start, path);
-    double totalDistance = pathDistance(path);
+    long long totalDistance = pathDistance(path);
 
     cout << "Travelled distance: " << totalDistance << endl;
     cout << "Path: ";
