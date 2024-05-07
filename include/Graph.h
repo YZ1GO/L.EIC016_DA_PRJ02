@@ -756,10 +756,7 @@ Graph<T> Graph<T>::convertToMST() const {
     for (auto v : vertexSet) {
         v->setVisited(false);
         v->setDist(std::numeric_limits<double>::max());
-    }
-
-    for (auto v : vertexSet) {
-        mst.addVertex(v->getInfo());
+        mst.addVertexCoordinates(v->getInfo(), v->getLongitude(), v->getLatitude());
     }
 
     Vertex<T> *startVertex = vertexSet[0];

@@ -63,6 +63,12 @@ int main() {
 
     //Graph<int> RealGraph3;
     //dataParser.ParseBigGraph("data/Real_world_Graphs/graph3/nodes.csv", "data/Real_world_Graphs/graph3/edges.csv", RealGraph3, true);
+    Graph<int> realGraph1;
+    Graph<int> realGraph2;
+    Graph<int> realGraph3;
+    //dataParser.ParseBigGraph("data/Real_world_Graphs/graph1/nodes.csv", "data/Real_world_Graphs/graph1/edges.csv", realGraph1, true);
+    //dataParser.ParseBigGraph("data/Real_world_Graphs/graph2/nodes.csv", "data/Real_world_Graphs/graph2/edges.csv", realGraph2, true);
+    //dataParser.ParseBigGraph("data/Real_world_Graphs/graph3/nodes.csv", "data/Real_world_Graphs/graph3/edges.csv", realGraph3, true);
 
     Graph<int> ToyGraphTourism;
     Graph<int> ToyGraphStadiums;
@@ -77,6 +83,9 @@ int main() {
     Graph<int> ExtraFullyConnectedGraph25;
     dataParser.ParseBigGraph(extraFullyConnectedGraphsNodes, extraFullyConnectedGraphsEdges[0], ExtraFullyConnectedGraph25, false);
     TSP twoFiveGraph(ExtraFullyConnectedGraph25);
+    TSP realWorldGraph1(realGraph1);
+    TSP realWorldGraph2(realGraph2);
+    TSP realWorldGraph3(realGraph3);
 
     /***** EXECUTION ****/
     // 1. BEFORE CALL THE FUNCTION
@@ -101,6 +110,10 @@ int main() {
     //twoFiveGraph.heldKarp(); // ~ 37min
 
     //stadiumGraph.heldKarp(); // ~ 15ms
+
+    //realWorldGraph1.triangularApproximationAlgorithm();
+    //realWorldGraph2.triangularApproximationAlgorithm();
+    //realWorldGraph3.triangularApproximationAlgorithm();
 
     // 3. AFTER FUNCTION CALL
     auto stop = high_resolution_clock::now();

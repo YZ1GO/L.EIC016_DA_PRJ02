@@ -12,7 +12,6 @@ private:
     void backtrackingAlgorithmAux(Vertex<int>* currVertex, double currDistance, std::vector<Vertex<int>*> &path, std::vector<bool> &visited, double &minDistance, std::vector<Vertex<int>*> &bestPath);
 
     /***  TRIANGULAR APPROXIMATION RELATED FUNCTIONS  ***/
-    static Graph<int> getMST(const Graph<int>& graph);
     static void dfsTraversal(Vertex<int>* current, std::vector<Vertex<int>*>& path);
     static void traverseMST(const Graph<int>& graph, Vertex<int>* start, std::vector<Vertex<int>*>& path);
     long long pathDistance(const std::vector<Vertex<int>*>& path);

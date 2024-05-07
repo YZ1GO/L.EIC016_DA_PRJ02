@@ -1,13 +1,25 @@
-Vertices: 5
+Vertices: 11
 (target vertex, edge weight)
 
 Vertex [0] :
-     Adjacent edges: (3,450) 
+     Adjacent edges: (1,4.6) (2,20.6) (3,37.8) 
 Vertex [1] :
-     Adjacent edges: (2,450) (4,450) 
+     Adjacent edges: (0,4.6) 
 Vertex [2] :
-     Adjacent edges: (3,500) (1,450) 
+     Adjacent edges: (0,20.6) (10,14.6) 
 Vertex [3] :
-     Adjacent edges: (0,450) (2,500) 
+     Adjacent edges: (0,37.8) 
 Vertex [4] :
-     Adjacent edges: (1,450) 
+     Adjacent edges: (5,16.8) (8,16.2) 
+Vertex [5] :
+     Adjacent edges: (10,6.4) (4,16.8) (7,77.5) 
+Vertex [6] :
+     Adjacent edges: (10,18) (9,18.7) 
+Vertex [7] :
+     Adjacent edges: (5,77.5) 
+Vertex [8] :
+     Adjacent edges: (4,16.2) 
+Vertex [9] :
+     Adjacent edges: (6,18.7) 
+Vertex [10] :
+     Adjacent edges: (2,14.6) (5,6.4) (6,18) 
