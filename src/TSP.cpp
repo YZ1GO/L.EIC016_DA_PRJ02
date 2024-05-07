@@ -180,8 +180,8 @@ Graph<int> TSP::getMST(const Graph<int>& graph) {
     return copyGraph;
 }
 
-double TSP::pathDistance(const vector<Vertex<int>*>& path) {
-    double totalDistance = 0.0;
+long long TSP::pathDistance(const vector<Vertex<int>*>& path) {
+    long long totalDistance = 0.0;
 
     for (int i = 0; i < path.size() - 1; i++) {
         auto s = tspGraph.findVertex(path[i]->getInfo());
@@ -252,7 +252,7 @@ void TSP::triangularApproximationAlgorithm() {
 
     vector<Vertex<int>*> path;
     traverseMST(graph, start, path);
-    double totalDistance = pathDistance(path);
+    long long totalDistance = pathDistance(path);
 
     cout << "Travelled distance: " << totalDistance << endl;
     cout << "Path: ";
