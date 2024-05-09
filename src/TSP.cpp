@@ -177,6 +177,8 @@ void TSP::heldKarp() {
 }
 
 /*** TRIANGULAR APPROXIMATION RELATED FUNCTIONS [T2.2] ***/
+// Time Complexity: O(V+V×A)
+// where V is the number of vertices in the path and A is the maximum number of adjacent edges for any vertex in the graph
 long long TSP::pathDistance(const vector<Vertex<int>*>& path) {
     long long totalDistance = 0.0;
 
@@ -213,15 +215,15 @@ long long TSP::pathDistance(const vector<Vertex<int>*>& path) {
     return totalDistance;
 }
 
-
+// Time Complexity: O(V+E)
 void TSP::dfsTraversal(Vertex<int>* current, vector<Vertex<int>*>& path) {
     current->setVisited(true);
     path.push_back(current);
 
     auto adj = current->getAdj();
-    sort(adj.begin(), adj.end(), [](const Edge<int>* a, const Edge<int>* b) {
+    /*sort(adj.begin(), adj.end(), [](const Edge<int>* a, const Edge<int>* b) {
         return a->getWeight() < b->getWeight();
-    });
+    });*/
 
     for (auto edge : adj) {
         Vertex<int>* nextVertex = edge->getDest();
@@ -231,12 +233,14 @@ void TSP::dfsTraversal(Vertex<int>* current, vector<Vertex<int>*>& path) {
     }
 }
 
+//Time Complexity: O(V+E)
 void TSP::traverseMST(const Graph<int>& graph, Vertex<int>* start, vector<Vertex<int>*>& path) {
     graph.setAllNotVisited();
     dfsTraversal(start, path);
     path.push_back(start);
 }
 
+//Time Complexity: O((V+E)logV)
 void TSP::triangularApproximationAlgorithm() {
     Graph<int> graph = tspGraph.convertToMST();
 
@@ -259,3 +263,156 @@ void TSP::triangularApproximationAlgorithm() {
     }
     cout << endl;
 }
+
+/*** NEAREST NEIGHBOR ALGORITHM ***/
+// Time Complexity: O(V)
+bool TSP::findPathToOrigin(Vertex<int>* origin, vector<Vertex<int>*>& tour) {
+    if (tour.size() == tspGraph.getNumVertex() && tour.back() == origin) {
+        return true;
+    }
+
+    Vertex<int>* current = tour.back();
+    for (auto e : current->getAdj()) {
+        auto dest = e->getDest();
+        if (dest->getInfo() == origin->getInfo()) {
+            tour.push_back(dest);
+            return true;
+        }
+    }
+
+    return false;
+}
+
+// Time Complexity: O(V^2)
+vector<Vertex<int>*> TSP::nearestNeighborPath(Vertex<int>* origin) {
+    vector<Vertex<int>*> tour;
+    if (origin == nullptr) {
+        return tour;
+    }
+    tspGraph.setAllNotVisited();
+    origin->setVisited(true);
+    tour.push_back(origin);
+
+    Vertex<int>* current = origin;
+    while (true) {
+        Vertex<int>* next = current->nearestNeighbor();
+        if (next == nullptr) {
+            break;
+        }
+        next->setVisited(true);
+        tour.push_back(next);
+        current = next;
+    }
+    /*
+    cout << "N\'path: ";
+    for (auto v : tour) {
+        cout << v->getInfo() << " ";
+    }
+    cout << endl; */
+
+    return tour;
+}
+
+// Time Complexity: O(V^2)
+void TSP::nearestNeighborAlgorithm(const int& origin) {
+    Vertex<int>* start = tspGraph.findVertex(origin);
+    if (start == nullptr) {
+        cerr << "Couldn\'t find origin vertex " << origin << endl;
+        return;
+    }
+
+    vector<Vertex<int>*> tour = nearestNeighborPath(start);
+    if (tour.size() == tspGraph.getNumVertex()) {
+        if (!findPathToOrigin(start, tour)) {
+            tour.clear();
+        }
+    } else {
+        tour.clear();
+    }
+
+    if (tour.empty()) {
+        cerr << "No feasible tour exists starting on vertex " << origin << endl;
+        return;
+    }
+
+    long long totalDistance = pathDistance(tour);
+
+    cout << "Travelled distance: " << totalDistance << endl;
+    cout << "Path: ";
+    for (auto step : tour) {
+        cout << step->getInfo() << " ";
+    }
+    cout << endl;
+}
+
+// Time complexity: O(V^2 * logV)
+vector<Vertex<int>*> TSP::kNearestNeighborPath(Vertex<int>* origin, int numNeighbors) {
+    vector<Vertex<int>*> tour;
+    if (origin == nullptr) {
+        return tour;
+    }
+    tspGraph.setAllNotVisited();
+    origin->setVisited(true);
+    tour.push_back(origin);
+
+    Vertex<int>* current = origin;
+    while (tour.size() < tspGraph.getNumVertex()) {
+        vector<pair<Vertex<int>*, double>> neighbors;
+        for (auto e : current->getAdj()) {
+            auto dest = e->getDest();
+            if (!dest->isVisited()) {
+                neighbors.push_back({dest, e->getWeight()});
+            }
+        }
+        if (neighbors.empty()) {
+            break;
+        }
+
+        sort(neighbors.begin(), neighbors.end(), [](const auto& a, const auto& b) {
+            return a.second < b.second;
+        });
+
+        int neighborsToExplore = min(numNeighbors, static_cast<int>(neighbors.size()));
+        for (int i = 0; i < neighborsToExplore; ++i) {
+            auto next = neighbors[i].first;
+            next->setVisited(true);
+            tour.push_back(next);
+            current = next;
+        }
+    }
+
+    return tour;
+}
+
+// Time complexity: O(V^2 * logV)
+void TSP::kNearestNeighborAlgorithm(const int& origin, int k) {
+    Vertex<int>* start = tspGraph.findVertex(origin);
+    if (start == nullptr) {
+        cerr << "Couldn\'t find origin vertex " << origin << endl;
+        return;
+    }
+
+    vector<Vertex<int>*> tour = kNearestNeighborPath(start, k);
+    if (tour.size() == tspGraph.getNumVertex()) {
+        if (!findPathToOrigin(start, tour)) {
+            tour.clear();
+        }
+    } else {
+        tour.clear();
+    }
+
+    if (tour.empty()) {
+        cerr << "No feasible tour exists starting on vertex " << origin << endl;
+        return;
+    }
+
+    long long totalDistance = pathDistance(tour);
+
+    cout << "Travelled distance: " << totalDistance << endl;
+    cout << "Path: ";
+    for (auto step : tour) {
+        cout << step->getInfo() << " ";
+    }
+    cout << endl;
+}
+

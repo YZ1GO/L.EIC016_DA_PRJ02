@@ -62,6 +62,7 @@ public:
     void removeOutgoingEdges();
     void setLabel(std::string);
     int getQueueIndex() const;
+    Vertex<T>* nearestNeighbor() const;
 
     friend class MutablePriorityQueue<Vertex>;
 protected:
@@ -371,6 +372,28 @@ void Vertex<T>::deleteEdge(Edge<T> *edge) {
         }
     }
     delete edge;
+}
+
+/***
+ * Finds the nearest neighbor vertex connected to the current vertex.
+ * @tparam T
+ * @return Pointer to the nearest neighbor vertex, or nullptr if no neighbors exist.
+ *
+ * Time Complexity: O(V)
+ */
+template<class T>
+Vertex<T>* Vertex<T>::nearestNeighbor() const {
+    double minDist = INF;
+    Vertex<T>* nearestNode = nullptr;
+    for (auto e : adj) {
+        auto w = e->getDest();
+        if (!w->isVisited() && e->getWeight() < minDist) {
+            minDist = e->getWeight();
+            nearestNode = w;
+        }
+    }
+
+    return nearestNode;
 }
 
 /********************** Edge  ****************************/
