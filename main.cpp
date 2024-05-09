@@ -67,7 +67,7 @@ int main() {
     Graph<int> realGraph2;
     Graph<int> realGraph3;
     //dataParser.ParseBigGraph("data/Real_world_Graphs/graph1/nodes.csv", "data/Real_world_Graphs/graph1/edges.csv", realGraph1, true);
-    //dataParser.ParseBigGraph("data/Real_world_Graphs/graph2/nodes.csv", "data/Real_world_Graphs/graph2/edges.csv", realGraph2, true);
+    dataParser.ParseBigGraph("data/Real_world_Graphs/graph2/nodes.csv", "data/Real_world_Graphs/graph2/edges.csv", realGraph2, true);
     //dataParser.ParseBigGraph("data/Real_world_Graphs/graph3/nodes.csv", "data/Real_world_Graphs/graph3/edges.csv", realGraph3, true);
 
     Graph<int> ToyGraphTourism;
@@ -112,7 +112,7 @@ int main() {
     //stadiumGraph.heldKarp(); // ~ 15ms
 
     //realWorldGraph1.triangularApproximationAlgorithm();
-    //realWorldGraph2.triangularApproximationAlgorithm();
+    realWorldGraph2.triangularApproximationAlgorithm();
     //realWorldGraph3.triangularApproximationAlgorithm();
 
     // 3. AFTER FUNCTION CALL

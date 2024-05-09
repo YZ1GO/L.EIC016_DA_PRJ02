@@ -173,6 +173,8 @@ void TSP::heldKarp() {
 }
 
 /*** TRIANGULAR APPROXIMATION RELATED FUNCTIONS [T2.2] ***/
+// Time Complexity: O(V+V×A)
+// where V is the number of vertices in the path and A is the maximum number of adjacent edges for any vertex in the graph
 long long TSP::pathDistance(const vector<Vertex<int>*>& path) {
     long long totalDistance = 0.0;
 
@@ -209,15 +211,15 @@ long long TSP::pathDistance(const vector<Vertex<int>*>& path) {
     return totalDistance;
 }
 
-
+// Time Complexity: O(V+E)
 void TSP::dfsTraversal(Vertex<int>* current, vector<Vertex<int>*>& path) {
     current->setVisited(true);
     path.push_back(current);
 
     auto adj = current->getAdj();
-    sort(adj.begin(), adj.end(), [](const Edge<int>* a, const Edge<int>* b) {
+    /*sort(adj.begin(), adj.end(), [](const Edge<int>* a, const Edge<int>* b) {
         return a->getWeight() < b->getWeight();
-    });
+    });*/
 
     for (auto edge : adj) {
         Vertex<int>* nextVertex = edge->getDest();
@@ -227,12 +229,14 @@ void TSP::dfsTraversal(Vertex<int>* current, vector<Vertex<int>*>& path) {
     }
 }
 
+//Time Complexity: O(V+E)
 void TSP::traverseMST(const Graph<int>& graph, Vertex<int>* start, vector<Vertex<int>*>& path) {
     graph.setAllNotVisited();
     dfsTraversal(start, path);
     path.push_back(start);
 }
 
+//Time Complexity: O((V+E)logV)
 void TSP::triangularApproximationAlgorithm() {
     Graph<int> graph = tspGraph.convertToMST();
 
