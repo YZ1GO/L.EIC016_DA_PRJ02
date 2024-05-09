@@ -53,14 +53,50 @@ void Menu::run() {
             if (waitInput(choice, "Choose a algorithm: ")) continue;
 
             auto start = high_resolution_clock::now();
+            clearScreen();
             switch (choice) {
                 case 0:
-                    clearScreen();
                     cout << "BYE BYE!" << endl;
                     cout << "Tip: Rerun to analyze another graph" << endl;
                     return;
                 case 1:
                     tsp.backtrackingAlgorithm();
+                    break;
+                case 2:
+                    tsp.triangularApproximationAlgorithm();
+                    break;
+                case 3:
+                    tsp.heldKarp();
+                    break;
+                case 4:
+                    int origin;
+                    cout << "Choose origin (int): ";
+                    if (!(cin >> origin)) {
+                        cin.clear();
+                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                        return;
+                    }
+                    start = high_resolution_clock::now();
+                    tsp.nearestNeighborAlgorithm(origin);
+                    break;
+                case 5:
+                    int origin2;
+                    cout << "Choose origin (int): ";
+                    if (!(cin >> origin2)) {
+                        cin.clear();
+                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                        return;
+                    }
+
+                    int k;
+                    cout << "Choose K (int): ";
+                    if (!(cin >> k)) {
+                        cin.clear();
+                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                        return;
+                    }
+                    start = high_resolution_clock::now();
+                    tsp.kNearestNeighborAlgorithm(origin2, k);
                     break;
                 default:
                     continue;
