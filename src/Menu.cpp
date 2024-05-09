@@ -1,9 +1,9 @@
 #include "Menu.h"
 
 using namespace std;
+using namespace chrono;
 
 Menu::Menu() {
-    dataParser = DataParser();
     graph = Graph<int>();
     tsp = TSP();
 }
@@ -52,6 +52,7 @@ void Menu::run() {
             int choice;
             if (waitInput(choice, "Choose a algorithm: ")) continue;
 
+            auto start = high_resolution_clock::now();
             switch (choice) {
                 case 0:
                     clearScreen();
@@ -64,6 +65,9 @@ void Menu::run() {
                 default:
                     continue;
             }
+            auto end = high_resolution_clock::now();
+            executionTime(start, end);
+
             waitPress();
 
         }
@@ -203,4 +207,9 @@ void Menu::waitPress() {
 
 void Menu::clearScreen() {
     system("clear || cls");
+}
+
+void Menu::executionTime(time_point<high_resolution_clock> start, time_point<high_resolution_clock> end) {
+    auto duration = duration_cast<seconds>(end - start);
+    cout << makeBold("Time taken by function: ") << duration.count() << " s" << endl;
 }

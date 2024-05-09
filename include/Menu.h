@@ -11,8 +11,6 @@ public:
     int init();
 
 private:
-    void parseGraph();
-    DataParser dataParser;
     Graph<int> graph;
     std::string currentGraph = "-";
     TSP tsp;
@@ -21,6 +19,7 @@ private:
     static int waitInput(int& choice, const std::string& text);
     static void waitPress();
     static void clearScreen();
+    static void executionTime(std::chrono::time_point<std::chrono::high_resolution_clock> start, std::chrono::time_point<std::chrono::high_resolution_clock> end);
 
     std::string extraFullyConnectedGraphsNodes = "data/Extra_Fully_Connected_Graphs/nodes.csv";
     std::vector<std::string> extraFullyConnectedGraphsEdges = {
