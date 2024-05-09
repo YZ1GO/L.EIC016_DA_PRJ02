@@ -19,6 +19,7 @@ private:
 
     static void printMenu(std::vector<std::string> menuIndex);
     static int waitInput(int& choice, const std::string& text);
+    static void waitPress();
     static void clearScreen();
 
     std::string extraFullyConnectedGraphsNodes = "data/Extra_Fully_Connected_Graphs/nodes.csv";

@@ -29,16 +29,51 @@ void Menu::printMenu(vector<string> menuIndex) {
 void Menu::run() {
     while (true) {
         if (init()) {
-            return;
+            break;
         }
+        tsp = TSP(graph);
 
-        /*while (true) {
+        vector<string> menu = {
+                makeBold("Current Graph: ") + currentGraph,
+                "",
+                makeBold("[1]. Backtracking"),
+                makeBold("[2]. Triangular Approximation"),
+                makeBold("[3]. Held Karp"),
+                makeBold("[4]. Nearest Neighbor"),
+                makeBold("[5]. K-Nearest Neighbor"),
+                "...",
+                "[0]. CHANGE GRAPH"
+        };
 
-        }*/
+        bool exit = false;
+        while (true) {
+            clearScreen();
+            printMenu(menu);
 
-        cout << "BYE BYE";
-        return;
+            int choice;
+            if (waitInput(choice, "Choose a algorithm: ")) continue;
+
+            switch (choice) {
+                case 0:
+                    exit = true;
+                    break;
+                case 1:
+                    tsp.backtrackingAlgorithm();
+                    break;
+                default:
+                    continue;
+            }
+
+            if (exit) {
+                break;
+            }
+
+            waitPress();
+
+        }
     }
+    clearScreen();
+    cout << "BYE BYE" << endl;
 }
 
 int Menu::init() {
@@ -149,7 +184,6 @@ int Menu::init() {
             default:
                 continue;
         }
-
         break;
     }
 
@@ -164,6 +198,13 @@ int Menu::waitInput(int& choice, const string& text) {
         return 1;
     }
     return 0;
+}
+
+void Menu::waitPress() {
+    cout << "\n";
+    cin.get();
+    cout << "Press ENTER to continue...";
+    cin.get();
 }
 
 void Menu::clearScreen() {
