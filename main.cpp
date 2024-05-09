@@ -2,6 +2,7 @@
 #include <vector>
 #include <chrono>
 #include "TSP.h"
+#include "Menu.h"
 
 using namespace std;
 using namespace chrono;
@@ -140,5 +141,10 @@ int main() {
     // available units: nano, micro, milliseconds, seconds, minutes, hours
     auto duration = duration_cast<milliseconds>(stop - start);
     cout << "Time taken by function: " << duration.count() << " ms" << endl;
+
+    Menu().run();
     return 0;
 }
+
+
+

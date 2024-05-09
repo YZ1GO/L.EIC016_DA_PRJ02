@@ -22,6 +22,7 @@ private:
     std::vector<Vertex<int>*> kNearestNeighborPath(Vertex<int>* origin, int numNeighbors);
 
 public:
+    TSP();
     explicit TSP(const Graph<int> &graph);
     Graph<int> getTspGraph();
     void backtrackingAlgorithm();
