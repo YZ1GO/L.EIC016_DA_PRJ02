@@ -385,7 +385,7 @@ Vertex<T>* Vertex<T>::nearestNeighbor() const {
     Vertex<T>* nearestNode = nullptr;
     for (auto e : adj) {
         auto w = e->getDest();
-        if (e->getWeight() < minDist) {
+        if (!w->isVisited() && e->getWeight() < minDist) {
             minDist = e->getWeight();
             nearestNode = w;
         }

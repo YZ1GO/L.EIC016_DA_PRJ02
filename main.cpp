@@ -122,6 +122,10 @@ int main() {
     //realWorldGraph2.triangularApproximationAlgorithm();
     //realWorldGraph3.triangularApproximationAlgorithm();
 
+    realWorldGraph1.nearestNeighborAlgorithm(0);
+    //realWorldGraph2.nearestNeighborAlgorithm(0);
+    //realWorldGraph3.nearestNeighborAlgorithm(0);
+
     // 3. AFTER FUNCTION CALL
     auto stop = high_resolution_clock::now();
 

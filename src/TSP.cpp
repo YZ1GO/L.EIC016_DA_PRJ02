@@ -273,14 +273,9 @@ bool TSP::findPathToOrigin(Vertex<int>* origin, vector<Vertex<int>*>& tour) {
     Vertex<int>* current = tour.back();
     for (auto e : current->getAdj()) {
         auto dest = e->getDest();
-        if (!dest->isVisited()) {
-            dest->setVisited(true);
+        if (dest->getInfo() == origin->getInfo()) {
             tour.push_back(dest);
-            if (findPathToOrigin(origin, tour)) {
-                return true;
-            }
-            tour.pop_back();
-            dest->setVisited(false);
+            return true;
         }
     }
 
@@ -299,13 +294,19 @@ vector<Vertex<int>*> TSP::nearestNeighborPath(Vertex<int>* origin) {
     Vertex<int>* current = origin;
     while (true) {
         Vertex<int>* next = current->nearestNeighbor();
-        if (next == nullptr || next->isVisited()) {
+        if (next == nullptr) {
             break;
         }
         next->setVisited(true);
         tour.push_back(next);
         current = next;
     }
+    /*
+    cout << "N\'path: ";
+    for (auto v : tour) {
+        cout << v->getInfo() << " ";
+    }
+    cout << endl; */
 
     return tour;
 }
