@@ -42,10 +42,9 @@ void Menu::run() {
                 makeBold("[4]. Nearest Neighbor"),
                 makeBold("[5]. K-Nearest Neighbor"),
                 "...",
-                "[0]. CHANGE GRAPH"
+                "[0]. EXIT"
         };
 
-        bool exit = false;
         while (true) {
             clearScreen();
             printMenu(menu);
@@ -55,25 +54,20 @@ void Menu::run() {
 
             switch (choice) {
                 case 0:
-                    exit = true;
-                    break;
+                    clearScreen();
+                    cout << "BYE BYE!" << endl;
+                    cout << "Tip: Rerun to analyze another graph" << endl;
+                    return;
                 case 1:
                     tsp.backtrackingAlgorithm();
                     break;
                 default:
                     continue;
             }
-
-            if (exit) {
-                break;
-            }
-
             waitPress();
 
         }
     }
-    clearScreen();
-    cout << "BYE BYE" << endl;
 }
 
 int Menu::init() {

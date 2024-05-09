@@ -8,6 +8,7 @@
 class TSP {
 private:
     Graph<int> tspGraph;
+
     void printPath(double distance, const std::vector<Vertex<int>*> &path);
     void backtrackingAlgorithmAux(Vertex<int>* currVertex, double currDistance, std::vector<Vertex<int>*> &path, std::vector<bool> &visited, double &minDistance, std::vector<Vertex<int>*> &bestPath);
 
@@ -25,6 +26,7 @@ public:
     TSP();
     explicit TSP(const Graph<int> &graph);
     Graph<int> getTspGraph();
+
     void backtrackingAlgorithm();
     void triangularApproximationAlgorithm();
     void heldKarp();
