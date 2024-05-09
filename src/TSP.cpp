@@ -259,3 +259,81 @@ void TSP::triangularApproximationAlgorithm() {
     }
     cout << endl;
 }
+
+/*** NEAREST NEIGHBOR ALGORITHM ***/
+bool TSP::findPathToOrigin(Vertex<int>* origin, vector<Vertex<int>*>& tour) {
+    if (tour.size() == tspGraph.getNumVertex() && tour.back() == origin) {
+        return true;
+    }
+
+    Vertex<int>* current = tour.back();
+    for (auto e : current->getAdj()) {
+        auto dest = e->getDest();
+        if (!dest->isVisited()) {
+            dest->setVisited(true);
+            tour.push_back(dest);
+            if (findPathToOrigin(origin, tour)) {
+                return true;
+            }
+            tour.pop_back();
+            dest->setVisited(false);
+        }
+    }
+
+    return false;
+}
+
+vector<Vertex<int>*> TSP::nearestNeighborPath(Vertex<int>* origin) {
+    vector<Vertex<int>*> tour;
+    if (origin == nullptr) {
+        return tour;
+    }
+    tspGraph.setAllNotVisited();
+    origin->setVisited(true);
+    tour.push_back(origin);
+
+    Vertex<int>* current = origin;
+    while (true) {
+        Vertex<int>* next = current->nearestNeighbor();
+        if (next == nullptr || next->isVisited()) {
+            break;
+        }
+        next->setVisited(true);
+        tour.push_back(next);
+        current = next;
+    }
+
+    return tour;
+}
+
+void TSP::nearestNeighborAlgorithm(const int& origin) {
+    Vertex<int>* start = tspGraph.findVertex(origin);
+    if (start == nullptr) {
+        cerr << "Couldn\'t find origin vertex " << origin << endl;
+        return;
+    }
+
+    vector<Vertex<int>*> tour = nearestNeighborPath(start);
+    if (tour.size() == tspGraph.getNumVertex()) {
+        if (!findPathToOrigin(start, tour)) {
+            tour.clear();
+        }
+    } else {
+        tour.clear();
+    }
+
+    if (tour.empty()) {
+        cerr << "No feasible tour exists starting on vertex " << origin << endl;
+        return;
+    }
+
+    long long totalDistance = pathDistance(tour);
+
+    cout << "Travelled distance: " << totalDistance << endl;
+    cout << "Path: ";
+    for (auto step : tour) {
+        cout << step->getInfo() << " ";
+    }
+    cout << endl;
+}
+

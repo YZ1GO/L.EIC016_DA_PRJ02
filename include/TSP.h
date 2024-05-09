@@ -15,12 +15,17 @@ private:
     static void dfsTraversal(Vertex<int>* current, std::vector<Vertex<int>*>& path);
     static void traverseMST(const Graph<int>& graph, Vertex<int>* start, std::vector<Vertex<int>*>& path);
     long long pathDistance(const std::vector<Vertex<int>*>& path);
+
+    /*** NEAREST NEIGHBOR ALGORITHM ***/
+    bool findPathToOrigin(Vertex<int>* origin, std::vector<Vertex<int>*>& tour);
+    std::vector<Vertex<int>*> nearestNeighborPath(Vertex<int>* origin);
   
 public:
     explicit TSP(const Graph<int> &graph);
     void backtrackingAlgorithm();
     void triangularApproximationAlgorithm();
     void heldKarp();
+    void nearestNeighborAlgorithm(const int& origin);
 };
 
 

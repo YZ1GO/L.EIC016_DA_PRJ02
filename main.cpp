@@ -67,7 +67,7 @@ int main() {
     Graph<int> realGraph2;
     Graph<int> realGraph3;
     //dataParser.ParseBigGraph("data/Real_world_Graphs/graph1/nodes.csv", "data/Real_world_Graphs/graph1/edges.csv", realGraph1, true);
-    dataParser.ParseBigGraph("data/Real_world_Graphs/graph2/nodes.csv", "data/Real_world_Graphs/graph2/edges.csv", realGraph2, true);
+    //dataParser.ParseBigGraph("data/Real_world_Graphs/graph2/nodes.csv", "data/Real_world_Graphs/graph2/edges.csv", realGraph2, true);
     //dataParser.ParseBigGraph("data/Real_world_Graphs/graph3/nodes.csv", "data/Real_world_Graphs/graph3/edges.csv", realGraph3, true);
 
     Graph<int> ToyGraphTourism;
@@ -95,24 +95,28 @@ int main() {
 
     //tourismGraph.backtrackingAlgorithm(); // 0ms
     //tourismGraph.triangularApproximationAlgorithm();
+    //tourismGraph.nearestNeighborAlgorithm(0);
     //tourismGraph.heldKarp(); // 0ms
 
     //shippingGraph.backtrackingAlgorithm(); // ~ 30ms
     //shippingGraph.triangularApproximationAlgorithm();
+    //shippingGraph.nearestNeighborAlgorithm(0);
     //shippingGraph.heldKarp(); // ~ 220ms
 
     //stadiumGraph.backtrackingAlgorithm(); // ~ 550ms
     //stadiumGraph.triangularApproximationAlgorithm();
+    //stadiumGraph.nearestNeighborAlgorithm(0);
     //stadiumGraph.heldKarp(); // ~ 15ms
 
     //twoFiveGraph.backtrackingAlgorithm(); // 1.5 hours still didn't end
     //twoFiveGraph.triangularApproximationAlgorithm();
+    //twoFiveGraph.nearestNeighborAlgorithm(0);
     //twoFiveGraph.heldKarp(); // ~ 37min
 
     //stadiumGraph.heldKarp(); // ~ 15ms
 
     //realWorldGraph1.triangularApproximationAlgorithm();
-    realWorldGraph2.triangularApproximationAlgorithm();
+    //realWorldGraph2.triangularApproximationAlgorithm();
     //realWorldGraph3.triangularApproximationAlgorithm();
 
     // 3. AFTER FUNCTION CALL
