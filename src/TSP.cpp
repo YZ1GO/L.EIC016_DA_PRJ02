@@ -1,6 +1,8 @@
 #include "TSP.h"
 using namespace std;
 
+TSP::TSP() {}
+
 TSP::TSP(const Graph<int> &graph) {
     tspGraph = graph;
 }

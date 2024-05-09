@@ -11,4 +11,5 @@ add_executable(feup_da_02
         include/Utilities.h             src/Utilities.cpp
         include/DataParser.h            src/DataParser.cpp
         include/TSP.h                   src/TSP.cpp
+        include/Menu.h                  src/Menu.cpp
 )
