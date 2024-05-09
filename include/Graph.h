@@ -378,6 +378,8 @@ void Vertex<T>::deleteEdge(Edge<T> *edge) {
  * Finds the nearest neighbor vertex connected to the current vertex.
  * @tparam T
  * @return Pointer to the nearest neighbor vertex, or nullptr if no neighbors exist.
+ *
+ * Time Complexity: O(V)
  */
 template<class T>
 Vertex<T>* Vertex<T>::nearestNeighbor() const {
