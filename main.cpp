@@ -66,7 +66,7 @@ int main() {
     Graph<int> realGraph1;
     Graph<int> realGraph2;
     Graph<int> realGraph3;
-    dataParser.ParseRealWorldGraph("data/Real_world_Graphs/graph1/nodes.csv", "data/Real_world_Graphs/graph1/edges.csv", realGraph1);
+    //dataParser.ParseRealWorldGraph("data/Real_world_Graphs/graph1/nodes.csv", "data/Real_world_Graphs/graph1/edges.csv", realGraph1);
     //realGraph1.printGraph("../output/real1.txt");
     //dataParser.ParseRealWorldGraph("data/Real_world_Graphs/graph2/nodes.csv", "data/Real_world_Graphs/graph2/edges.csv", realGraph2);
     //dataParser.ParseRealWorldGraph("data/Real_world_Graphs/graph3/nodes.csv", "data/Real_world_Graphs/graph3/edges.csv", realGraph3);
@@ -99,21 +99,25 @@ int main() {
     //tourismGraph.backtrackingAlgorithm(); // 0ms
     //tourismGraph.triangularApproximationAlgorithm();
     //tourismGraph.nearestNeighborAlgorithm(0);
+    //tourismGraph.kNearestNeighborAlgorithm(0,1);
     //tourismGraph.heldKarp(); // 0ms
 
     //shippingGraph.backtrackingAlgorithm(); // ~ 30ms
     //shippingGraph.triangularApproximationAlgorithm();
     //shippingGraph.nearestNeighborAlgorithm(0);
+    //shippingGraph.kNearestNeighborAlgorithm(0,2);
     //shippingGraph.heldKarp(); // ~ 220ms
 
     //stadiumGraph.backtrackingAlgorithm(); // ~ 550ms
     //stadiumGraph.triangularApproximationAlgorithm();
     //stadiumGraph.nearestNeighborAlgorithm(0);
+    //stadiumGraph.kNearestNeighborAlgorithm(0,1);
     //stadiumGraph.heldKarp(); // ~ 15ms
 
     //twoFiveGraph.backtrackingAlgorithm(); // 1.5 hours still didn't end
     //twoFiveGraph.triangularApproximationAlgorithm();
     //twoFiveGraph.nearestNeighborAlgorithm(0);
+    //twoFiveGraph.kNearestNeighborAlgorithm(0,1);
     //twoFiveGraph.heldKarp(); // ~ 37min
 
     //stadiumGraph.heldKarp(); // ~ 15ms
@@ -122,9 +126,12 @@ int main() {
     //realWorldGraph2.triangularApproximationAlgorithm();
     //realWorldGraph3.triangularApproximationAlgorithm();
 
-    realWorldGraph1.nearestNeighborAlgorithm(0);
+    //realWorldGraph1.nearestNeighborAlgorithm(0);
+    //realWorldGraph1.kNearestNeighborAlgorithm(0,1);
     //realWorldGraph2.nearestNeighborAlgorithm(0);
+    //realWorldGraph2.kNearestNeighborAlgorithm(0,100);
     //realWorldGraph3.nearestNeighborAlgorithm(0);
+    //realWorldGraph3.kNearestNeighborAlgorithm(0,500);
 
     // 3. AFTER FUNCTION CALL
     auto stop = high_resolution_clock::now();

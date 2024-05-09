@@ -342,3 +342,72 @@ void TSP::nearestNeighborAlgorithm(const int& origin) {
     cout << endl;
 }
 
+vector<Vertex<int>*> TSP::kNearestNeighborPath(Vertex<int>* origin, int numNeighbors) {
+    vector<Vertex<int>*> tour;
+    if (origin == nullptr) {
+        return tour;
+    }
+    tspGraph.setAllNotVisited();
+    origin->setVisited(true);
+    tour.push_back(origin);
+
+    Vertex<int>* current = origin;
+    while (tour.size() < tspGraph.getNumVertex()) {
+        vector<pair<Vertex<int>*, double>> neighbors;
+        for (auto e : current->getAdj()) {
+            auto dest = e->getDest();
+            if (!dest->isVisited()) {
+                neighbors.push_back({dest, e->getWeight()});
+            }
+        }
+        if (neighbors.empty()) {
+            break;
+        }
+
+        sort(neighbors.begin(), neighbors.end(), [](const auto& a, const auto& b) {
+            return a.second < b.second;
+        });
+
+        int neighborsToExplore = min(numNeighbors, static_cast<int>(neighbors.size()));
+        for (int i = 0; i < neighborsToExplore; ++i) {
+            auto next = neighbors[i].first;
+            next->setVisited(true);
+            tour.push_back(next);
+            current = next;
+        }
+    }
+
+    return tour;
+}
+
+void TSP::kNearestNeighborAlgorithm(const int& origin, int k) {
+    Vertex<int>* start = tspGraph.findVertex(origin);
+    if (start == nullptr) {
+        cerr << "Couldn\'t find origin vertex " << origin << endl;
+        return;
+    }
+
+    vector<Vertex<int>*> tour = kNearestNeighborPath(start, k);
+    if (tour.size() == tspGraph.getNumVertex()) {
+        if (!findPathToOrigin(start, tour)) {
+            tour.clear();
+        }
+    } else {
+        tour.clear();
+    }
+
+    if (tour.empty()) {
+        cerr << "No feasible tour exists starting on vertex " << origin << endl;
+        return;
+    }
+
+    long long totalDistance = pathDistance(tour);
+
+    cout << "Travelled distance: " << totalDistance << endl;
+    cout << "Path: ";
+    for (auto step : tour) {
+        cout << step->getInfo() << " ";
+    }
+    cout << endl;
+}
+

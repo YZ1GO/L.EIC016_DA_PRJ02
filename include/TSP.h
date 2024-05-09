@@ -19,7 +19,8 @@ private:
     /*** NEAREST NEIGHBOR ALGORITHM ***/
     bool findPathToOrigin(Vertex<int>* origin, std::vector<Vertex<int>*>& tour);
     std::vector<Vertex<int>*> nearestNeighborPath(Vertex<int>* origin);
-  
+    std::vector<Vertex<int>*> kNearestNeighborPath(Vertex<int>* origin, int numNeighbors);
+
 public:
     explicit TSP(const Graph<int> &graph);
     Graph<int> getTspGraph();
@@ -27,6 +28,7 @@ public:
     void triangularApproximationAlgorithm();
     void heldKarp();
     void nearestNeighborAlgorithm(const int& origin);
+    void kNearestNeighborAlgorithm(const int& origin, int k);
 };
 
 
