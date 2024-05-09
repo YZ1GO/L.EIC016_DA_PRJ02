@@ -22,6 +22,7 @@ private:
   
 public:
     explicit TSP(const Graph<int> &graph);
+    Graph<int> getTspGraph();
     void backtrackingAlgorithm();
     void triangularApproximationAlgorithm();
     void heldKarp();
