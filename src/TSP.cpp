@@ -5,6 +5,10 @@ TSP::TSP(const Graph<int> &graph) {
     tspGraph = graph;
 }
 
+Graph<int> TSP::getTspGraph() {
+    return tspGraph;
+};
+
 void TSP::printPath(const double distance, const vector<Vertex<int> *> &path) {
     cout << "Minimum Distance: ";
     if (distance == INF) {

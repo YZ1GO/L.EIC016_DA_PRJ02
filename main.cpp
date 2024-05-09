@@ -66,9 +66,10 @@ int main() {
     Graph<int> realGraph1;
     Graph<int> realGraph2;
     Graph<int> realGraph3;
-    //dataParser.ParseBigGraph("data/Real_world_Graphs/graph1/nodes.csv", "data/Real_world_Graphs/graph1/edges.csv", realGraph1, true);
-    //dataParser.ParseBigGraph("data/Real_world_Graphs/graph2/nodes.csv", "data/Real_world_Graphs/graph2/edges.csv", realGraph2, true);
-    //dataParser.ParseBigGraph("data/Real_world_Graphs/graph3/nodes.csv", "data/Real_world_Graphs/graph3/edges.csv", realGraph3, true);
+    dataParser.ParseRealWorldGraph("data/Real_world_Graphs/graph1/nodes.csv", "data/Real_world_Graphs/graph1/edges.csv", realGraph1);
+    //realGraph1.printGraph("../output/real1.txt");
+    //dataParser.ParseRealWorldGraph("data/Real_world_Graphs/graph2/nodes.csv", "data/Real_world_Graphs/graph2/edges.csv", realGraph2);
+    //dataParser.ParseRealWorldGraph("data/Real_world_Graphs/graph3/nodes.csv", "data/Real_world_Graphs/graph3/edges.csv", realGraph3);
 
     Graph<int> ToyGraphTourism;
     Graph<int> ToyGraphStadiums;
@@ -81,7 +82,9 @@ int main() {
     TSP shippingGraph(ToyGraphShipping);
 
     Graph<int> ExtraFullyConnectedGraph25;
-    dataParser.ParseBigGraph(extraFullyConnectedGraphsNodes, extraFullyConnectedGraphsEdges[0], ExtraFullyConnectedGraph25, false);
+    dataParser.ParseFullyConnectedGraph(extraFullyConnectedGraphsNodes, extraFullyConnectedGraphsEdges[0], ExtraFullyConnectedGraph25, 25);
+    //ExtraFullyConnectedGraph25.printGraph("../output/25Full.txt");
+
     TSP twoFiveGraph(ExtraFullyConnectedGraph25);
     TSP realWorldGraph1(realGraph1);
     TSP realWorldGraph2(realGraph2);

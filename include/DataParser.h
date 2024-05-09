@@ -15,7 +15,8 @@ public:
 
     static void ParseToyGraphs(std::string filePath, Graph<int>& graph);
     static void ParseToyGraphTourism(std::string tourismPath, Graph<int>& graph);
-    static void ParseBigGraph(std::string vertexPath, std::string edgePath, Graph<int>& graph, bool edgeFileHasHeader);
+    static void ParseFullyConnectedGraph(std::string vertexPath, std::string edgePath, Graph<int>& graph, const int& nodesNum);
+    static void ParseRealWorldGraph(std::string vertexPath, std::string edgePath, Graph<int>& graph);
 };
 
 
