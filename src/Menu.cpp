@@ -8,7 +8,7 @@ Menu::Menu() {
     tsp = TSP();
 }
 
-void Menu::printMenu(vector<string> menuIndex) {
+void Menu::printMenu(const vector<string>& menuIndex) {
     cout << "┌───────────────────────────────────────────────────────────────────────────────┐" << endl;
     cout << "│                      ████████╗    ███████╗     ███████╗                       │" << endl;
     cout << "│                      ╚══██╔══╝    ██╔════╝     ██╔═══██╗                      │" << endl;
@@ -70,31 +70,18 @@ void Menu::run() {
                     break;
                 case 4:
                     int origin;
-                    cout << "Choose origin (int): ";
-                    if (!(cin >> origin)) {
-                        cin.clear();
-                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                        return;
-                    }
+                    if (waitInput(origin, "Choose origin (int): ")) continue;
+
                     start = high_resolution_clock::now();
                     tsp.nearestNeighborAlgorithm(origin);
                     break;
                 case 5:
                     int origin2;
-                    cout << "Choose origin (int): ";
-                    if (!(cin >> origin2)) {
-                        cin.clear();
-                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                        return;
-                    }
+                    if (waitInput(origin2, "Choose origin (int): ")) continue;
 
                     int k;
-                    cout << "Choose K (int): ";
-                    if (!(cin >> k)) {
-                        cin.clear();
-                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                        return;
-                    }
+                    if (waitInput(k,"Choose K (int > 0): ")) continue;
+
                     start = high_resolution_clock::now();
                     tsp.kNearestNeighborAlgorithm(origin2, k);
                     break;

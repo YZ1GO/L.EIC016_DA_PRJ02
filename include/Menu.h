@@ -15,7 +15,7 @@ private:
     std::string currentGraph = "-";
     TSP tsp;
 
-    static void printMenu(std::vector<std::string> menuIndex);
+    static void printMenu(const std::vector<std::string>& menuIndex);
     static int waitInput(int& choice, const std::string& text);
     static void waitPress();
     static void clearScreen();
