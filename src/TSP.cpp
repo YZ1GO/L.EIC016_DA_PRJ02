@@ -417,3 +417,57 @@ void TSP::kNearestNeighborAlgorithm(const int& origin, int k) {
     printPath(totalDistance, tour);
 }
 
+/* DOESN'T WORK
+void TSP::twoOptChristofidesAlgorithm() {
+    vector<Vertex<int>*> path;
+    tspGraph.setAllNotVisited();
+    auto origin = tspGraph.findVertex(0);
+    origin->setVisited(true);
+    path.push_back(origin);
+
+    Vertex<int>* current = origin;
+    while (true) {
+        Vertex<int> *next = current->nearestNeighbor();
+        if (next == nullptr) {
+            break;
+        }
+        next->setVisited(true);
+        path.push_back(next);
+        current = next;
+    }
+
+    path.push_back(path[0]);
+    printPath(0, path);
+    long long minDistance = pathDistanceFullyConnected(path);
+
+    bool improved = true;
+    while (improved) {
+        improved = false;
+        for (int i = 1; i < path.size() - 1; ++i) {
+            for (int k = i + 1; k < path.size(); ++k) {
+                Vertex<int> *u = path[i - 1];
+                Vertex<int> *v = path[i];
+                Vertex<int> *x = path[k - 1];
+                Vertex<int> *y = path[k];
+
+                tspGraph.twoOptSwap(u, v, x, y);
+
+                long long newDistance = pathDistanceFullyConnected(path);
+
+                if (newDistance < minDistance) {
+                    improved = true;
+                    minDistance = newDistance;
+                    swap(path[i], path[k]);
+                    break;
+                } else {
+                    tspGraph.twoOptSwap(v, u, y, x);
+                }
+            }
+
+            if (improved) break;
+        }
+    }
+
+    printPath(minDistance, path);
+}*/
+
