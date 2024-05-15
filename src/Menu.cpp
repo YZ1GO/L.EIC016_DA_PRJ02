@@ -36,16 +36,17 @@ void Menu::run() {
         vector<string> menu = {
                 makeBold("Current Graph: ") + currentGraph,
                 "",
-                makeBold("[1]. Backtracking *"),
-                makeBold("[2]. Christofides"),
+                makeBold("[1]. Backtracking"),
+                makeBold("[2]. Triangular Approximation MST *"),
                 makeBold("[3]. Held Karp"),
                 makeBold("[4]. Nearest Neighbor *"),
                 makeBold("[5]. K-Nearest Neighbor *"),
-                makeBold("[6]. Nearest Neighbor + 2-Opt"),
+                makeBold("[6]. 2-Opt"),
+                makeBold("[7]. 3-Opt"),
                 "...",
                 "[0]. EXIT",
                 "",
-                "* - no option to choose to consider as fully connected graph"
+                "* - returns feasible or not"
         };
 
         while (true) {
@@ -66,14 +67,14 @@ void Menu::run() {
                     tsp.backtrackingAlgorithm();
                     break;
                 case 2:
-                    int originC;
-                    if (waitInput(originC, "Choose origin (int): ")) continue;
+                    int originMST;
+                    if (waitInput(originMST, "Choose origin (int): ")) continue;
 
                     int isFullyConnectedC;
                     if (waitInput(isFullyConnectedC, "Considering graph fully connected? [1-YES / 0-NO]: ")) continue;
 
                     start = high_resolution_clock::now();
-                    tsp.christofidesAlgorithm(originC, isFullyConnectedC);
+                    tsp.triangularApproximationMSTAlgorithm(originMST, isFullyConnectedC);
                     break;
                 case 3:
                     tsp.heldKarp();
@@ -96,11 +97,18 @@ void Menu::run() {
                     tsp.kNearestNeighborAlgorithm(originKNN, k);
                     break;
                 case 6:
-                    int originTONN;
-                    if (waitInput(originTONN, "Choose origin (int): ")) continue;
+                    int origin2OPT;
+                    if (waitInput(origin2OPT, "Choose origin (int): ")) continue;
 
                     start = high_resolution_clock::now();
-                    tsp.twoOptNearestNeighborAlgorithm(originTONN);
+                    tsp.twoOptAlgorithm(origin2OPT);
+                    break;
+                case 7:
+                    int origin3OPT;
+                    if (waitInput(origin3OPT, "Choose origin (int): ")) continue;
+
+                    start = high_resolution_clock::now();
+                    tsp.threeOptAlgorithm(origin3OPT);
                     break;
                 default:
                     continue;
