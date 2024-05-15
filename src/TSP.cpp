@@ -11,8 +11,8 @@ Graph<int> TSP::getTspGraph() {
     return tspGraph;
 };
 
-void TSP::printPath(const double distance, const vector<Vertex<int> *> &path) {
-    cout << "Minimum Distance: ";
+void TSP::printPath(const long long distance, const vector<Vertex<int> *> &path) {
+    cout << "DISTANCE: ";
     if (distance == INF) {
         cout << "No path found" << endl;
         return;
@@ -179,15 +179,13 @@ void TSP::heldKarp() {
 }
 
 /*** TRIANGULAR APPROXIMATION RELATED FUNCTIONS [T2.2] ***/
-// Time Complexity: O(V+V×A)
-// where V is the number of vertices in the path and A is the maximum number of adjacent edges for any vertex in the graph
-long long TSP::pathDistance(const vector<Vertex<int>*>& path) {
+// return false if not find direct edge between 2 nodes
+// distance is the total distance of the path if all vertices in path is connected
+bool TSP::pathDistanceNotFullyConnected(const vector<Vertex<int>*>& path, long long& distance_) {
     long long totalDistance = 0.0;
-
     for (int i = 0; i < path.size() - 1; i++) {
         auto s = tspGraph.findVertex(path[i]->getInfo());
         auto t = tspGraph.findVertex(path[i + 1]->getInfo());
-
         double distance = 0.0;
         bool directEdgeFound = false;
         for (auto e : s->getAdj()) {
@@ -197,23 +195,41 @@ long long TSP::pathDistance(const vector<Vertex<int>*>& path) {
                 break;
             }
         }
+        if (!directEdgeFound) {
+            return false;
+        }
+        totalDistance += distance;
+    }
+    distance_ = totalDistance;
 
+    return true;
+}
+// Time Complexity: O(V+V×A)
+// where V is the number of vertices in the path and A is the maximum number of adjacent edges for any vertex in the graph
+// that function always consider graph fully connected
+long long TSP::pathDistanceFullyConnected(const vector<Vertex<int>*>& path) {
+    long long totalDistance = 0.0;
+    for (int i = 0; i < path.size() - 1; i++) {
+        auto s = tspGraph.findVertex(path[i]->getInfo());
+        auto t = tspGraph.findVertex(path[i + 1]->getInfo());
+        double distance = 0.0;
+        bool directEdgeFound = false;
+        for (auto e : s->getAdj()) {
+            if (e->getDest()->getInfo() == t->getInfo()) {
+                distance = e->getWeight();
+                directEdgeFound = true;
+                break;
+            }
+        }
         if (!directEdgeFound) {
             double lat1 = s->getLatitude();
             double lon1 = s->getLongitude();
             double lat2 = t->getLatitude();
             double lon2 = t->getLongitude();
             distance = HarversineDistance(lat1, lon1, lat2, lon2);
-            //if (distance <= 0) {
-            //    cerr << "Error: Can\'t calculate the Harversine distance" << endl;
-            //    cout << s->getInfo() << ", " << t->getInfo() << endl;
-            //}
-            //cout << lat1 << ", " << lon1 << ", " << lat2 << ", " << lon2 << endl;
         }
         totalDistance += distance;
-        //cout << s->getInfo() << "," << t->getInfo() << ": " << distance << endl;
     }
-
     return totalDistance;
 }
 
@@ -223,9 +239,6 @@ void TSP::dfsTraversal(Vertex<int>* current, vector<Vertex<int>*>& path) {
     path.push_back(current);
 
     auto adj = current->getAdj();
-    /*sort(adj.begin(), adj.end(), [](const Edge<int>* a, const Edge<int>* b) {
-        return a->getWeight() < b->getWeight();
-    });*/
 
     for (auto edge : adj) {
         Vertex<int>* nextVertex = edge->getDest();
@@ -243,27 +256,29 @@ void TSP::traverseMST(const Graph<int>& graph, Vertex<int>* start, vector<Vertex
 }
 
 //Time Complexity: O((V+E)logV)
-void TSP::triangularApproximationAlgorithm() {
+void TSP::christofidesAlgorithm(int origin, bool fullyConnected) {
     Graph<int> graph = tspGraph.convertToMST();
 
-    //graph.printGraph("../output/MST.txt");
-    //tspGraph.printGraph("../output/original.txt");
     graph.setAllNotVisited();
-    Vertex<int>* start = graph.findVertex(0);
+    Vertex<int>* start = graph.findVertex(origin);
     if (start == nullptr) {
-        throw logic_error("Node zero not found in graph");
+        throw logic_error("Node " + to_string(origin) + " not found in graph");
     }
 
     vector<Vertex<int>*> path;
     traverseMST(graph, start, path);
-    long long totalDistance = pathDistance(path);
 
-    cout << "Travelled distance: " << totalDistance << endl;
-    cout << "Path: ";
-    for (auto step : path) {
-        cout << step->getInfo() << " ";
+    long long totalDistance;
+    if (fullyConnected) {
+        totalDistance = pathDistanceFullyConnected(path);
+    } else {
+        bool feasible = pathDistanceNotFullyConnected(path, totalDistance);
+        if (!feasible) {
+            cerr << "No feasible tour exists starting on vertex " << origin << endl;
+            return;
+        }
     }
-    cout << endl;
+    printPath(totalDistance, path);
 }
 
 /*** NEAREST NEIGHBOR ALGORITHM ***/
@@ -297,7 +312,7 @@ vector<Vertex<int>*> TSP::nearestNeighborPath(Vertex<int>* origin) {
 
     Vertex<int>* current = origin;
     while (true) {
-        Vertex<int>* next = current->nearestNeighbor();
+        Vertex<int> *next = current->nearestNeighbor();
         if (next == nullptr) {
             break;
         }
@@ -305,18 +320,12 @@ vector<Vertex<int>*> TSP::nearestNeighborPath(Vertex<int>* origin) {
         tour.push_back(next);
         current = next;
     }
-    /*
-    cout << "N\'path: ";
-    for (auto v : tour) {
-        cout << v->getInfo() << " ";
-    }
-    cout << endl; */
 
     return tour;
 }
 
 // Time Complexity: O(V^2)
-void TSP::nearestNeighborAlgorithm(const int& origin) {
+void TSP::nearestNeighborAlgorithm(const int& origin, bool fullyConnected) {
     Vertex<int>* start = tspGraph.findVertex(origin);
     if (start == nullptr) {
         cerr << "Couldn\'t find origin vertex " << origin << endl;
@@ -337,14 +346,17 @@ void TSP::nearestNeighborAlgorithm(const int& origin) {
         return;
     }
 
-    long long totalDistance = pathDistance(tour);
-
-    cout << "Travelled distance: " << totalDistance << endl;
-    cout << "Path: ";
-    for (auto step : tour) {
-        cout << step->getInfo() << " ";
+    long long totalDistance;
+    if (fullyConnected) {
+        totalDistance = pathDistanceFullyConnected(tour);
+    } else {
+        bool feasible = pathDistanceNotFullyConnected(tour, totalDistance);
+        if (!feasible) {
+            cerr << "No feasible tour exists starting on vertex " << origin << endl;
+            return;
+        }
     }
-    cout << endl;
+    printPath(totalDistance, tour);
 }
 
 // Time complexity: O(V^2 * logV)
@@ -387,7 +399,7 @@ vector<Vertex<int>*> TSP::kNearestNeighborPath(Vertex<int>* origin, int numNeigh
 }
 
 // Time complexity: O(V^2 * logV)
-void TSP::kNearestNeighborAlgorithm(const int& origin, int k) {
+void TSP::kNearestNeighborAlgorithm(const int& origin, int k, bool fullyConnected) {
     Vertex<int>* start = tspGraph.findVertex(origin);
     if (start == nullptr) {
         cerr << "Couldn\'t find origin vertex " << origin << endl;
@@ -408,13 +420,16 @@ void TSP::kNearestNeighborAlgorithm(const int& origin, int k) {
         return;
     }
 
-    long long totalDistance = pathDistance(tour);
-
-    cout << "Travelled distance: " << totalDistance << endl;
-    cout << "Path: ";
-    for (auto step : tour) {
-        cout << step->getInfo() << " ";
+    long long totalDistance;
+    if (fullyConnected) {
+        totalDistance = pathDistanceFullyConnected(tour);
+    } else {
+        bool feasible = pathDistanceNotFullyConnected(tour, totalDistance);
+        if (!feasible) {
+            cerr << "No feasible tour exists starting on vertex " << origin << endl;
+            return;
+        }
     }
-    cout << endl;
+    printPath(totalDistance, tour);
 }
 

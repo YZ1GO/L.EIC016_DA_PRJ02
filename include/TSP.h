@@ -9,13 +9,14 @@ class TSP {
 private:
     Graph<int> tspGraph;
 
-    void printPath(double distance, const std::vector<Vertex<int>*> &path);
+    void printPath(long long distance, const std::vector<Vertex<int>*> &path);
     void backtrackingAlgorithmAux(Vertex<int>* currVertex, double currDistance, std::vector<Vertex<int>*> &path, std::vector<bool> &visited, double &minDistance, std::vector<Vertex<int>*> &bestPath);
 
     /***  TRIANGULAR APPROXIMATION RELATED FUNCTIONS  ***/
     static void dfsTraversal(Vertex<int>* current, std::vector<Vertex<int>*>& path);
     static void traverseMST(const Graph<int>& graph, Vertex<int>* start, std::vector<Vertex<int>*>& path);
-    long long pathDistance(const std::vector<Vertex<int>*>& path);
+    bool pathDistanceNotFullyConnected(const std::vector<Vertex<int>*>& path, long long& distance);
+    long long pathDistanceFullyConnected(const std::vector<Vertex<int>*>& path);
 
     /*** NEAREST NEIGHBOR ALGORITHM ***/
     bool findPathToOrigin(Vertex<int>* origin, std::vector<Vertex<int>*>& tour);
@@ -28,10 +29,10 @@ public:
     Graph<int> getTspGraph();
 
     void backtrackingAlgorithm();
-    void triangularApproximationAlgorithm();
+    void christofidesAlgorithm(int origin, bool fullyConnected);
     void heldKarp();
-    void nearestNeighborAlgorithm(const int& origin);
-    void kNearestNeighborAlgorithm(const int& origin, int k);
+    void nearestNeighborAlgorithm(const int& origin, bool fullyConnected);
+    void kNearestNeighborAlgorithm(const int& origin, int k, bool fullyConnected);
 };
 
 

@@ -37,7 +37,7 @@ void Menu::run() {
                 makeBold("Current Graph: ") + currentGraph,
                 "",
                 makeBold("[1]. Backtracking"),
-                makeBold("[2]. Triangular Approximation"),
+                makeBold("[2]. Christofides"),
                 makeBold("[3]. Held Karp"),
                 makeBold("[4]. Nearest Neighbor"),
                 makeBold("[5]. K-Nearest Neighbor"),
@@ -63,27 +63,40 @@ void Menu::run() {
                     tsp.backtrackingAlgorithm();
                     break;
                 case 2:
-                    tsp.triangularApproximationAlgorithm();
+                    int originC;
+                    if (waitInput(originC, "Choose origin (int): ")) continue;
+
+                    int isFullyConnectedC;
+                    if (waitInput(isFullyConnectedC, "Considering graph fully connected? [1-YES / 0-NO]: ")) continue;
+
+                    start = high_resolution_clock::now();
+                    tsp.christofidesAlgorithm(originC, isFullyConnectedC);
                     break;
                 case 3:
                     tsp.heldKarp();
                     break;
                 case 4:
-                    int origin;
-                    if (waitInput(origin, "Choose origin (int): ")) continue;
+                    int originNN;
+                    if (waitInput(originNN, "Choose origin (int): ")) continue;
+
+                    int isFullyConnectedNN;
+                    if (waitInput(isFullyConnectedNN, "Considering graph fully connected? [1-YES / 0-NO]: ")) continue;
 
                     start = high_resolution_clock::now();
-                    tsp.nearestNeighborAlgorithm(origin);
+                    tsp.nearestNeighborAlgorithm(originNN, isFullyConnectedNN);
                     break;
                 case 5:
-                    int origin2;
-                    if (waitInput(origin2, "Choose origin (int): ")) continue;
+                    int originKNN;
+                    if (waitInput(originKNN, "Choose origin (int): ")) continue;
 
                     int k;
                     if (waitInput(k,"Choose K (int > 0): ")) continue;
 
+                    int isFullyConnectedKNN;
+                    if (waitInput(isFullyConnectedKNN, "Considering graph fully connected? [1-YES / 0-NO]: ")) continue;
+
                     start = high_resolution_clock::now();
-                    tsp.kNearestNeighborAlgorithm(origin2, k);
+                    tsp.kNearestNeighborAlgorithm(originKNN, k, isFullyConnectedKNN);
                     break;
                 default:
                     continue;
