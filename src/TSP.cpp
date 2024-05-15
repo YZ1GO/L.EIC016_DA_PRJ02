@@ -325,7 +325,7 @@ vector<Vertex<int>*> TSP::nearestNeighborPath(Vertex<int>* origin) {
 }
 
 // Time Complexity: O(V^2)
-void TSP::nearestNeighborAlgorithm(const int& origin, bool fullyConnected) {
+void TSP::nearestNeighborAlgorithm(const int& origin) {
     Vertex<int>* start = tspGraph.findVertex(origin);
     if (start == nullptr) {
         cerr << "Couldn\'t find origin vertex " << origin << endl;
@@ -347,15 +347,7 @@ void TSP::nearestNeighborAlgorithm(const int& origin, bool fullyConnected) {
     }
 
     long long totalDistance;
-    if (fullyConnected) {
-        totalDistance = pathDistanceFullyConnected(tour);
-    } else {
-        bool feasible = pathDistanceNotFullyConnected(tour, totalDistance);
-        if (!feasible) {
-            cerr << "No feasible tour exists starting on vertex " << origin << endl;
-            return;
-        }
-    }
+    pathDistanceNotFullyConnected(tour, totalDistance);
     printPath(totalDistance, tour);
 }
 
@@ -399,7 +391,7 @@ vector<Vertex<int>*> TSP::kNearestNeighborPath(Vertex<int>* origin, int numNeigh
 }
 
 // Time complexity: O(V^2 * logV)
-void TSP::kNearestNeighborAlgorithm(const int& origin, int k, bool fullyConnected) {
+void TSP::kNearestNeighborAlgorithm(const int& origin, int k) {
     Vertex<int>* start = tspGraph.findVertex(origin);
     if (start == nullptr) {
         cerr << "Couldn\'t find origin vertex " << origin << endl;
@@ -421,15 +413,7 @@ void TSP::kNearestNeighborAlgorithm(const int& origin, int k, bool fullyConnecte
     }
 
     long long totalDistance;
-    if (fullyConnected) {
-        totalDistance = pathDistanceFullyConnected(tour);
-    } else {
-        bool feasible = pathDistanceNotFullyConnected(tour, totalDistance);
-        if (!feasible) {
-            cerr << "No feasible tour exists starting on vertex " << origin << endl;
-            return;
-        }
-    }
+    pathDistanceNotFullyConnected(tour, totalDistance);
     printPath(totalDistance, tour);
 }
 

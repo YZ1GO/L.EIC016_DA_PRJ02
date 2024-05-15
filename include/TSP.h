@@ -31,8 +31,8 @@ public:
     void backtrackingAlgorithm();
     void christofidesAlgorithm(int origin, bool fullyConnected);
     void heldKarp();
-    void nearestNeighborAlgorithm(const int& origin, bool fullyConnected);
-    void kNearestNeighborAlgorithm(const int& origin, int k, bool fullyConnected);
+    void nearestNeighborAlgorithm(const int& origin);
+    void kNearestNeighborAlgorithm(const int& origin, int k);
 };
 
 

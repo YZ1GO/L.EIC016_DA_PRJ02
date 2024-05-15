@@ -36,13 +36,15 @@ void Menu::run() {
         vector<string> menu = {
                 makeBold("Current Graph: ") + currentGraph,
                 "",
-                makeBold("[1]. Backtracking"),
+                makeBold("[1]. Backtracking *"),
                 makeBold("[2]. Christofides"),
                 makeBold("[3]. Held Karp"),
-                makeBold("[4]. Nearest Neighbor"),
-                makeBold("[5]. K-Nearest Neighbor"),
+                makeBold("[4]. Nearest Neighbor *"),
+                makeBold("[5]. K-Nearest Neighbor *"),
                 "...",
-                "[0]. EXIT"
+                "[0]. EXIT",
+                "",
+                "* - no option to choose to consider as fully connected graph"
         };
 
         while (true) {
@@ -79,11 +81,8 @@ void Menu::run() {
                     int originNN;
                     if (waitInput(originNN, "Choose origin (int): ")) continue;
 
-                    int isFullyConnectedNN;
-                    if (waitInput(isFullyConnectedNN, "Considering graph fully connected? [1-YES / 0-NO]: ")) continue;
-
                     start = high_resolution_clock::now();
-                    tsp.nearestNeighborAlgorithm(originNN, isFullyConnectedNN);
+                    tsp.nearestNeighborAlgorithm(originNN);
                     break;
                 case 5:
                     int originKNN;
@@ -92,11 +91,8 @@ void Menu::run() {
                     int k;
                     if (waitInput(k,"Choose K (int > 0): ")) continue;
 
-                    int isFullyConnectedKNN;
-                    if (waitInput(isFullyConnectedKNN, "Considering graph fully connected? [1-YES / 0-NO]: ")) continue;
-
                     start = high_resolution_clock::now();
-                    tsp.kNearestNeighborAlgorithm(originKNN, k, isFullyConnectedKNN);
+                    tsp.kNearestNeighborAlgorithm(originKNN, k);
                     break;
                 default:
                     continue;
