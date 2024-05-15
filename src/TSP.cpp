@@ -11,7 +11,8 @@ Graph<int> TSP::getTspGraph() {
     return tspGraph;
 };
 
-void TSP::printPath(const long long distance, const vector<Vertex<int> *> &path) {
+template <typename T>
+void TSP::printPath(const T distance, const vector<Vertex<int> *> &path) {
     cout << "DISTANCE: ";
     if (distance == INF) {
         cout << "No path found" << endl;
@@ -104,7 +105,10 @@ void TSP::backtrackingAlgorithm() {
 /***************4.3 Other Heuristics****************/
 
 // O(V^2 * 2^V)
-void TSP::heldKarp() {
+void TSP::heldKarp(const int& origin) {
+    auto vertexRoot = tspGraph.findVertex(origin);
+    if (vertexRoot == nullptr) throw logic_error("Root vertex not found in graph");
+
     auto vertexSet = tspGraph.getVertexSet();
     if (vertexSet.size() > 25) {
         vertexSet.resize(25);
@@ -113,15 +117,13 @@ void TSP::heldKarp() {
     vector<vector<double>> dp(n, vector<double>(1 << n, INF));
     vector<vector<Vertex<int>*>> parentVertex(n, vector<Vertex<int>*>(1 << n, nullptr));
 
-    for (auto v : vertexSet) {
-        dp[v->getInfo()][1 << v->getInfo()] = 0;
-    }
+    dp[vertexRoot->getInfo()][1 << vertexRoot->getInfo()] = 0;
 
     for (int mask = 1; mask < (1 << n); mask++) {
         for (int src = 0; src < n; src++) {
             if (mask & (1 << src)) {
                 for (int dest = 0; dest < n; dest++) {
-                    if (!(mask & (1 << dest)) && dest != 0) {
+                    if (!(mask & (1 << dest)) && dest != origin) {
                         double distance = INF;
                         auto vertexSrc = tspGraph.findVertex(src);
                         auto vertexDest = tspGraph.findVertex(dest);
@@ -145,14 +147,14 @@ void TSP::heldKarp() {
 
     double minDistance = INF;
     Vertex<int>* lastVertex = nullptr;
-    for (int i = 1; i < n; i++) {
+    for (int i = 0; i < n; i++) {
+        if (i == origin) continue;
         double distance = INF;
         auto vertexI = tspGraph.findVertex(i);
-        auto vertexZero = tspGraph.findVertex(0);
-        if (vertexI == nullptr || vertexZero == nullptr) throw logic_error("Vertex not found in graph");
+        if (vertexI == nullptr) throw logic_error("Vertex not found in graph");
 
         for (auto edge : vertexI->getAdj()) {
-            if (edge->getDest() == vertexZero) {
+            if (edge->getDest() == vertexRoot) {
                 distance = edge->getWeight();
                 break;
             }
@@ -163,9 +165,7 @@ void TSP::heldKarp() {
         }
     }
     vector<Vertex<int>*> path;
-    auto root = tspGraph.findVertex(0);
-    if (root == nullptr) throw logic_error("Root vertex not found in graph");
-    path.push_back(root);
+    path.push_back(vertexRoot);
 
     int mask = (1 << n) - 1;
     while (lastVertex != nullptr) {
@@ -174,7 +174,7 @@ void TSP::heldKarp() {
         mask ^= (1 << lastVertex->getInfo());
         lastVertex = parentVertex[lastVertex->getInfo()][temp];
     }
-  
+
     printPath(minDistance, path);
 }
 

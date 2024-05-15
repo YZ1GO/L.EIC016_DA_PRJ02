@@ -9,7 +9,8 @@ class TSP {
 private:
     Graph<int> tspGraph;
 
-    void printPath(long long distance, const std::vector<Vertex<int>*> &path);
+    template <typename T>
+    void printPath(T distance, const std::vector<Vertex<int>*> &path);
     void backtrackingAlgorithmAux(Vertex<int>* currVertex, double currDistance, std::vector<Vertex<int>*> &path, std::vector<bool> &visited, double &minDistance, std::vector<Vertex<int>*> &bestPath);
 
 
@@ -32,7 +33,7 @@ public:
 
     void backtrackingAlgorithm();
     void christofidesAlgorithm(int origin, bool fullyConnected);
-    void heldKarp();
+    void heldKarp(const int& origin);
     void nearestNeighborAlgorithm(const int& origin);
     void kNearestNeighborAlgorithm(const int& origin, int k);
     void twoOptNearestNeighborAlgorithm(const int& origin);

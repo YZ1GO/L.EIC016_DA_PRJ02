@@ -76,7 +76,10 @@ void Menu::run() {
                     tsp.christofidesAlgorithm(originC, isFullyConnectedC);
                     break;
                 case 3:
-                    tsp.heldKarp();
+                    int originHK;
+                    if (waitInput(originHK, "Choose origin (int): ")) continue;
+
+                    tsp.heldKarp(originHK);
                     break;
                 case 4:
                     int originNN;
