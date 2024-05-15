@@ -41,7 +41,7 @@ void Menu::run() {
                 makeBold("[3]. Held Karp"),
                 makeBold("[4]. Nearest Neighbor *"),
                 makeBold("[5]. K-Nearest Neighbor *"),
-                makeBold("[6]. 2-Opt"),
+                makeBold("[6]. Nearest Neighbor + 2-Opt"),
                 "...",
                 "[0]. EXIT",
                 "",
@@ -96,7 +96,11 @@ void Menu::run() {
                     tsp.kNearestNeighborAlgorithm(originKNN, k);
                     break;
                 case 6:
+                    int originTONN;
+                    if (waitInput(originTONN, "Choose origin (int): ")) continue;
 
+                    start = high_resolution_clock::now();
+                    tsp.twoOptNearestNeighborAlgorithm(originTONN);
                     break;
                 default:
                     continue;

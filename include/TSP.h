@@ -35,7 +35,7 @@ public:
     void heldKarp();
     void nearestNeighborAlgorithm(const int& origin);
     void kNearestNeighborAlgorithm(const int& origin, int k);
-    //void twoOptChristofidesAlgorithm();
+    void twoOptNearestNeighborAlgorithm(const int& origin);
 };
 
 
