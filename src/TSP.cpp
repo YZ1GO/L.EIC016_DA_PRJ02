@@ -417,3 +417,37 @@ void TSP::kNearestNeighborAlgorithm(const int& origin, int k) {
     printPath(totalDistance, tour);
 }
 
+
+void TSP::twoOptNearestNeighborAlgorithm(const int& origin) {
+    vector<Vertex<int> *> path = nearestNeighborPath(tspGraph.findVertex(origin));
+    path.push_back(path[0]);
+    long long minDistance = pathDistanceFullyConnected(path);
+    long long maxIterations = path.size(), iterations = 0;
+
+    bool improved = true;
+    while (improved && iterations < maxIterations) {
+        improved = false;
+        for (int i = 1; i < path.size() - 2; ++i) {
+            for (int k = i + 1; k < path.size() - 1; ++k) {
+                swap(path[i], path[k]);
+
+                long long newDistance = pathDistanceFullyConnected(path);
+
+                if (newDistance < minDistance) {
+                    improved = true;
+                    minDistance = newDistance;
+                    //cout << iterations << ". min distance: " << minDistance << endl;
+                    break;
+                } else {
+                    swap(path[i], path[k]);
+                }
+            }
+
+            if (improved) break;
+        }
+        iterations++;
+        //cout << "current iteration: " << iterations << endl;
+    }
+    printPath(pathDistanceFullyConnected(path), path);
+}
+

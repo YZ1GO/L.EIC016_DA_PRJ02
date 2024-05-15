@@ -12,16 +12,18 @@ private:
     void printPath(long long distance, const std::vector<Vertex<int>*> &path);
     void backtrackingAlgorithmAux(Vertex<int>* currVertex, double currDistance, std::vector<Vertex<int>*> &path, std::vector<bool> &visited, double &minDistance, std::vector<Vertex<int>*> &bestPath);
 
-    /***  TRIANGULAR APPROXIMATION RELATED FUNCTIONS  ***/
+
     static void dfsTraversal(Vertex<int>* current, std::vector<Vertex<int>*>& path);
     static void traverseMST(const Graph<int>& graph, Vertex<int>* start, std::vector<Vertex<int>*>& path);
     bool pathDistanceNotFullyConnected(const std::vector<Vertex<int>*>& path, long long& distance);
     long long pathDistanceFullyConnected(const std::vector<Vertex<int>*>& path);
 
-    /*** NEAREST NEIGHBOR ALGORITHM ***/
+
     bool findPathToOrigin(Vertex<int>* origin, std::vector<Vertex<int>*>& tour);
     std::vector<Vertex<int>*> nearestNeighborPath(Vertex<int>* origin);
     std::vector<Vertex<int>*> kNearestNeighborPath(Vertex<int>* origin, int numNeighbors);
+
+
 
 public:
     TSP();
@@ -33,6 +35,7 @@ public:
     void heldKarp();
     void nearestNeighborAlgorithm(const int& origin);
     void kNearestNeighborAlgorithm(const int& origin, int k);
+    void twoOptNearestNeighborAlgorithm(const int& origin);
 };
 
 

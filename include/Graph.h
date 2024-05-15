@@ -110,6 +110,9 @@ public:
     void setSelected(bool selected);
     void setReverse(Edge<T> *reverse);
     void setFlow(double flow);
+
+    void setDest(Vertex<T>* v);
+    void setWeight(double w);
 protected:
     Vertex<T> * dest; // destination vertex
     double weight; // edge weight, can also be used for capacity
@@ -171,6 +174,7 @@ public:
     std::vector<T> topsort() const;
     Graph<T> convertToMST() const;
     void setAllNotVisited() const;
+    void twoOptSwap(Vertex<T> *u, Vertex<T> *v, Vertex<T> *x, Vertex<T> *y) const;
     void printGraph(std::string filename) const;
 protected:
     std::vector<Vertex<T> *> vertexSet;    // vertex set
@@ -444,6 +448,16 @@ void Edge<T>::setReverse(Edge<T> *reverse) {
 template <class T>
 void Edge<T>::setFlow(double flow) {
     this->flow = flow;
+}
+
+template <class T>
+void Edge<T>::setDest(Vertex<T>* v) {
+    this->dest = v;
+}
+
+template <class T>
+void Edge<T>::setWeight(double w) {
+    this->weight = w;
 }
 
 /********************** Graph  ****************************/
@@ -826,6 +840,45 @@ void Graph<T>::setAllNotVisited() const {
         v->setVisited(false);
     }
 }
+
+template<class T>
+void Graph<T>::twoOptSwap(Vertex<T> *u, Vertex<T> *v, Vertex<T> *x, Vertex<T> *y) const {
+    Edge<T> *ux = nullptr, *vx = nullptr, *xy = nullptr, *yx = nullptr;
+
+    for (Edge<T> *edge : u->getAdj()) {
+        if (edge->getDest() == x) {
+            ux = edge;
+        } else if (edge->getDest() == v) {
+            vx = edge;
+        }
+    }
+
+    for (Edge<T> *edge : x->getAdj()) {
+        if (edge->getDest() == y) {
+            xy = edge;
+        } else if (edge->getDest() == u) {
+            yx = edge;
+        }
+    }
+
+    if (ux && vx && xy && yx) {
+        double weight_ux = ux->getWeight();
+        double weight_vx = vx->getWeight();
+        double weight_xy = xy->getWeight();
+        double weight_yx = yx->getWeight();
+
+        ux->setDest(v);
+        vx->setDest(u);
+        xy->setDest(u);
+        yx->setDest(v);
+
+        ux->setWeight(weight_vx);
+        vx->setWeight(weight_ux);
+        xy->setWeight(weight_yx);
+        yx->setWeight(weight_xy);
+    }
+}
+
 
 /***
  * Writes the graph information to a text file.
