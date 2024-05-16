@@ -1,0 +1,63 @@
+\hypertarget{Graph_8h}{}\doxysection{Graph.\+h File Reference}
+\label{Graph_8h}\index{Graph.h@{Graph.h}}
+
+
+Contains the declaration of the \mbox{\hyperlink{classGraph}{Graph}} class and its related classes\+: \mbox{\hyperlink{classVertex}{Vertex}} and \mbox{\hyperlink{classEdge}{Edge}}. It provides functionalities for graph manipulation.  
+
+
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$queue$>$}\newline
+{\ttfamily \#include $<$limits$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$unordered\+\_\+set$>$}\newline
+{\ttfamily \#include \char`\"{}Mutable\+Priority\+Queue.\+h\char`\"{}}\newline
+Include dependency graph for Graph.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{Graph_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=160pt]{Graph_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classVertex}{Vertex$<$ T $>$}}
+\begin{DoxyCompactList}\small\item\em Represents a city or location. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classEdge}{Edge$<$ T $>$}}
+\begin{DoxyCompactList}\small\item\em Represents the connection between the the cities or locations. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classGraph}{Graph$<$ T $>$}}
+\begin{DoxyCompactList}\small\item\em Represents the \mbox{\hyperlink{classTSP}{TSP}} network. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{Graph_8h_a12c2040f25d8e3a7b9e1c2024c618cb6}\label{Graph_8h_a12c2040f25d8e3a7b9e1c2024c618cb6}} 
+\#define {\bfseries INF}~std\+::numeric\+\_\+limits$<$double$>$\+::max()
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{Graph_8h_ad56527992afe31a371065e795da57d25}\label{Graph_8h_ad56527992afe31a371065e795da57d25}} 
+void {\bfseries delete\+Matrix} (int $\ast$$\ast$m, int n)
+\item 
+\mbox{\Hypertarget{Graph_8h_af077bc8682a1a1d97e30b08eb1131b19}\label{Graph_8h_af077bc8682a1a1d97e30b08eb1131b19}} 
+void {\bfseries delete\+Matrix} (double $\ast$$\ast$m, int n)
+\item 
+\mbox{\Hypertarget{Graph_8h_a7f4bf7188e0405c41cd9bd9231164d56}\label{Graph_8h_a7f4bf7188e0405c41cd9bd9231164d56}} 
+{\footnotesize template$<$class T $>$ }\\\mbox{\hyperlink{classGraph}{Graph}}$<$ T $>$ {\bfseries deep\+Graph\+Copy} (\mbox{\hyperlink{classGraph}{Graph}}$<$ T $>$ original\+Graph)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Contains the declaration of the \mbox{\hyperlink{classGraph}{Graph}} class and its related classes\+: \mbox{\hyperlink{classVertex}{Vertex}} and \mbox{\hyperlink{classEdge}{Edge}}. It provides functionalities for graph manipulation. 
+

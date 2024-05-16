@@ -1,0 +1,16 @@
+<map id="TSP.h" name="TSP.h">
+<area shape="rect" id="node1" title="Contains the declaration of the TSP class." alt="" coords="360,5,416,32"/>
+<area shape="rect" id="node2" href="$DataParser_8h.html" title="Contains the declaration of the DataParser class." alt="" coords="335,80,441,107"/>
+<area shape="rect" id="node3" href="$Graph_8h.html" title="Contains the declaration of the Graph class and its related classes: Vertex and Edge...." alt="" coords="507,155,581,181"/>
+<area shape="rect" id="node12" href="$Utilities_8h.html" title="Contains utility functions for string manipulation and distance calculation." alt="" coords="189,155,275,181"/>
+<area shape="rect" id="node4" title=" " alt="" coords="192,229,272,256"/>
+<area shape="rect" id="node5" title=" " alt="" coords="450,304,513,331"/>
+<area shape="rect" id="node6" title=" " alt="" coords="657,229,719,256"/>
+<area shape="rect" id="node7" title=" " alt="" coords="744,229,803,256"/>
+<area shape="rect" id="node8" title=" " alt="" coords="827,229,901,256"/>
+<area shape="rect" id="node9" title=" " alt="" coords="296,229,381,256"/>
+<area shape="rect" id="node10" title=" " alt="" coords="925,229,1040,256"/>
+<area shape="rect" id="node11" href="$MutablePriorityQueue_8h.html" title="A simple implementation of mutable priority queues, required by Dijkstra algorithm." alt="" coords="456,229,632,256"/>
+<area shape="rect" id="node13" title=" " alt="" coords="5,229,80,256"/>
+<area shape="rect" id="node14" title=" " alt="" coords="105,229,167,256"/>
+</map>

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['toradians_0',['ToRadians',['../_utilities_8h.html#ab71afa9ae22b10ecf4b79f34cf208cc5',1,'Utilities.h']]],
-  ['trimstring_1',['TrimString',['../_utilities_8h.html#a61146d2609ffbef3c80509b4335728e2',1,'Utilities.h']]]
+  ['gettspgraph_46',['getTspGraph',['../classTSP.html#afd136d979e7468e5f073fe30da8f02de',1,'TSP']]]
 ];

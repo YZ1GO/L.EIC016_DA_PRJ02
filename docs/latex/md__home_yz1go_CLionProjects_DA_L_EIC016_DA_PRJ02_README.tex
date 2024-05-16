@@ -1,0 +1,57 @@
+\hypertarget{md__home_yz1go_CLionProjects_DA_L_EIC016_DA_PRJ02_README_autotoc_md1}{}\doxysection{Description}\label{md__home_yz1go_CLionProjects_DA_L_EIC016_DA_PRJ02_README_autotoc_md1}
+This project enables comparison between different solutions for the Traveling Salesman Problem (\mbox{\hyperlink{classTSP}{TSP}}), a renowned challenge in combinatorial optimization. The objective is to determine the shortest route that visits each city exactly once and returns to the starting city. Being \href{https://en.wikipedia.org/wiki/NP-hardness}{\texttt{ NP-\/hard}}, the \mbox{\hyperlink{classTSP}{TSP}} lacks a polynomial-\/time solution algorithm.
+
+\href{https://docs.google.com/spreadsheets/d/1I6d1NvNj34K96kJRol0O1ccQ8HP2-nnEXvQ0IW0alAs/edit?usp=sharing}{\texttt{ RESULTS SHEET}}\hypertarget{md__home_yz1go_CLionProjects_DA_L_EIC016_DA_PRJ02_README_autotoc_md2}{}\doxysection{Algorithms}\label{md__home_yz1go_CLionProjects_DA_L_EIC016_DA_PRJ02_README_autotoc_md2}
+\hypertarget{md__home_yz1go_CLionProjects_DA_L_EIC016_DA_PRJ02_README_autotoc_md3}{}\doxysubsection{Backtracking}\label{md__home_yz1go_CLionProjects_DA_L_EIC016_DA_PRJ02_README_autotoc_md3}
+
+\begin{DoxyItemize}
+\item Brute force algorithm that explores all possible routes.
+\item {\bfseries{🚀 Time Complexity\+:}} O(V!), where V is the number of vertices in the graph.
+\end{DoxyItemize}\hypertarget{md__home_yz1go_CLionProjects_DA_L_EIC016_DA_PRJ02_README_autotoc_md4}{}\doxysubsection{Triangular Approximation}\label{md__home_yz1go_CLionProjects_DA_L_EIC016_DA_PRJ02_README_autotoc_md4}
+
+\begin{DoxyItemize}
+\item Creates a MST using Prim\textquotesingle{}s algorithm and traverses it using a DFS.
+\item {\bfseries{🚀 Time Complexity\+:}} O((V+E) logV), where V is the number of vertices and E is the number of edges in the graph.
+\end{DoxyItemize}\hypertarget{md__home_yz1go_CLionProjects_DA_L_EIC016_DA_PRJ02_README_autotoc_md5}{}\doxysubsection{Nearest Neighbor}\label{md__home_yz1go_CLionProjects_DA_L_EIC016_DA_PRJ02_README_autotoc_md5}
+
+\begin{DoxyItemize}
+\item Greedy algorithm that selects the nearest unvisited vertex to the current vertex.
+\item {\bfseries{🚀 Time Complexity\+:}} O(\+V$^\wedge$2), where V is the number of vertices in the graph.
+\end{DoxyItemize}\hypertarget{md__home_yz1go_CLionProjects_DA_L_EIC016_DA_PRJ02_README_autotoc_md6}{}\doxysubsection{K-\/\+Nearest Neighbor}\label{md__home_yz1go_CLionProjects_DA_L_EIC016_DA_PRJ02_README_autotoc_md6}
+
+\begin{DoxyItemize}
+\item Greedy algorithm that selects the k nearest unvisited vertices to the current vertex.
+\item {\bfseries{🚀 Time Complexity\+:}} O(V$^\wedge$2 $\ast$ logV + V $\ast$ k), where V is the number of vertices in the graph. ~\newline
+ 💡 Tips\+: Increasing the value of K provides better chance to find a feasible path. However, the larger is K, the longer computation time is to complete the traversal.
+\end{DoxyItemize}\hypertarget{md__home_yz1go_CLionProjects_DA_L_EIC016_DA_PRJ02_README_autotoc_md7}{}\doxysubsection{2-\/\+Opt}\label{md__home_yz1go_CLionProjects_DA_L_EIC016_DA_PRJ02_README_autotoc_md7}
+
+\begin{DoxyItemize}
+\item Give a solution path and iteratively swaps two edges to reduce the total distance of the path.
+\item {\bfseries{🚀 Time Complexity\+:}} O(\+V$^\wedge$2), where V is the number of vertices in the graph.
+\end{DoxyItemize}\hypertarget{md__home_yz1go_CLionProjects_DA_L_EIC016_DA_PRJ02_README_autotoc_md8}{}\doxysubsection{3-\/\+Opt}\label{md__home_yz1go_CLionProjects_DA_L_EIC016_DA_PRJ02_README_autotoc_md8}
+
+\begin{DoxyItemize}
+\item Give a solution path and iteratively swaps three edges to reduce the total distance of the path.
+\item {\bfseries{🚀 Time Complexity\+:}} O(\+V$^\wedge$3), where V is the number of vertices in the graph. ~\newline
+ 📝 Note\+: The Opt algorithms that we implemented, uses as initial solution the nearest neighbor algorithm (NNA). Which means that the time complexity of the Opt algorithms is {\ttfamily max(\+Opt, NNA)}.
+\end{DoxyItemize}\hypertarget{md__home_yz1go_CLionProjects_DA_L_EIC016_DA_PRJ02_README_autotoc_md9}{}\doxysubsection{Held-\/\+Karp}\label{md__home_yz1go_CLionProjects_DA_L_EIC016_DA_PRJ02_README_autotoc_md9}
+
+\begin{DoxyItemize}
+\item Dynamic programming algorithm that uses the concept of state and transition.
+\item {\bfseries{🚀 Time Complexity\+:}} O(2$^\wedge$\+V $\ast$ V$^\wedge$2), where V is the number of vertices in the graph.
+\end{DoxyItemize}\hypertarget{md__home_yz1go_CLionProjects_DA_L_EIC016_DA_PRJ02_README_autotoc_md10}{}\doxysubsection{Ant Colony Optimization (\+ACO)}\label{md__home_yz1go_CLionProjects_DA_L_EIC016_DA_PRJ02_README_autotoc_md10}
+
+\begin{DoxyItemize}
+\item Probabilistic technique that simulates the behavior of ants in finding paths from the colony to food.
+\item {\bfseries{🚀 Time Complexity\+:}} O(\+V$^\wedge$2 $\ast$ num\+Ants $\ast$ num\+Iterations), where V is the number of vertices in the graph, num\+Ants is the number of ants, and num\+Iterations is the number of iterations.
+\end{DoxyItemize}\hypertarget{md__home_yz1go_CLionProjects_DA_L_EIC016_DA_PRJ02_README_autotoc_md11}{}\doxysubsection{TSP in Real World}\label{md__home_yz1go_CLionProjects_DA_L_EIC016_DA_PRJ02_README_autotoc_md11}
+We tailored the Triangular Approximation, Nearest Neighbor Algorithm (NNA), K-\/\+Nearest Neighbor (K-\/\+NN), and Ant Colony Optimization (ACO) to tackle real-\/world \mbox{\hyperlink{classTSP}{TSP}} scenarios. Users now have the flexibility to {\bfseries{select}} the starting vertex and determine whether to treat the graph as fully connected or not.
+
+With these adjustments, our algorithms provide solutions even when the graphs {\bfseries{may not be fully connected}}, by returning {\ttfamily feasible} or {\ttfamily not feasible}, ensuring that a solution is always provided.\hypertarget{md__home_yz1go_CLionProjects_DA_L_EIC016_DA_PRJ02_README_autotoc_md12}{}\doxysection{Reflection}\label{md__home_yz1go_CLionProjects_DA_L_EIC016_DA_PRJ02_README_autotoc_md12}
+The Ant Colony Optimization (ACO) algorithm performs well on larger datasets and is able to find good solutions due to its probabilistic nature and the use of both pheromone trails and heuristic information. However, the time complexity is dependent on the number of ants and iterations, which can be a limiting factor for very large problems or for a very high number of ants or iterations. With a greater number of ants and iterations, we could potentially get more optimal solutions, but the time to run the algorithm would also increase.
+
+Both the Triangular Approximation and Nearest Neighbor Algorithms demonstrate speed and efficacy, with the NNA edging slightly ahead providing marginally superior results in large dataset. Overall, both algorithms perfom incredibly well
+
+The 2-\/Opt is very good for small dataset which always provides a better solution than Nearest Neighbor Algorithm (NNA). However, as the dataset grows larger, it becomes impractial due to its exponential increase in execution time.
+
+Even though the 3-\/opt heuristic takes more time than the 2-\/opt heuristic, it doesn\textquotesingle{}t consistently yield better results. From this observation, we can conclude that it\textquotesingle{}s not an effective algorithm in this scenario. 

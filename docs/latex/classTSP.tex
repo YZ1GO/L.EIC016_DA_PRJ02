@@ -1,0 +1,183 @@
+\hypertarget{classTSP}{}\doxysection{TSP Class Reference}
+\label{classTSP}\index{TSP@{TSP}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classTSP_a707519a097c28e52aebedc6132650e79}\label{classTSP_a707519a097c28e52aebedc6132650e79}} 
+\mbox{\hyperlink{classTSP_a707519a097c28e52aebedc6132650e79}{TSP}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classTSP_a456475222ac387d8958af8b51b39cdfc}{TSP}} (const \mbox{\hyperlink{classGraph}{Graph}}$<$ int $>$ \&graph)
+\begin{DoxyCompactList}\small\item\em Constructor that initializes the \mbox{\hyperlink{classTSP}{TSP}} graph. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classGraph}{Graph}}$<$ int $>$ \mbox{\hyperlink{classTSP_afd136d979e7468e5f073fe30da8f02de}{get\+Tsp\+Graph}} ()
+\begin{DoxyCompactList}\small\item\em Getter for the \mbox{\hyperlink{classTSP}{TSP}} graph. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classTSP_a55f9d7f19104f3253a8804877eb5c5db}\label{classTSP_a55f9d7f19104f3253a8804877eb5c5db}} 
+void \mbox{\hyperlink{classTSP_a55f9d7f19104f3253a8804877eb5c5db}{backtracking\+Algorithm}} ()
+\begin{DoxyCompactList}\small\item\em Solves the \mbox{\hyperlink{classTSP}{TSP}} using the backtracking algorithm. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classTSP_a8b469983a7a90e2c11564bd6589711c7}{held\+Karp}} (const int \&origin)
+\begin{DoxyCompactList}\small\item\em Solves the \mbox{\hyperlink{classTSP}{TSP}} using the Held-\/\+Karp algorithm. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classTSP_ad15c5f5838c8e5395762544e684ff8b1}{triangular\+Approximation\+MSTAlgorithm}} (int origin, bool fully\+Connected)
+\begin{DoxyCompactList}\small\item\em Solves the \mbox{\hyperlink{classTSP}{TSP}} using the triangular approximation MST algorithm. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classTSP_a895f3d908ba184b25a3237c3fdeb94d1}{nearest\+Neighbor\+Algorithm}} (const int \&origin)
+\begin{DoxyCompactList}\small\item\em Solves the \mbox{\hyperlink{classTSP}{TSP}} using the nearest neighbor algorithm. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classTSP_a69fa3140bb82589b47f850db0e1c67d8}{k\+Nearest\+Neighbor\+Algorithm}} (const int \&origin, int k)
+\begin{DoxyCompactList}\small\item\em Solves the \mbox{\hyperlink{classTSP}{TSP}} using the k-\/nearest neighbor algorithm. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classTSP_a07f1f2d20649fbe6481dedd7566af8ea}{two\+Opt\+Algorithm}} (const int \&origin)
+\begin{DoxyCompactList}\small\item\em Solves the \mbox{\hyperlink{classTSP}{TSP}} using the 2-\/opt algorithm. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classTSP_ae2b6cde6f9cdd2b1ed1962aad5cd7238}{three\+Opt\+Algorithm}} (const int \&origin)
+\begin{DoxyCompactList}\small\item\em Solves the \mbox{\hyperlink{classTSP}{TSP}} using the 3-\/opt algorithm. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classTSP_a1e4f7f03ea842685098a687d094ae1fc}{ant\+Colony\+Optimization}} (const int \&origin, int num\+Ants, int num\+Iterations, bool fully\+Connected)
+\begin{DoxyCompactList}\small\item\em Solves the \mbox{\hyperlink{classTSP}{TSP}} using the ant colony optimization algorithm. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classTSP_a456475222ac387d8958af8b51b39cdfc}\label{classTSP_a456475222ac387d8958af8b51b39cdfc}} 
+\index{TSP@{TSP}!TSP@{TSP}}
+\index{TSP@{TSP}!TSP@{TSP}}
+\doxysubsubsection{\texorpdfstring{TSP()}{TSP()}}
+{\footnotesize\ttfamily TSP\+::\+TSP (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classGraph}{Graph}}$<$ int $>$ \&}]{graph }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructor that initializes the \mbox{\hyperlink{classTSP}{TSP}} graph. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em graph} & The graph to be used for \mbox{\hyperlink{classTSP}{TSP}}. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classTSP_a1e4f7f03ea842685098a687d094ae1fc}\label{classTSP_a1e4f7f03ea842685098a687d094ae1fc}} 
+\index{TSP@{TSP}!antColonyOptimization@{antColonyOptimization}}
+\index{antColonyOptimization@{antColonyOptimization}!TSP@{TSP}}
+\doxysubsubsection{\texorpdfstring{antColonyOptimization()}{antColonyOptimization()}}
+{\footnotesize\ttfamily void TSP\+::ant\+Colony\+Optimization (\begin{DoxyParamCaption}\item[{const int \&}]{origin,  }\item[{int}]{num\+Ants,  }\item[{int}]{num\+Iterations,  }\item[{bool}]{fully\+Connected }\end{DoxyParamCaption})}
+
+
+
+Solves the \mbox{\hyperlink{classTSP}{TSP}} using the ant colony optimization algorithm. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em origin} & The starting vertex for the \mbox{\hyperlink{classTSP}{TSP}}. \\
+\hline
+{\em num\+Ants} & The number of ants in the ant colony. \\
+\hline
+{\em num\+Iterations} & The number of iterations for the algorithm. \\
+\hline
+{\em fully\+Connected} & Whether considering the graph as fully connected or not. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classTSP_afd136d979e7468e5f073fe30da8f02de}\label{classTSP_afd136d979e7468e5f073fe30da8f02de}} 
+\index{TSP@{TSP}!getTspGraph@{getTspGraph}}
+\index{getTspGraph@{getTspGraph}!TSP@{TSP}}
+\doxysubsubsection{\texorpdfstring{getTspGraph()}{getTspGraph()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classGraph}{Graph}}$<$int$>$ TSP\+::get\+Tsp\+Graph (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Getter for the \mbox{\hyperlink{classTSP}{TSP}} graph. 
+
+\begin{DoxyReturn}{Returns}
+The \mbox{\hyperlink{classTSP}{TSP}} graph. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classTSP_a8b469983a7a90e2c11564bd6589711c7}\label{classTSP_a8b469983a7a90e2c11564bd6589711c7}} 
+\index{TSP@{TSP}!heldKarp@{heldKarp}}
+\index{heldKarp@{heldKarp}!TSP@{TSP}}
+\doxysubsubsection{\texorpdfstring{heldKarp()}{heldKarp()}}
+{\footnotesize\ttfamily void TSP\+::held\+Karp (\begin{DoxyParamCaption}\item[{const int \&}]{origin }\end{DoxyParamCaption})}
+
+
+
+Solves the \mbox{\hyperlink{classTSP}{TSP}} using the Held-\/\+Karp algorithm. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em origin} & The starting vertex for the \mbox{\hyperlink{classTSP}{TSP}}. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classTSP_a69fa3140bb82589b47f850db0e1c67d8}\label{classTSP_a69fa3140bb82589b47f850db0e1c67d8}} 
+\index{TSP@{TSP}!kNearestNeighborAlgorithm@{kNearestNeighborAlgorithm}}
+\index{kNearestNeighborAlgorithm@{kNearestNeighborAlgorithm}!TSP@{TSP}}
+\doxysubsubsection{\texorpdfstring{kNearestNeighborAlgorithm()}{kNearestNeighborAlgorithm()}}
+{\footnotesize\ttfamily void TSP\+::k\+Nearest\+Neighbor\+Algorithm (\begin{DoxyParamCaption}\item[{const int \&}]{origin,  }\item[{int}]{k }\end{DoxyParamCaption})}
+
+
+
+Solves the \mbox{\hyperlink{classTSP}{TSP}} using the k-\/nearest neighbor algorithm. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em origin} & The starting vertex for the \mbox{\hyperlink{classTSP}{TSP}}. \\
+\hline
+{\em k} & The number of nearest neighbors to consider. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classTSP_a895f3d908ba184b25a3237c3fdeb94d1}\label{classTSP_a895f3d908ba184b25a3237c3fdeb94d1}} 
+\index{TSP@{TSP}!nearestNeighborAlgorithm@{nearestNeighborAlgorithm}}
+\index{nearestNeighborAlgorithm@{nearestNeighborAlgorithm}!TSP@{TSP}}
+\doxysubsubsection{\texorpdfstring{nearestNeighborAlgorithm()}{nearestNeighborAlgorithm()}}
+{\footnotesize\ttfamily void TSP\+::nearest\+Neighbor\+Algorithm (\begin{DoxyParamCaption}\item[{const int \&}]{origin }\end{DoxyParamCaption})}
+
+
+
+Solves the \mbox{\hyperlink{classTSP}{TSP}} using the nearest neighbor algorithm. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em origin} & The starting vertex for the \mbox{\hyperlink{classTSP}{TSP}}. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classTSP_ae2b6cde6f9cdd2b1ed1962aad5cd7238}\label{classTSP_ae2b6cde6f9cdd2b1ed1962aad5cd7238}} 
+\index{TSP@{TSP}!threeOptAlgorithm@{threeOptAlgorithm}}
+\index{threeOptAlgorithm@{threeOptAlgorithm}!TSP@{TSP}}
+\doxysubsubsection{\texorpdfstring{threeOptAlgorithm()}{threeOptAlgorithm()}}
+{\footnotesize\ttfamily void TSP\+::three\+Opt\+Algorithm (\begin{DoxyParamCaption}\item[{const int \&}]{origin }\end{DoxyParamCaption})}
+
+
+
+Solves the \mbox{\hyperlink{classTSP}{TSP}} using the 3-\/opt algorithm. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em origin} & The starting vertex for the \mbox{\hyperlink{classTSP}{TSP}}. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classTSP_ad15c5f5838c8e5395762544e684ff8b1}\label{classTSP_ad15c5f5838c8e5395762544e684ff8b1}} 
+\index{TSP@{TSP}!triangularApproximationMSTAlgorithm@{triangularApproximationMSTAlgorithm}}
+\index{triangularApproximationMSTAlgorithm@{triangularApproximationMSTAlgorithm}!TSP@{TSP}}
+\doxysubsubsection{\texorpdfstring{triangularApproximationMSTAlgorithm()}{triangularApproximationMSTAlgorithm()}}
+{\footnotesize\ttfamily void TSP\+::triangular\+Approximation\+MSTAlgorithm (\begin{DoxyParamCaption}\item[{int}]{origin,  }\item[{bool}]{fully\+Connected }\end{DoxyParamCaption})}
+
+
+
+Solves the \mbox{\hyperlink{classTSP}{TSP}} using the triangular approximation MST algorithm. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em origin} & The starting vertex for the \mbox{\hyperlink{classTSP}{TSP}}. \\
+\hline
+{\em fully\+Connected} & Whether considering the graph as fully connected or not. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classTSP_a07f1f2d20649fbe6481dedd7566af8ea}\label{classTSP_a07f1f2d20649fbe6481dedd7566af8ea}} 
+\index{TSP@{TSP}!twoOptAlgorithm@{twoOptAlgorithm}}
+\index{twoOptAlgorithm@{twoOptAlgorithm}!TSP@{TSP}}
+\doxysubsubsection{\texorpdfstring{twoOptAlgorithm()}{twoOptAlgorithm()}}
+{\footnotesize\ttfamily void TSP\+::two\+Opt\+Algorithm (\begin{DoxyParamCaption}\item[{const int \&}]{origin }\end{DoxyParamCaption})}
+
+
+
+Solves the \mbox{\hyperlink{classTSP}{TSP}} using the 2-\/opt algorithm. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em origin} & The starting vertex for the \mbox{\hyperlink{classTSP}{TSP}}. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{TSP_8h}{TSP.\+h}}\end{DoxyCompactItemize}

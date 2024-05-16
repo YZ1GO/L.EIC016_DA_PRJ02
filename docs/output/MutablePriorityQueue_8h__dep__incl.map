@@ -1,0 +1,7 @@
+<map id="MutablePriorityQueue.h" name="MutablePriorityQueue.h">
+<area shape="rect" id="node1" title="A simple implementation of mutable priority queues, required by Dijkstra algorithm." alt="" coords="5,5,181,32"/>
+<area shape="rect" id="node2" href="$Graph_8h.html" title="Contains the declaration of the Graph class and its related classes: Vertex and Edge...." alt="" coords="57,80,130,107"/>
+<area shape="rect" id="node3" href="$DataParser_8h.html" title="Contains the declaration of the DataParser class." alt="" coords="40,155,147,181"/>
+<area shape="rect" id="node4" href="$TSP_8h.html" title="Contains the declaration of the TSP class." alt="" coords="65,229,121,256"/>
+<area shape="rect" id="node5" href="$Menu_8h.html" title="Contains the declaration of the Menu class." alt="" coords="58,304,129,331"/>
+</map>
