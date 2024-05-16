@@ -1,10 +1,8 @@
 #include "TSP.h"
-#include <random>
 #include <unordered_map>
 #include <cmath>
-using namespace std;
 
-#define MAX_ITERATIONS 5
+using namespace std;
 
 TSP::TSP() {}
 

@@ -101,4 +101,4 @@ void MutablePriorityQueue<T>::set(unsigned i, T * x) {
 	x->queueIndex = i;
 }
 
-#endif /* PROJ_DA_02_MUTABLEPRIORITYQUEUE */
+#endif

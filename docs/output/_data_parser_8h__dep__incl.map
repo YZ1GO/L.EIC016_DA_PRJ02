@@ -1,9 +1,7 @@
 <map id="DataParser.h" name="DataParser.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,103,31"/>
-<area shape="rect" id="Node000002" href="$_t_s_p_8h.html" title=" " alt="" coords="26,79,82,105"/>
+<area shape="rect" id="Node000001" title="Contains the declaration of the DataParser class." alt="" coords="5,5,103,31"/>
+<area shape="rect" id="Node000002" href="$_t_s_p_8h.html" title="Contains the declaration of the TSP class." alt="" coords="26,79,82,105"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="57,46,57,79,51,79,51,46"/>
-<area shape="rect" id="Node000003" href="$_menu_8h.html" title=" " alt="" coords="22,153,86,178"/>
+<area shape="rect" id="Node000003" href="$_menu_8h.html" title="Contains the declaration of the Menu class." alt="" coords="22,153,86,178"/>
 <area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="57,120,57,152,51,152,51,120"/>
-<area shape="rect" id="Node000004" href="$main_8cpp.html" title=" " alt="" coords="17,226,91,252"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="57,194,57,226,51,226,51,194"/>
 </map>

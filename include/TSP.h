@@ -1,13 +1,27 @@
+/**
+ * @file TSP.h
+ * @brief Contains the declaration of the TSP class.
+ *
+ * This header file contains the declaration of the TSP class which is responsible for solving the Travelling Salesman Problem.
+ */
+
 #ifndef FEUP_DA_02_TSP_H
 #define FEUP_DA_02_TSP_H
 
 #include "DataParser.h"
-#include <stack>
 #define DOUBLE_INF std::numeric_limits<double>::max()
 #define LONG_LONG_INF std::numeric_limits<long long>::max()
+#define MAX_ITERATIONS 5
 
+/***
+ * @class TSP
+ * @brief Solves the Travelling Salesman Problem.
+ */
 class TSP {
 private:
+    /***
+     * @brief Graph to perform the TSP on.
+     */
     Graph<int> tspGraph;
     std::vector<std::vector<double>> pheromones;
     double alpha = 1.0;

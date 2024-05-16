@@ -1,9 +1,9 @@
 /**
  * @file Utilities.h
- * @brief Contains utility functions for string manipulation.
+ * @brief Contains utility functions for string manipulation and distance calculation.
  *
- * This header file provides various utility functions used for string manipulation.
- * Functions include string trimming and formatting text in bold for terminal output.
+ * This header file provides various utility functions used for string manipulation and distance calculation.
+ * Functions include string trimming and formatting text in bold for terminal output and Harversine Distance formula.
  */
 
 #ifndef PROJ_DA_02_UTILITIES_H
@@ -51,4 +51,4 @@ double ToRadians(double degrees);
 double HarversineDistance(double lat1, double lon1, double lat2, double lon2);
 
 
-#endif //PROJ_DA_02_UTILITIES_H
+#endif

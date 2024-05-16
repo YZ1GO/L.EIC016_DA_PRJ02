@@ -4,7 +4,7 @@ using namespace std;
 
 DataParser::DataParser() {}
 
-void DataParser::ParseToyGraphs(std::string filePath, Graph<int>& graph) {
+void DataParser::ParseToyGraphs(const string& filePath, Graph<int>& graph) {
     ifstream file(filePath);
     if (!file.is_open()) {
         cerr << "Error: Unable to open file " << filePath << endl;
@@ -37,7 +37,7 @@ void DataParser::ParseToyGraphs(std::string filePath, Graph<int>& graph) {
     cout << "Success: " << filePath << " parsed!" << endl;
 }
 
-void DataParser::ParseToyGraphTourism(std::string tourismPath, Graph<int>& graph) {
+void DataParser::ParseToyGraphTourism(const string& tourismPath, Graph<int>& graph) {
     ifstream file(tourismPath);
     if (!file.is_open()) {
         cerr << "Error: Unable to open file " << tourismPath << endl;
@@ -76,7 +76,7 @@ void DataParser::ParseToyGraphTourism(std::string tourismPath, Graph<int>& graph
     cout << "Success: " << tourismPath << " parsed!" << endl;
 }
 
-void DataParser::ParseFullyConnectedGraph(std::string vertexPath, std::string edgePath, Graph<int>& graph, const int& nodesNum) {
+void DataParser::ParseFullyConnectedGraph(const string& vertexPath, const string& edgePath, Graph<int>& graph, const int& nodesNum) {
     /*      NODES PARSER    */
     ifstream nodeFile(vertexPath);
     if (!nodeFile.is_open()) {
@@ -138,7 +138,7 @@ void DataParser::ParseFullyConnectedGraph(std::string vertexPath, std::string ed
     cout << "Success: " << edgePath << " parsed!" << endl;
 }
 
-void DataParser::ParseRealWorldGraph(std::string vertexPath, std::string edgePath, Graph<int>& graph) {
+void DataParser::ParseRealWorldGraph(const string& vertexPath, const string& edgePath, Graph<int>& graph) {
     /*      NODES PARSER    */
     ifstream nodeFile(vertexPath);
     if (!nodeFile.is_open()) {
