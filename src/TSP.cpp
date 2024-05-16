@@ -32,28 +32,10 @@ void TSP::printPath(const T distance, const vector<Vertex<int> *> &path) {
     for (auto vertex : path) {
         cout << vertex->getInfo() << " ";
     }
-    /*for (size_t i = 0; i < path.size() - 1; ++i) {
-        double edgeWeight = 0;
-        for (auto edge : path[i]->getAdj()) {
-            if (edge->getDest() == path[i + 1]) {
-                edgeWeight = edge->getWeight();
-                break;
-            }
-        }
-        cout << edgeWeight << " ";
-    }*/
     cout << endl;
 }
 
 void TSP::backtrackingAlgorithmAux(Vertex<int>* currVertex, double currDistance, vector<Vertex<int>*> &currPath, vector<bool> &visited, double &minDistance, vector<Vertex<int>*> &bestPath) {
-    /*cout << "Current vertex: " << currVertex->getInfo() << endl;
-    cout << "Current path: ";
-    for (auto vertex : currPath) {
-        cout << vertex->getInfo() << " ";
-    }
-    cout << "Current distance: " << currDistance << endl;
-    cout << endl;*/
-
     if (currPath.size() == tspGraph.getVertexSet().size()) {
         for (auto edge: currVertex->getAdj()) {
             if (edge->getDest() == currPath.front()) {
@@ -520,11 +502,13 @@ void TSP::threeOptAlgorithm(const int& origin) {
 }
 
 /********** ANT COLONY OPTIMIZATION **********/
+// O(V^2)
 void TSP::initializePheromones(double initialPheromoneLevel) {
     int numVertices = tspGraph.getNumVertex();
     pheromones = vector<vector<double>>(numVertices, vector<double>(numVertices, initialPheromoneLevel));
 }
 
+// O(V)
 double TSP::calculateHeuristic(Vertex<int>* s, Vertex<int>* t) {
     for (auto edge : s->getAdj()) {
         if (edge->getDest() == t) {
@@ -538,6 +522,7 @@ double TSP::calculateHeuristic(Vertex<int>* s, Vertex<int>* t) {
     return 1.0 / HarversineDistance(lat1, lon1, lat2, lon2);
 }
 
+// O(V^2)
 vector<Vertex<int>*> TSP::constructSolution(Vertex<int>* start) {
     vector<Vertex<int>*> tour;
     tspGraph.setAllNotVisited();
@@ -593,6 +578,7 @@ vector<Vertex<int>*> TSP::constructSolution(Vertex<int>* start) {
     return tour;
 }
 
+// O(V^2 * numAnts)
 void TSP::updatePheromones(const vector<vector<Vertex<int>*>> &allTours, const std::vector<long long> &distances) {
     for (auto& row : pheromones) {
         for (auto& pheromone : row) {
@@ -613,6 +599,7 @@ void TSP::updatePheromones(const vector<vector<Vertex<int>*>> &allTours, const s
     }
 }
 
+// O(V^2 * numAnts * numIterations)
 void TSP::antColonyOptimization(const int &origin, int numAnts, int numIterations, bool fullyConnected) {
     Vertex<int>* start = tspGraph.findVertex(origin);
     if (start == nullptr) throw logic_error("Root vertex not found in graph");
