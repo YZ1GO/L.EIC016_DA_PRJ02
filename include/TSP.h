@@ -12,6 +12,9 @@
 #define DOUBLE_INF std::numeric_limits<double>::max()
 #define LONG_LONG_INF std::numeric_limits<long long>::max()
 #define MAX_ITERATIONS 5
+#define ALPHA 1.0
+#define BETA 5.0
+#define EVAPORATION_RATE 0.5
 
 /***
  * @class TSP
@@ -24,9 +27,9 @@ private:
      */
     Graph<int> tspGraph;
     std::vector<std::vector<double>> pheromones;
-    double alpha = 1.0;
-    double beta = 5.0;
-    double evaporationRate = 0.5;
+    double alpha = ALPHA;
+    double beta = BETA;
+    double evaporationRate = EVAPORATION_RATE;
 
     template <typename T>
     void printPath(T distance, const std::vector<Vertex<int>*> &path);
@@ -62,9 +65,6 @@ public:
     void kNearestNeighborAlgorithm(const int& origin, int k);
     void twoOptAlgorithm(const int& origin);
     void threeOptAlgorithm(const int& origin);
-    
-    //std::vector<std::vector<Vertex<int>*>> kMeansClustering(int k);
-
     void antColonyOptimization(const int& origin, int numAnts, int numIterations, bool fullyConnected);
 };
 

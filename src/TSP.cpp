@@ -519,19 +519,7 @@ void TSP::threeOptAlgorithm(const int& origin) {
     printPath(minDistance, path);
 }
 
-/*vector<vector<Vertex<int> *>> TSP::kMeansClustering(int k) {
-    vector<vector<Vertex<int>*>> clusters(k);
-
-    random_device rd;
-    mt19937 gen(rd());
-    uniform_int_distribution<> dis(0, tspGraph.getNumVertex() - 1);
-    vector<pair<double, double>> centroids;
-    for (int i = 0; i < k; i++) {
-        int index = dis(gen);
-
-    }
-}*/
-
+/********** ANT COLONY OPTIMIZATION **********/
 void TSP::initializePheromones(double initialPheromoneLevel) {
     int numVertices = tspGraph.getNumVertex();
     pheromones = vector<vector<double>>(numVertices, vector<double>(numVertices, initialPheromoneLevel));
@@ -559,6 +547,7 @@ vector<Vertex<int>*> TSP::constructSolution(Vertex<int>* start) {
 
     while (tour.size() < tspGraph.getNumVertex()) {
         vector<pair<Vertex<int>*, double>> probabilities;
+        vector<Vertex<int>*> unvisited;
         double sum = 0.0;
 
         for (auto edge : current->getAdj()) {
@@ -569,24 +558,28 @@ vector<Vertex<int>*> TSP::constructSolution(Vertex<int>* start) {
                 double probability = pow(pheromone, alpha) * pow(heuristic, beta);
                 double distance = edge->getWeight();
                 probabilities.emplace_back(next, probability / distance);
+                unvisited.push_back(next);
                 sum += probability / distance;
             }
         }
 
-        if (sum == 0) break;
+        if (sum == 0) {
+            current = unvisited[rand() % unvisited.size()];
+        } else {
+            double threshold = (double) rand() / RAND_MAX * sum;
+            double cumulative = 0.0;
 
-        double threshold = (double) rand() / RAND_MAX * sum;
-        double cumulative = 0.0;
-
-        for (auto& p : probabilities) {
-            cumulative += p.second;
-            if (cumulative >= threshold) {
-                current = p.first;
-                current->setVisited(true);
-                tour.push_back(current);
-                break;
+            for (auto& p : probabilities) {
+                cumulative += p.second;
+                if (cumulative >= threshold) {
+                    current = p.first;
+                    break;
+                }
             }
         }
+
+        current->setVisited(true);
+        tour.push_back(current);
     }
 
     tour.push_back(start);
