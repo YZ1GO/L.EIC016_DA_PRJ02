@@ -38,10 +38,11 @@ void Menu::run() {
                 "",
                 makeBold("[1]. Backtracking *"),
                 makeBold("[2]. Christofides"),
-                makeBold("[3]. Held Karp"),
+                makeBold("[3]. Held Karp *"),
                 makeBold("[4]. Nearest Neighbor *"),
                 makeBold("[5]. K-Nearest Neighbor *"),
                 makeBold("[6]. Nearest Neighbor + 2-Opt"),
+                makeBold("[7]. Ant Colony Optimization"),
                 "...",
                 "[0]. EXIT",
                 "",
@@ -104,6 +105,19 @@ void Menu::run() {
 
                     start = high_resolution_clock::now();
                     tsp.twoOptNearestNeighborAlgorithm(originTONN);
+                    break;
+                case 7:
+                    int originACO;
+                    if (waitInput(originACO, "Choose origin (int): ")) continue;
+
+                    int numAnts;
+                    if (waitInput(numAnts, "Choose number of ants (int > 0): ")) continue;
+
+                    int numIterations;
+                    if (waitInput(numIterations, "Choose number of iterations (int > 0): ")) continue;
+
+                    start = high_resolution_clock::now();
+                    tsp.antColonyOptimization(originACO, numAnts, numIterations);
                     break;
                 default:
                     continue;

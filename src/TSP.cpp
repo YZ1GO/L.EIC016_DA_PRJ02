@@ -1,4 +1,7 @@
 #include "TSP.h"
+#include <random>
+#include <unordered_map>
+#include <cmath>
 using namespace std;
 
 TSP::TSP() {}
@@ -14,7 +17,7 @@ Graph<int> TSP::getTspGraph() {
 template <typename T>
 void TSP::printPath(const T distance, const vector<Vertex<int> *> &path) {
     cout << "DISTANCE: ";
-    if (distance == INF) {
+    if (distance == DOUBLE_INF || distance == LONG_LONG_INF) {
         cout << "No path found" << endl;
         return;
     } else {
@@ -84,9 +87,10 @@ void TSP::backtrackingAlgorithmAux(Vertex<int>* currVertex, double currDistance,
 
 // O(V!)
 void TSP::backtrackingAlgorithm() {
+    tspGraph.setAllNotVisited();
     vector<Vertex<int>*> currPath;
     vector<bool> visited(tspGraph.getVertexSet().size(), false);
-    double minDistance = INF;
+    double minDistance = DOUBLE_INF;
     vector<Vertex<int>*> bestPath;
 
     Vertex<int>* root = tspGraph.findVertex(0);
@@ -124,7 +128,7 @@ void TSP::heldKarp(const int& origin) {
             if (mask & (1 << src)) {
                 for (int dest = 0; dest < n; dest++) {
                     if (!(mask & (1 << dest)) && dest != origin) {
-                        double distance = INF;
+                        double distance = DOUBLE_INF;
                         auto vertexSrc = tspGraph.findVertex(src);
                         auto vertexDest = tspGraph.findVertex(dest);
                         if (vertexSrc == nullptr || vertexDest == nullptr) throw logic_error("Vertex not found in graph");
@@ -135,7 +139,7 @@ void TSP::heldKarp(const int& origin) {
                                 break;
                             }
                         }
-                        if (distance != INF && dp[src][mask] + distance < dp[dest][mask | (1 << dest)]) {
+                        if (distance != DOUBLE_INF && dp[src][mask] + distance < dp[dest][mask | (1 << dest)]) {
                             dp[dest][mask | (1 << dest)] = dp[src][mask] + distance;
                             parentVertex[dest][mask | (1 << dest)] = vertexSrc;
                         }
@@ -145,11 +149,11 @@ void TSP::heldKarp(const int& origin) {
         }
     }
 
-    double minDistance = INF;
+    double minDistance = DOUBLE_INF;
     Vertex<int>* lastVertex = nullptr;
     for (int i = 0; i < n; i++) {
         if (i == origin) continue;
-        double distance = INF;
+        double distance = DOUBLE_INF;
         auto vertexI = tspGraph.findVertex(i);
         if (vertexI == nullptr) throw logic_error("Vertex not found in graph");
 
@@ -159,7 +163,7 @@ void TSP::heldKarp(const int& origin) {
                 break;
             }
         }
-        if (distance != INF && dp[i][(1 << n) - 1] + distance < minDistance) {
+        if (distance != DOUBLE_INF && dp[i][(1 << n) - 1] + distance < minDistance) {
             minDistance = dp[i][(1 << n) - 1] + distance;
             lastVertex = vertexI;
         }
@@ -417,7 +421,6 @@ void TSP::kNearestNeighborAlgorithm(const int& origin, int k) {
     printPath(totalDistance, tour);
 }
 
-
 void TSP::twoOptNearestNeighborAlgorithm(const int& origin) {
     vector<Vertex<int> *> path = nearestNeighborPath(tspGraph.findVertex(origin));
     path.push_back(path[0]);
@@ -451,3 +454,121 @@ void TSP::twoOptNearestNeighborAlgorithm(const int& origin) {
     printPath(pathDistanceFullyConnected(path), path);
 }
 
+/*vector<vector<Vertex<int> *>> TSP::kMeansClustering(int k) {
+    vector<vector<Vertex<int>*>> clusters(k);
+
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<> dis(0, tspGraph.getNumVertex() - 1);
+    vector<pair<double, double>> centroids;
+    for (int i = 0; i < k; i++) {
+        int index = dis(gen);
+
+    }
+}*/
+
+void TSP::initializePheromones(double initialPheromoneLevel) {
+    int numVertices = tspGraph.getNumVertex();
+    pheromones = vector<vector<double>>(numVertices, vector<double>(numVertices, initialPheromoneLevel));
+}
+
+double TSP::calculateHeuristic(Vertex<int>* s, Vertex<int>* t) {
+    double lat1 = s->getLatitude();
+    double lon1 = s->getLongitude();
+    double lat2 = t->getLatitude();
+    double lon2 = t->getLongitude();
+    return 1.0 / HarversineDistance(lat1, lon1, lat2, lon2);
+}
+
+vector<Vertex<int>*> TSP::constructSolution(Vertex<int>* start) {
+    vector<Vertex<int>*> tour;
+    tspGraph.setAllNotVisited();
+    Vertex<int>* current = start;
+    current->setVisited(true);
+    tour.push_back(current);
+
+    while (tour.size() < tspGraph.getNumVertex()) {
+        vector<pair<Vertex<int>*, double>> probabilities;
+        double sum = 0.0;
+
+        for (auto edge : current->getAdj()) {
+            auto next = edge->getDest();
+            if (!next->isVisited()) {
+                double pheromone = pheromones[current->getInfo()][next->getInfo()];
+                double heuristic = calculateHeuristic(current, next);
+                double probability = pow(pheromone, alpha) * pow(heuristic, beta);
+                probabilities.emplace_back(next, probability);
+                sum += probability;
+            }
+        }
+
+        if (sum == 0) break;
+
+        double threshold = (double) rand() / RAND_MAX * sum;
+        double cumulative = 0.0;
+
+        for (auto& p : probabilities) {
+            cumulative += p.second;
+            if (cumulative >= threshold) {
+                current = p.first;
+                current->setVisited(true);
+                tour.push_back(current);
+                break;
+            }
+        }
+    }
+
+    tour.push_back(start);
+    return tour;
+}
+
+void TSP::updatePheromones(const vector<vector<Vertex<int>*>> &allTours, const std::vector<long long> &distances) {
+    for (auto& row : pheromones) {
+        for (auto& pheromone : row) {
+            pheromone *= (1.0 - evaporationRate);
+        }
+    }
+
+    for (int i = 0; i < allTours.size(); i++) {
+        double contribution = 1.0 / distances[i];
+        for (int j = 0; j < allTours[i].size() - 1; j++) {
+            int from = allTours[i][j]->getInfo();
+            int to = allTours[i][j + 1]->getInfo();
+            pheromones[from][to] += contribution;
+            pheromones[to][from] += contribution;
+        }
+    }
+}
+
+void TSP::antColonyOptimization(const int &origin, int numAnts, int numIterations) {
+    Vertex<int>* start = tspGraph.findVertex(origin);
+    if (start == nullptr) throw logic_error("Root vertex not found in graph");
+
+    double initialPheromoneLevel = 1.0;
+    initializePheromones(initialPheromoneLevel);
+
+    vector<Vertex<int>*> bestTour;
+    long long bestDistance = LONG_LONG_INF;
+
+    for (int iter = 0; iter < numIterations; iter++) {
+        vector<vector<Vertex<int>*>> allTours(numAnts);
+        vector<long long> distances(numAnts);
+
+        for (int ant = 0; ant < numAnts; ant++) {
+            vector<Vertex<int>*> tour = constructSolution(start);
+            long long distance = pathDistanceFullyConnected(tour);
+
+            if (distance < bestDistance) {
+                bestDistance = distance;
+                bestTour = tour;
+            }
+
+            allTours[ant] = tour;
+            distances[ant] = distance;
+        }
+
+        updatePheromones(allTours, distances);
+    }
+
+    printPath(bestDistance, bestTour);
+}
