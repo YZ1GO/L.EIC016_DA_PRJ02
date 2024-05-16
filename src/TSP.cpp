@@ -356,7 +356,7 @@ void TSP::nearestNeighborAlgorithm(const int& origin) {
     printPath(totalDistance, tour);
 }
 
-// Time complexity: O(V^2 * logV)
+// Time complexity: O(V^2 * logV + VK)
 vector<Vertex<int>*> TSP::kNearestNeighborPath(Vertex<int>* origin, int numNeighbors) {
     vector<Vertex<int>*> tour;
     if (origin == nullptr) {
@@ -395,7 +395,7 @@ vector<Vertex<int>*> TSP::kNearestNeighborPath(Vertex<int>* origin, int numNeigh
     return tour;
 }
 
-// Time complexity: O(V^2 * logV)
+// Time complexity: O(V^2 * logV + VK)
 void TSP::kNearestNeighborAlgorithm(const int& origin, int k) {
     Vertex<int>* start = tspGraph.findVertex(origin);
     if (start == nullptr) {

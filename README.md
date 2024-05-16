@@ -1,22 +1,40 @@
-## DA - 2nd project
+# TSP - Traveling Salesman Problem
+
+## Description
+This project enables comparison between different solutions for the Traveling Salesman Problem (TSP), a renowned challenge in combinatorial optimization. The objective is to determine the shortest route that visits each city exactly once and returns to the starting city. Being [NP-hard](https://en.wikipedia.org/wiki/NP-hardness), the TSP lacks a polynomial-time solution algorithm.
 
 [RESULTS SHEET](https://docs.google.com/spreadsheets/d/1I6d1NvNj34K96kJRol0O1ccQ8HP2-nnEXvQ0IW0alAs/edit?usp=sharing)
 
-### Basic
-- [T1.1] - simple menu interface
-- [T1.2] - parse csv files
-- [T1.3] - doxygen documentation
+## Algorithms
 
 ### Backtracking
-- [T2.1] - develop a backtracking algorithmic approach to the TSP starting and ending on node zero (id = 0)
+- __🚀 Time Complexity:__ O(V!), where V is the number of vertices in the graph. 
 
 ### Triangular Approximation
-- [T2.2] - implement the approximation algorithm for TSP that relies on the triangular inequality to ensure a 2-approximation algorithm starting and ending on node zero (id = 0)
+- Creates a MST using Prim's algorithm and traverses it using a DFS.
+- __🚀 Time Complexity:__ O((V+E) logV), where V is the number of vertices and E is the number of edges in the graph.
 
-### Other Heuristics
-- [T2.3] - implement another heuristic by you choice to solve the TSP starting and ending on node zero (id = 0).
+### Nearest Neighbor
+- Greedy algorithm that selects the nearest unvisited vertex to the current vertex.
+- __🚀 Time Complexity:__ O(V^2), where V is the number of vertices in the graph.
 
-__Notes:__ That algorithm should be efficient and feasible even for the large graphs.
+### K-Nearest Neighbor
+- Greedy algorithm that selects the k nearest unvisited vertices to the current vertex.
+- __🚀 Time Complexity:__ O(V^2 * logV + V * k), where V is the number of vertices in the graph.
+
+### 2-Opt
+- Give a solution path and iteratively swaps two edges to reduce the total distance of the path.
+- __🚀 Time Complexity:__ O(V^2), where V is the number of vertices in the graph.
+
+### 3-Opt
+- Give a solution path and iteratively swaps three edges to reduce the total distance of the path.
+- __🚀 Time Complexity:__ O(V^3), where V is the number of vertices in the graph.
+<br></br>
+📝 Note: The Opt algorithms that we implemented, uses as initial solution the nearest neighbor algorithm (NNA). Which means that the time complexity of the Opt algorithms is `max(Opt, NNA)`.
 
 ### TSP in Real World
-- [T2.4] - develop an algorithm that __always__ gives a solution to the tsp problem even in graphs that are not guaranteed to be fully connected. The starting and ending node is on user preference (id = any).
+We tailored the Triangular Approximation, Nearest Neighbor Algorithm (NNA), and K-Nearest Neighbor (K-NN) to tackle real-world TSP scenarios. Users now have the flexibility to __select__ the starting vertex and determine whether to treat the graph as fully connected or not.
+
+With these adjustments, our algorithms provide solutions even when the graphs __may not be fully connected__, by returning `feasible` or `not feasible`, ensuring that a solution is always provided.
+
+
