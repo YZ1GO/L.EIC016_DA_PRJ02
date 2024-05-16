@@ -29,6 +29,8 @@ private:
     std::vector<Vertex<int>*> nearestNeighborPath(Vertex<int>* origin);
     std::vector<Vertex<int>*> kNearestNeighborPath(Vertex<int>* origin, int numNeighbors);
 
+    static std::vector<Vertex<int>*> applyThreeOptSwap(const std::vector<Vertex<int>*>& path, int i, int j, int k);
+
     void initializePheromones(double initialPheromoneLevel);
     static double calculateHeuristic(Vertex<int>* s, Vertex<int>* t);
     std::vector<Vertex<int>*> constructSolution(Vertex<int>* start);
@@ -40,11 +42,13 @@ public:
     Graph<int> getTspGraph();
 
     void backtrackingAlgorithm();
-    void christofidesAlgorithm(int origin, bool fullyConnected);
     void heldKarp(const int& origin);
+    void triangularApproximationMSTAlgorithm(int origin, bool fullyConnected);
     void nearestNeighborAlgorithm(const int& origin);
     void kNearestNeighborAlgorithm(const int& origin, int k);
-    void twoOptNearestNeighborAlgorithm(const int& origin);
+    void twoOptAlgorithm(const int& origin);
+    void threeOptAlgorithm(const int& origin);
+    
     //std::vector<std::vector<Vertex<int>*>> kMeansClustering(int k);
 
     void antColonyOptimization(const int& origin, int numAnts, int numIterations, bool fullyConnected);
