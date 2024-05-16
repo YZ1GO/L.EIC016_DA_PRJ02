@@ -555,11 +555,18 @@ vector<Vertex<int>*> TSP::constructSolution(Vertex<int>* start) {
             if (!next->isVisited()) {
                 double pheromone = pheromones[current->getInfo()][next->getInfo()];
                 double heuristic = calculateHeuristic(current, next);
-                double probability = pow(pheromone, ALPHA) * pow(heuristic, BETA);
+                double probability;
                 double distance = edge->getWeight();
-                probabilities.emplace_back(next, probability / distance);
+                if (distance != 0) {
+                    probability = pow(pheromone, ALPHA) * pow(heuristic, BETA) / distance;
+                    probabilities.emplace_back(next, probability / distance);
+                    sum += probability / distance;
+                } else {
+                    probability = 1.0;
+                    probabilities.emplace_back(next, probability);
+                    sum += probability;
+                }
                 unvisited.push_back(next);
-                sum += probability / distance;
             }
         }
 
@@ -594,7 +601,9 @@ void TSP::updatePheromones(const vector<vector<Vertex<int>*>> &allTours, const s
     }
 
     for (int i = 0; i < allTours.size(); i++) {
-        double contribution = 1.0 / distances[i];
+        double contribution;
+        if (distances[i] != 0) contribution = 1.0 / distances[i];
+        else contribution = 1.0;
         for (int j = 0; j < allTours[i].size() - 1; j++) {
             int from = allTours[i][j]->getInfo();
             int to = allTours[i][j + 1]->getInfo();
