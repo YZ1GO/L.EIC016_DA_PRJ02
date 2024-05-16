@@ -7,9 +7,6 @@
 #include <vector>
 
 class DataParser {
-private:
-
-
 public:
     DataParser();
 

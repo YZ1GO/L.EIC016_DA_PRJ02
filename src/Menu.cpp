@@ -44,6 +44,7 @@ void Menu::run() {
                 makeBold("[6]. 2-Opt"),
                 makeBold("[7]. 3-Opt"),
                 makeBold("[8]. Ant Colony Optimization"),
+                makeBold("[9]. Export Graph txt"),
                 "...",
                 "[0]. EXIT",
                 "",
@@ -129,6 +130,11 @@ void Menu::run() {
 
                     start = high_resolution_clock::now();
                     tsp.antColonyOptimization(originACO, numAnts, numIterations, isFullyConnectedACO);
+                    break;
+                case 9:
+                    tsp.getTspGraph().printGraph("../output/" + currentGraph + ".txt");
+                    cout << "Exporting graph text to \"../output/" + currentGraph + ".txt\"" << endl;
+                    cout << "( It might take some time )" << endl;
                     break;
                 default:
                     continue;
@@ -279,5 +285,5 @@ void Menu::clearScreen() {
 
 void Menu::executionTime(time_point<high_resolution_clock> start, time_point<high_resolution_clock> end) {
     auto duration = duration_cast<seconds>(end - start);
-    cout << makeBold("Time taken by function: ") << duration.count() << " s" << endl;
+    cout << "\n" + makeBold("Time taken by function: ") << duration.count() << " s" << endl;
 }
