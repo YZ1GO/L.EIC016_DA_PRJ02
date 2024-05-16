@@ -43,6 +43,7 @@ void Menu::run() {
                 makeBold("[5]. K-Nearest Neighbor *"),
                 makeBold("[6]. 2-Opt"),
                 makeBold("[7]. 3-Opt"),
+                makeBold("[8]. Ant Colony Optimization"),
                 "...",
                 "[0]. EXIT",
                 "",
@@ -112,6 +113,22 @@ void Menu::run() {
 
                     start = high_resolution_clock::now();
                     tsp.threeOptAlgorithm(origin3OPT);
+                    break;
+                case 8:
+                    int originACO;
+                    if (waitInput(originACO, "Choose origin (int): ")) continue;
+
+                    int numAnts;
+                    if (waitInput(numAnts, "Choose number of ants (int > 0): ")) continue;
+
+                    int numIterations;
+                    if (waitInput(numIterations, "Choose number of iterations (int > 0): ")) continue;
+
+                    int isFullyConnectedACO;
+                    if (waitInput(isFullyConnectedACO, "Considering graph fully connected? [1-YES / 0-NO]: ")) continue;
+
+                    start = high_resolution_clock::now();
+                    tsp.antColonyOptimization(originACO, numAnts, numIterations, isFullyConnectedACO);
                     break;
                 default:
                     continue;

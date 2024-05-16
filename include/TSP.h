@@ -3,11 +3,16 @@
 
 #include "DataParser.h"
 #include <stack>
-#define INF std::numeric_limits<double>::max()
+#define DOUBLE_INF std::numeric_limits<double>::max()
+#define LONG_LONG_INF std::numeric_limits<long long>::max()
 
 class TSP {
 private:
     Graph<int> tspGraph;
+    std::vector<std::vector<double>> pheromones;
+    double alpha = 1.0;
+    double beta = 5.0;
+    double evaporationRate = 0.5;
 
     template <typename T>
     void printPath(T distance, const std::vector<Vertex<int>*> &path);
@@ -26,7 +31,10 @@ private:
 
     static std::vector<Vertex<int>*> applyThreeOptSwap(const std::vector<Vertex<int>*>& path, int i, int j, int k);
 
-
+    void initializePheromones(double initialPheromoneLevel);
+    static double calculateHeuristic(Vertex<int>* s, Vertex<int>* t);
+    std::vector<Vertex<int>*> constructSolution(Vertex<int>* start);
+    void updatePheromones(const std::vector<std::vector<Vertex<int>*>>& allTours, const std::vector<long long>& distances);
 
 public:
     TSP();
@@ -40,6 +48,10 @@ public:
     void kNearestNeighborAlgorithm(const int& origin, int k);
     void twoOptAlgorithm(const int& origin);
     void threeOptAlgorithm(const int& origin);
+    
+    //std::vector<std::vector<Vertex<int>*>> kMeansClustering(int k);
+
+    void antColonyOptimization(const int& origin, int numAnts, int numIterations, bool fullyConnected);
 };
 
 
