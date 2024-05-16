@@ -1,6 +1,8 @@
 #include "TSP.h"
 using namespace std;
 
+#define MAX_ITERATIONS 5
+
 TSP::TSP() {}
 
 TSP::TSP(const Graph<int> &graph) {
@@ -20,6 +22,7 @@ void TSP::printPath(const T distance, const vector<Vertex<int> *> &path) {
     } else {
         cout << distance << endl;
     }
+    cout << "Number of Nodes: " << path.size()-1 << endl;
     cout << "Path: ";
     if (path.empty()) {
         cout << "No path found" << endl;
@@ -256,7 +259,7 @@ void TSP::traverseMST(const Graph<int>& graph, Vertex<int>* start, vector<Vertex
 }
 
 //Time Complexity: O((V+E)logV)
-void TSP::christofidesAlgorithm(int origin, bool fullyConnected) {
+void TSP::triangularApproximationMSTAlgorithm(int origin, bool fullyConnected) {
     Graph<int> graph = tspGraph.convertToMST();
 
     graph.setAllNotVisited();
@@ -417,12 +420,13 @@ void TSP::kNearestNeighborAlgorithm(const int& origin, int k) {
     printPath(totalDistance, tour);
 }
 
-
-void TSP::twoOptNearestNeighborAlgorithm(const int& origin) {
+// Time Complexity: O(KV^2), where K is a value choose by us
+// The higher the value, the more precise the optimal solution is, but the longer it takes to execute
+void TSP::twoOptAlgorithm(const int& origin) {
     vector<Vertex<int> *> path = nearestNeighborPath(tspGraph.findVertex(origin));
     path.push_back(path[0]);
     long long minDistance = pathDistanceFullyConnected(path);
-    long long maxIterations = path.size(), iterations = 0;
+    long long maxIterations = MAX_ITERATIONS, iterations = 0;
 
     bool improved = true;
     while (improved && iterations < maxIterations) {
@@ -449,5 +453,67 @@ void TSP::twoOptNearestNeighborAlgorithm(const int& origin) {
         //cout << "current iteration: " << iterations << endl;
     }
     printPath(pathDistanceFullyConnected(path), path);
+}
+
+// Time Complexity: O(V)
+vector<Vertex<int>*> TSP::applyThreeOptSwap(const vector<Vertex<int>*>& path, int i, int j, int k) {
+    vector<Vertex<int>*> newPath;
+    newPath.reserve(path.size());
+
+    // Copy the prefix before i
+    for (int idx = 0; idx <= i - 1; ++idx) {
+        newPath.push_back(path[idx]);
+    }
+
+    // Add the reversed segment (i, j) to newPath
+    for (int idx = j; idx >= i; --idx) {
+        newPath.push_back(path[idx]);
+    }
+
+    // Add the segment (j+1, k) to newPath
+    for (int idx = j + 1; idx <= k; ++idx) {
+        newPath.push_back(path[idx]);
+    }
+
+    // Add the suffix after k
+    for (int idx = k + 1; idx < path.size(); ++idx) {
+        newPath.push_back(path[idx]);
+    }
+
+    return newPath;
+}
+
+// Time Complexity: O(KV^3), where K is a value choose by us
+// The higher the value, the more precise the optimal solution is, but the longer it takes to execute
+void TSP::threeOptAlgorithm(const int& origin) {
+    vector<Vertex<int>*> path = nearestNeighborPath(tspGraph.findVertex(origin));
+    path.push_back(path[0]);
+    long long minDistance = pathDistanceFullyConnected(path);
+    long long maxIterations = MAX_ITERATIONS, iterations = 0;
+
+    bool improved = true;
+    while (improved && iterations < maxIterations) {
+        improved = false;
+        for (int i = 1; i < path.size() - 3; ++i) {
+            for (int j = i + 1; j < path.size() - 2; ++j) {
+                for (int k = j + 1; k < path.size() - 1; ++k) {
+                    vector<Vertex<int>*> newPath = applyThreeOptSwap(path, i, j, k);
+                    long long newDistance = pathDistanceFullyConnected(newPath);
+
+                    if (newDistance < minDistance) {
+                        improved = true;
+                        minDistance = newDistance;
+                        path = newPath;
+                        break;
+                    }
+                }
+                if (improved) break;
+            }
+            if (improved) break;
+        }
+        iterations++;
+    }
+
+    printPath(minDistance, path);
 }
 
