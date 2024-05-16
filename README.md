@@ -21,6 +21,8 @@ This project enables comparison between different solutions for the Traveling Sa
 ### K-Nearest Neighbor
 - Greedy algorithm that selects the k nearest unvisited vertices to the current vertex.
 - __🚀 Time Complexity:__ O(V^2 * logV + V * k), where V is the number of vertices in the graph.
+<br></br>
+💡 Tips: Increasing the value of K provides better chance to find a feasible path. However, the larger is K, the longer computation time is to complete the traversal.
 
 ### 2-Opt
 - Give a solution path and iteratively swaps two edges to reduce the total distance of the path.

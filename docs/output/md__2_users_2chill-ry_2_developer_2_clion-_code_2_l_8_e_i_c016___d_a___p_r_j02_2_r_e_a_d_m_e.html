@@ -78,33 +78,51 @@ $(function() {
 <div class="textblock"><p><a class="anchor" id="autotoc_md0"></a> </p>
 <h1><a class="anchor" id="autotoc_md1"></a>
 Description</h1>
-<p>This project tries to find the best and feasible algorithm to solve the Traveling Salesman Problem (<a class="el" href="class_t_s_p.html">TSP</a>). The <a class="el" href="class_t_s_p.html">TSP</a> is a well-known problem in the field of combinatorial optimization. The problem consists of finding the shortest possible route that visits each city exactly once and returns to the origin city. The problem is NP-hard, which means that there is no known algorithm that can solve the problem in polynomial time.</p>
+<p>This project enables comparison between different solutions for the Traveling Salesman Problem (<a class="el" href="class_t_s_p.html">TSP</a>), a renowned challenge in combinatorial optimization. The objective is to determine the shortest route that visits each city exactly once and returns to the starting city. Being <a href="https://en.wikipedia.org/wiki/NP-hardness">NP-hard</a>, the <a class="el" href="class_t_s_p.html">TSP</a> lacks a polynomial-time solution algorithm.</p>
 <p><a href="https://docs.google.com/spreadsheets/d/1I6d1NvNj34K96kJRol0O1ccQ8HP2-nnEXvQ0IW0alAs/edit?usp=sharing">RESULTS SHEET</a></p>
-<h2><a class="anchor" id="autotoc_md2"></a>
-Basic</h2>
-<ul>
-<li>[T1.1] - simple menu interface</li>
-<li>[T1.2] - parse csv files</li>
-<li>[T1.3] - doxygen documentation</li>
-</ul>
+<h1><a class="anchor" id="autotoc_md2"></a>
+Algorithms</h1>
 <h2><a class="anchor" id="autotoc_md3"></a>
-Backtracking [T2.1] - develop a backtracking algorithmic approach to the TSP starting and ending on node zero (id = 0)</h2>
+Backtracking</h2>
+<ul>
+<li><b>🚀 Time Complexity:</b> O(V!), where V is the number of vertices in the graph.</li>
+</ul>
 <h2><a class="anchor" id="autotoc_md4"></a>
 Triangular Approximation</h2>
 <ul>
-<li>[T2.2] - implement the approximation algorithm for <a class="el" href="class_t_s_p.html">TSP</a> that relies on the triangular inequality to ensure a 2-approximation algorithm starting and ending on node zero (id = 0)</li>
+<li>Creates a MST using Prim's algorithm and traverses it using a DFS.</li>
+<li><b>🚀 Time Complexity:</b> O((V+E) logV), where V is the number of vertices and E is the number of edges in the graph.</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md5"></a>
-Other Heuristics</h2>
+Nearest Neighbor</h2>
 <ul>
-<li>[T2.3] - implement another heuristic by you choice to solve the <a class="el" href="class_t_s_p.html">TSP</a> starting and ending on node zero (id = 0).</li>
+<li>Greedy algorithm that selects the nearest unvisited vertex to the current vertex.</li>
+<li><b>🚀 Time Complexity:</b> O(V^2), where V is the number of vertices in the graph.</li>
 </ul>
-<p><b>Notes:</b> That algorithm should be efficient and feasible even for the large graphs.</p>
 <h2><a class="anchor" id="autotoc_md6"></a>
-TSP in Real World</h2>
+K-Nearest Neighbor</h2>
 <ul>
-<li>[T2.4] - develop an algorithm that <b>always</b> gives a solution to the tsp problem even in graphs that are not guaranteed to be fully connected. The starting and ending node is on user preference (id = any). </li>
+<li>Greedy algorithm that selects the k nearest unvisited vertices to the current vertex.</li>
+<li><b>🚀 Time Complexity:</b> O(V^2 * logV + V * k), where V is the number of vertices in the graph. <br  />
+ 💡 Tips: Increasing the value of K provides better chance to find a feasible path. However, the larger is K, the longer computation time is to complete the traversal.</li>
 </ul>
+<h2><a class="anchor" id="autotoc_md7"></a>
+2-Opt</h2>
+<ul>
+<li>Give a solution path and iteratively swaps two edges to reduce the total distance of the path.</li>
+<li><b>🚀 Time Complexity:</b> O(V^2), where V is the number of vertices in the graph.</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md8"></a>
+3-Opt</h2>
+<ul>
+<li>Give a solution path and iteratively swaps three edges to reduce the total distance of the path.</li>
+<li><b>🚀 Time Complexity:</b> O(V^3), where V is the number of vertices in the graph. <br  />
+ 📝 Note: The Opt algorithms that we implemented, uses as initial solution the nearest neighbor algorithm (NNA). Which means that the time complexity of the Opt algorithms is <code>max(Opt, NNA)</code>.</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md9"></a>
+TSP in Real World</h2>
+<p>We tailored the Triangular Approximation, Nearest Neighbor Algorithm (NNA), and K-Nearest Neighbor (K-NN) to tackle real-world <a class="el" href="class_t_s_p.html">TSP</a> scenarios. Users now have the flexibility to <b>select</b> the starting vertex and determine whether to treat the graph as fully connected or not.</p>
+<p>With these adjustments, our algorithms provide solutions even when the graphs <b>may not be fully connected</b>, by returning <code>feasible</code> or <code>not feasible</code>, ensuring that a solution is always provided. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- start footer part -->

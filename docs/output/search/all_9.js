@@ -1,8 +1,4 @@
 var searchData=
 [
-  ['makebold_0',['makeBold',['../_utilities_8h.html#a3bd6ee67b0398de7c3501b9278cd89b9',1,'Utilities.h']]],
-  ['menu_1',['Menu',['../class_menu.html',1,'']]],
-  ['menu_2eh_2',['Menu.h',['../_menu_8h.html',1,'']]],
-  ['mutablepriorityqueue_3',['MutablePriorityQueue',['../class_mutable_priority_queue.html',1,'']]],
-  ['mutablepriorityqueue_2eh_4',['MutablePriorityQueue.h',['../_mutable_priority_queue_8h.html',1,'']]]
+  ['k_20nearest_20neighbor_0',['K-Nearest Neighbor',['../md__2_users_2chill-ry_2_developer_2_clion-_code_2_l_8_e_i_c016___d_a___p_r_j02_2_r_e_a_d_m_e.html#autotoc_md6',1,'']]]
 ];
