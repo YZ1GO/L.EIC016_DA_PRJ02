@@ -11,7 +11,7 @@ private:
     Graph<int> tspGraph;
     std::vector<std::vector<double>> pheromones;
     double alpha = 1.0;
-    double beta = 2.0;
+    double beta = 5.0;
     double evaporationRate = 0.5;
 
     template <typename T>
@@ -30,7 +30,7 @@ private:
     std::vector<Vertex<int>*> kNearestNeighborPath(Vertex<int>* origin, int numNeighbors);
 
     void initializePheromones(double initialPheromoneLevel);
-    double calculateHeuristic(Vertex<int>* s, Vertex<int>* t);
+    static double calculateHeuristic(Vertex<int>* s, Vertex<int>* t);
     std::vector<Vertex<int>*> constructSolution(Vertex<int>* start);
     void updatePheromones(const std::vector<std::vector<Vertex<int>*>>& allTours, const std::vector<long long>& distances);
 

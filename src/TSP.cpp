@@ -502,8 +502,9 @@ vector<Vertex<int>*> TSP::constructSolution(Vertex<int>* start) {
                 double pheromone = pheromones[current->getInfo()][next->getInfo()];
                 double heuristic = calculateHeuristic(current, next);
                 double probability = pow(pheromone, alpha) * pow(heuristic, beta);
-                probabilities.emplace_back(next, probability);
-                sum += probability;
+                double distance = edge->getWeight();
+                probabilities.emplace_back(next, probability / distance);
+                sum += probability / distance;
             }
         }
 
@@ -545,7 +546,7 @@ void TSP::updatePheromones(const vector<vector<Vertex<int>*>> &allTours, const s
     }
 }
 
-void TSP::antColonyOptimization(const int &origin, int numAnts, int numIterations, bool fullyConected) {
+void TSP::antColonyOptimization(const int &origin, int numAnts, int numIterations, bool fullyConnected) {
     Vertex<int>* start = tspGraph.findVertex(origin);
     if (start == nullptr) throw logic_error("Root vertex not found in graph");
 
@@ -562,7 +563,7 @@ void TSP::antColonyOptimization(const int &origin, int numAnts, int numIteration
         for (int ant = 0; ant < numAnts; ant++) {
             vector<Vertex<int>*> tour = constructSolution(start);
             long long distance;
-            if (fullyConected) {
+            if (fullyConnected) {
                 distance = pathDistanceFullyConnected(tour);
             } else {
                 bool feasible = pathDistanceNotFullyConnected(tour, distance);
