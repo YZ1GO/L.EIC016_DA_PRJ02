@@ -473,6 +473,11 @@ void TSP::initializePheromones(double initialPheromoneLevel) {
 }
 
 double TSP::calculateHeuristic(Vertex<int>* s, Vertex<int>* t) {
+    for (auto edge : s->getAdj()) {
+        if (edge->getDest() == t) {
+            return 1.0 / edge->getWeight();
+        }
+    }
     double lat1 = s->getLatitude();
     double lon1 = s->getLongitude();
     double lat2 = t->getLatitude();
