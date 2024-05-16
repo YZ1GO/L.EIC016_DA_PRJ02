@@ -540,7 +540,7 @@ void TSP::updatePheromones(const vector<vector<Vertex<int>*>> &allTours, const s
     }
 }
 
-void TSP::antColonyOptimization(const int &origin, int numAnts, int numIterations) {
+void TSP::antColonyOptimization(const int &origin, int numAnts, int numIterations, bool fullyConected) {
     Vertex<int>* start = tspGraph.findVertex(origin);
     if (start == nullptr) throw logic_error("Root vertex not found in graph");
 
@@ -556,7 +556,16 @@ void TSP::antColonyOptimization(const int &origin, int numAnts, int numIteration
 
         for (int ant = 0; ant < numAnts; ant++) {
             vector<Vertex<int>*> tour = constructSolution(start);
-            long long distance = pathDistanceFullyConnected(tour);
+            long long distance;
+            if (fullyConected) {
+                distance = pathDistanceFullyConnected(tour);
+            } else {
+                bool feasible = pathDistanceNotFullyConnected(tour, distance);
+                if (!feasible) {
+                    cerr << "No feasible tour exists starting on vertex " << origin << endl;
+                    return;
+                }
+            }
 
             if (distance < bestDistance) {
                 bestDistance = distance;

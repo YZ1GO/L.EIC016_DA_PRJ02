@@ -116,8 +116,11 @@ void Menu::run() {
                     int numIterations;
                     if (waitInput(numIterations, "Choose number of iterations (int > 0): ")) continue;
 
+                    int isFullyConnectedACO;
+                    if (waitInput(isFullyConnectedACO, "Considering graph fully connected? [1-YES / 0-NO]: ")) continue;
+
                     start = high_resolution_clock::now();
-                    tsp.antColonyOptimization(originACO, numAnts, numIterations);
+                    tsp.antColonyOptimization(originACO, numAnts, numIterations, isFullyConnectedACO);
                     break;
                 default:
                     continue;

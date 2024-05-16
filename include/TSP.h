@@ -47,7 +47,7 @@ public:
     void twoOptNearestNeighborAlgorithm(const int& origin);
     //std::vector<std::vector<Vertex<int>*>> kMeansClustering(int k);
 
-    void antColonyOptimization(const int& origin, int numAnts, int numIterations);
+    void antColonyOptimization(const int& origin, int numAnts, int numIterations, bool fullyConnected);
 };
 
 
