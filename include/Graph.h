@@ -26,7 +26,7 @@ class Edge;
 
 /**
  * @class Vertex
- * @brief Represents either a Reservoir, a pumping Station, or a City
+ * @brief Represents a city or location
  *
  * This class represents a vertex in a graph data structure.
  */
@@ -91,7 +91,7 @@ protected:
 
 /**
  * @class Edge
- * @brief Represents the connection between the water elements (Reservoir, Station and City).
+ * @brief Represents the connection between the the cities or locations
  *
  * This class represents an edge in a graph data structure.
  */
@@ -131,7 +131,7 @@ protected:
 
 /**
  * @class Graph
- * @brief Represents water supply network.
+ * @brief Represents the TSP network
  *
  * This class represents a graph data structure and provides functionalities for graph manipulation and algorithms.
  */
