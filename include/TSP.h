@@ -27,9 +27,6 @@ private:
      */
     Graph<int> tspGraph;
     std::vector<std::vector<double>> pheromones;
-    double alpha = ALPHA;
-    double beta = BETA;
-    double evaporationRate = EVAPORATION_RATE;
 
     template <typename T>
     void printPath(T distance, const std::vector<Vertex<int>*> &path);
