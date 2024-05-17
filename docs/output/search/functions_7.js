@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['nearestneighboralgorithm_0',['nearestNeighborAlgorithm',['../class_t_s_p.html#a895f3d908ba184b25a3237c3fdeb94d1',1,'TSP']]]
+  ['knearestneighboralgorithm_0',['kNearestNeighborAlgorithm',['../class_t_s_p.html#a69fa3140bb82589b47f850db0e1c67d8',1,'TSP']]]
 ];

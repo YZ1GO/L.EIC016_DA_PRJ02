@@ -16,13 +16,13 @@
 #define BETA 5.0
 #define EVAPORATION_RATE 0.5
 
-/***
+/**
  * @class TSP
  * @brief Solves the Travelling Salesman Problem.
  */
 class TSP {
 private:
-    /***
+    /**
      * @brief Graph to perform the TSP on.
      */
     Graph<int> tspGraph;
@@ -159,12 +159,18 @@ public:
 
     /**
      * @brief Solves the TSP using the backtracking algorithm.
+     *
+     * - Time Complexity: O(V!)
+     * - Space Complexity: O(V)
      */
     void backtrackingAlgorithm();
 
     /**
      * @brief Solves the TSP using the Held-Karp algorithm.
      * @param origin The starting vertex for the TSP.
+     *
+     * - Time Complexity: O(V^2 * 2^V)
+     * - Space Complexity: O(V * 2^V)
      */
     void heldKarp(const int& origin);
 
@@ -172,12 +178,18 @@ public:
      * @brief Solves the TSP using the triangular approximation MST algorithm.
      * @param origin The starting vertex for the TSP.
      * @param fullyConnected Whether considering the graph as fully connected or not.
+     *
+     * - Time Complexity: O((V+E) * logV)
+     * - Space Complexity: O(V)
      */
     void triangularApproximationMSTAlgorithm(int origin, bool fullyConnected);
 
     /**
      * @brief Solves the TSP using the nearest neighbor algorithm.
      * @param origin The starting vertex for the TSP.
+     *
+     * - Time Complexity: O(V^2)
+     * - Space Complexity: O(V)
      */
     void nearestNeighborAlgorithm(const int& origin);
 
@@ -185,18 +197,27 @@ public:
      * @brief Solves the TSP using the k-nearest neighbor algorithm.
      * @param origin The starting vertex for the TSP.
      * @param k The number of nearest neighbors to consider.
+     *
+     * - Time Complexity: O(V^2 * logV + V * k), where k is the number of nearest neighbors.
+     * - Space Complexity: O(V)
      */
     void kNearestNeighborAlgorithm(const int& origin, int k);
 
     /**
      * @brief Solves the TSP using the 2-opt algorithm.
      * @param origin The starting vertex for the TSP.
+     *
+     * - Time Complexity: O(kV^2), where k is the number of iterations.
+     * - Space Complexity: O(V)
      */
     void twoOptAlgorithm(const int& origin);
 
     /**
      * @brief Solves the TSP using the 3-opt algorithm.
      * @param origin The starting vertex for the TSP.
+     *
+     * - Time Complexity: O(kV^3), where k is the number of iterations.
+     * - Space Complexity: O(V)
      */
     void threeOptAlgorithm(const int& origin);
 
@@ -206,6 +227,9 @@ public:
      * @param numAnts The number of ants in the ant colony.
      * @param numIterations The number of iterations for the algorithm.
      * @param fullyConnected Whether considering the graph as fully connected or not.
+     *
+     * - Time Complexity: O(V^2 * numAnts * numIterations)
+     * - Space Complexity: O(V^2)
      */
     void antColonyOptimization(const int& origin, int numAnts, int numIterations, bool fullyConnected);
 };

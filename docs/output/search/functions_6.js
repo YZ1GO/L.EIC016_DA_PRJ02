@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['makebold_0',['makeBold',['../_utilities_8h.html#a3bd6ee67b0398de7c3501b9278cd89b9',1,'Utilities.h']]]
+  ['init_0',['init',['../class_menu.html#a514c26765dc9e00098f199c6c98788a4',1,'Menu']]]
 ];

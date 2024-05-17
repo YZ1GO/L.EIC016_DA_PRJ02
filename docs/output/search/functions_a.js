@@ -4,6 +4,5 @@ var searchData=
   ['parserealworldgraph_1',['ParseRealWorldGraph',['../class_data_parser.html#a23d9f35d72457e6067d1500fa46a0f32',1,'DataParser']]],
   ['parsetoygraphs_2',['ParseToyGraphs',['../class_data_parser.html#a92643c711276975218942e983dec6228',1,'DataParser']]],
   ['parsetoygraphtourism_3',['ParseToyGraphTourism',['../class_data_parser.html#ad17d6db9f4b41fec49c354d0d81b87fe',1,'DataParser']]],
-  ['printgraph_4',['printGraph',['../class_graph.html#a33ae4f2b50f9ac2b30112910cff2e043',1,'Graph']]],
-  ['problem_5',['TSP - Traveling Salesman Problem',['../md__2_users_2chill-ry_2_developer_2_clion-_code_2_l_8_e_i_c016___d_a___p_r_j02_2_r_e_a_d_m_e.html',1,'']]]
+  ['printgraph_4',['printGraph',['../class_graph.html#a33ae4f2b50f9ac2b30112910cff2e043',1,'Graph']]]
 ];

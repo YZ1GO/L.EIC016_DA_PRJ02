@@ -9,7 +9,6 @@
 #define PROJ_DA_02_GRAPH
 
 #include <iostream>
-#include <vector>
 #include <queue>
 #include <limits>
 #include <fstream>
@@ -378,12 +377,12 @@ void Vertex<T>::deleteEdge(Edge<T> *edge) {
     delete edge;
 }
 
-/***
+/**
  * Finds the nearest neighbor vertex connected to the current vertex.
  * @tparam T
  * @return Pointer to the nearest neighbor vertex, or nullptr if no neighbors exist.
  *
- * Time Complexity: O(V)
+ * - Time Complexity: O(V)
  */
 template<class T>
 Vertex<T>* Vertex<T>::nearestNeighbor() const {
@@ -776,14 +775,14 @@ std::vector<T> Graph<T>::topsort() const {
     return res;
 }
 
-/***
+/**
  * This function uses Prim's algorithm with a priority queue (implemented as a MutablePriorityQueue) to construct the MST.
  * Each vertex is inserted into and extracted from the priority queue once, and each edge is examined once.
  *
  * @tparam T Class type of the Graph.
  * @return MST graph
  *
- * Time Complexity: O((V+E)logV)
+ * - Time Complexity: O((V+E)logV)
  */
 template <class T>
 Graph<T> Graph<T>::convertToMST() const {
@@ -828,11 +827,11 @@ Graph<T> Graph<T>::convertToMST() const {
     return mst;
 }
 
-/***
+/**
  * Iterates through the graph nodes and set them all to NOT-VISITED
  * @tparam T Class type of the graph
  *
- * Time Complexity: O(V)
+ * - Time Complexity: O(V)
  */
 template <class T>
 void Graph<T>::setAllNotVisited() const {
@@ -880,14 +879,14 @@ void Graph<T>::twoOptSwap(Vertex<T> *u, Vertex<T> *v, Vertex<T> *x, Vertex<T> *y
 }
 
 
-/***
+/**
  * Writes the graph information to a text file.
  * Mainly for debug purpose.
  *
  * @tparam T Class type of the Graph.
  * @param filename Path to the text file.
  *
- * Time Complexity: O(VE)
+ * - Time Complexity: O(VE)
  */
 template<class T>
 void Graph<T>::printGraph(std::string filename) const {
@@ -933,13 +932,13 @@ Graph<T>::~Graph() {
 
 // make a deep copy of a graph
 
-/***
+/**
  * @brief Creates a deep of graph of the original one.
  * @tparam T Class type of the Graph.
  * @param originalGraph Original Graph.
  * @return Copy Graph.
  *
- * Time Complexity: O(V+E)
+ * - Time Complexity: O(V+E)
  */
 template <class T>
 Graph<T> deepGraphCopy (Graph<T> originalGraph){

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['dfsisdag_0',['dfsIsDAG',['../class_graph.html#a06743c0b3e219cfeefa5aade38556cb7',1,'Graph']]]
+  ['converttomst_0',['convertToMST',['../class_graph.html#a31e0adeeca3d226881040c69ad915645',1,'Graph']]]
 ];

@@ -170,8 +170,7 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getLabel</b> (
 <tr class="memitem:ac83e9238e2f4c54b46c77a409f44c769" id="r_ac83e9238e2f4c54b46c77a409f44c769"><td class="memItemLeft" align="right" valign="top"><a id="ac83e9238e2f4c54b46c77a409f44c769" name="ac83e9238e2f4c54b46c77a409f44c769"></a>
 <a class="el" href="class_edge.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><b>getQueueIndex</b> () <a class="el" href="class_edge.html">const</a></td></tr>
 <tr class="separator:ac83e9238e2f4c54b46c77a409f44c769"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a11f61376337948ce8926dba5c1ba493c" id="r_a11f61376337948ce8926dba5c1ba493c"><td class="memItemLeft" align="right" valign="top"><a id="a11f61376337948ce8926dba5c1ba493c" name="a11f61376337948ce8926dba5c1ba493c"></a>
-<a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_edge.html">T</a> &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>nearestNeighbor</b> () <a class="el" href="class_edge.html">const</a></td></tr>
+<tr class="memitem:a11f61376337948ce8926dba5c1ba493c" id="r_a11f61376337948ce8926dba5c1ba493c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_edge.html">T</a> &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a11f61376337948ce8926dba5c1ba493c">nearestNeighbor</a> () <a class="el" href="class_edge.html">const</a></td></tr>
 <tr class="separator:a11f61376337948ce8926dba5c1ba493c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
@@ -229,7 +228,37 @@ Friends</h2></td></tr>
 <div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="class_edge.html">class</a> <a class="el" href="class_edge.html">T</a>&gt;<br />
 class Vertex&lt; T &gt;</div><p>Represents a city or location. </p>
 <p>This class represents a vertex in a graph data structure. </p>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a11f61376337948ce8926dba5c1ba493c" name="a11f61376337948ce8926dba5c1ba493c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11f61376337948ce8926dba5c1ba493c">&#9670;&#160;</a></span>nearestNeighbor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="class_edge.html">class</a> <a class="el" href="class_edge.html">T</a> &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_edge.html">T</a> &gt; * <a class="el" href="class_vertex.html">Vertex</a>&lt; <a class="el" href="class_edge.html">T</a> &gt;::nearestNeighbor </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Finds the nearest neighbor vertex connected to the current vertex. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Pointer to the nearest neighbor vertex, or nullptr if no neighbors exist.</dd></dl>
+<ul>
+<li>Time Complexity: O(V) </li>
+</ul>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="_graph_8h_source.html">Graph.h</a></li>
 </ul>
 </div><!-- contents -->
