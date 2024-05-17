@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['problem_0',['TSP - Traveling Salesman Problem',['../md__2_users_2chill-ry_2_developer_2_clion-_code_2_l_8_e_i_c016___d_a___p_r_j02_2_r_e_a_d_m_e.html',1,'']]]
+  ['opt_0',['Opt',['../md__2_users_2chill-ry_2_developer_2_clion-_code_2_l_8_e_i_c016___d_a___p_r_j02_2_r_e_a_d_m_e.html#autotoc_md7',1,'2-Opt'],['../md__2_users_2chill-ry_2_developer_2_clion-_code_2_l_8_e_i_c016___d_a___p_r_j02_2_r_e_a_d_m_e.html#autotoc_md8',1,'3-Opt']]],
+  ['optimization_20aco_1',['Ant Colony Optimization (ACO)',['../md__2_users_2chill-ry_2_developer_2_clion-_code_2_l_8_e_i_c016___d_a___p_r_j02_2_r_e_a_d_m_e.html#autotoc_md10',1,'']]]
 ];

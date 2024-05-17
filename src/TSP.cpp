@@ -16,23 +16,29 @@ Graph<int> TSP::getTspGraph() {
 
 template <typename T>
 void TSP::printPath(const T distance, const vector<Vertex<int> *> &path) {
-    cout << "DISTANCE: ";
+    cout << "\n----------------------------------------" << endl;
+    cout << makeBold("Distance: ");
     if (distance == DOUBLE_INF || distance == LONG_LONG_INF) {
         cout << "No path found" << endl;
         return;
     } else {
         cout << distance << endl;
     }
-    cout << "Number of Nodes: " << path.size()-1 << endl;
-    cout << "Path: ";
+
+    cout << makeBold("Number of Nodes: ") << path.size()-1 << endl;
+    cout << makeBold("Path: ");
     if (path.empty()) {
         cout << "No path found" << endl;
         return;
     }
-    for (auto vertex : path) {
-        cout << vertex->getInfo() << " ";
+    for (size_t i = 0; i < path.size(); ++i) {
+        cout << path[i]->getInfo();
+        if (i != path.size() - 1) {
+            cout << " -> ";
+        }
     }
     cout << endl;
+    cout << "----------------------------------------" << endl;
 }
 
 void TSP::backtrackingAlgorithmAux(Vertex<int>* currVertex, double currDistance, vector<Vertex<int>*> &currPath, vector<bool> &visited, double &minDistance, vector<Vertex<int>*> &bestPath) {
